@@ -20,6 +20,11 @@ function Abono() {
     const [data, setData] = useState([]);
     const [dataPaciente, setDataPaciente] = useState([]);
 
+    const [idTherapy, setIdTherapy] = useState(0);
+    const [idPatients, setIdPatients] = useState(0);
+    const [fecha, setFecha] = useState('');
+    const [monto, setMonto] = useState(0);
+    const [description, setDescription] = useState('');
 
     useEffect(() => {
 
@@ -37,28 +42,36 @@ function Abono() {
 
 
     const pasientes = (e) => {
-        console.log(e)
+        setIdPatients(e)
     }
 
 
     const terapias = (e) => {
-        console.log(e)
+        setIdTherapy(e)
 
     }
 
     const Fdecripcion = (e) => {
-
-        console.log(e)
+        setDescription(e)
     }
 
 
     const Ffecha = (e) => {
-        console.log(e)
+        setFecha(e)
     }
 
 
 
+
+
+
     const dataEvaluacion = {
+
+        IdTherapy: idTherapy,
+        IdPatients: idPatients,
+        Fecha: fecha,
+        Monto: 2,
+        Description: description
 
     };
 
@@ -67,7 +80,10 @@ function Abono() {
     const EnviarAbono = (e) => {
         e.preventDefault()
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/traerpaciente/Abono';
+
+        console.log(dataEvaluacion)
+
+        const url = 'https://localhost:63958/api/Clinica/CrearAbono';
         axios.post(url, dataEvaluacion).then((resultEvaluacion) => {
 
 

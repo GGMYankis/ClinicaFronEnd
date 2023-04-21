@@ -19,44 +19,34 @@ import { FaUser } from 'react-icons/fa'
 
 
 function Evaluacion() {
-
-
-
     const [data, setData] = useState([]);
     const [dataPaciente, setDataPaciente] = useState([]);
-
     const [listapacientes, setListaPasientes] = useState([]);
     const [listaTerapia, setListaTerapia] = useState([]);
     const cookies = new Cookies();
     const navigation = useNavigate();
-
     const [idPatients, setIdPatients] = useState()
     const [idTherapy, setIdTherapy] = useState()
     const [priceEvaluacion, setPriceEvaluacion] = useState()
-
     const [day, setDay] = useState('')
     const [frecuencia, setFrecuencia] = useState('')
     const [repetir, setRepetir] = useState(null)
     const [fechaInicio, setFechaInicio] = useState(null)
     const [nom, setNom] = useState("")
     const [terapeuta, setTerapeuta] = useState([])
-
     const [idterapeuta, setIdterapeuta] = useState(0)
 
 
-
     useEffect(() => {
-
-
-        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Lista')
+        axios.get('https://localhost:63958/api/Clinica/Lista')
             .then(responses => {
-                //  console.log(responses)
+               
                 setDataPaciente(responses.data.lista)
             });
 
-        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
+        axios.get('https://localhost:63958/api/Clinica/ListaTerapia')
             .then(response => {
-                //     console.log(response.data.data)
+             
                 setData(response.data.lista)
             });
 
@@ -243,7 +233,6 @@ function Evaluacion() {
                                 <option >Seleccione una paciente</option>
                                 {
                                     dataPaciente.map(item => [
-                                        //<option key={item.value} value={item.value}>{item.value}</option>
                                         <option key={item.IdPatients} value={item.idPatients}>{item.name}</option>
 
                                     ])
@@ -259,10 +248,8 @@ function Evaluacion() {
 
                             <select className='form-select' onChange={e => terapias(e.target.value)} required >
                                 <option >Seleccione una terapia</option>
-                                <option >Seleccione una terapia</option>
                                 {
                                     data.map(item => [
-                                        //<option key={item.value} value={item.value}>{item.value}</option>
                                         <option value={item.idTherapy}>{item.label}</option>
                                     ])
                                 }
