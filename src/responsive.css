@@ -1,0 +1,35 @@
+
+
+
+@media(max-width:1298px){
+    .labelPaciente{
+        font-size: 13px;
+    }
+}
+
+
+
+
+
+
+@media(max-width:1200px){
+ 
+  
+    #primeraFila{
+        flex-direction: column;
+    }
+    #terceraFila{
+        flex-direction: column;
+
+    }
+    #segundaFila{
+        flex-direction: column;
+
+    }
+    .modal-paciente{
+        height: auto;
+    }
+}
+
+
+

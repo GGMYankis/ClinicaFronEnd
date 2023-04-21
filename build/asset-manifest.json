@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/GGMYankis/ClinicaFronEnd.git/static/css/main.d7f26f4b.css",
+    "main.js": "/GGMYankis/ClinicaFronEnd.git/static/js/main.8b02bb1a.js",
+    "static/media/undraw_medicine_b1ol.png": "/GGMYankis/ClinicaFronEnd.git/static/media/undraw_medicine_b1ol.9de9f49bcec75e742558.png",
+    "static/media/IMG-20230221-WA0009.png": "/GGMYankis/ClinicaFronEnd.git/static/media/IMG-20230221-WA0009.f77c05b6271320f9ba79.png",
+    "index.html": "/GGMYankis/ClinicaFronEnd.git/index.html",
+    "main.d7f26f4b.css.map": "/GGMYankis/ClinicaFronEnd.git/static/css/main.d7f26f4b.css.map",
+    "main.8b02bb1a.js.map": "/GGMYankis/ClinicaFronEnd.git/static/js/main.8b02bb1a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d7f26f4b.css",
+    "static/js/main.8b02bb1a.js"
+  ]
+}
