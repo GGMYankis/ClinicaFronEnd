@@ -3,8 +3,6 @@ import Cookies from 'universal-cookie';
 import axios from 'axios';
 const cookies = new Cookies();
 
-
-
 export function setToken(token) {
     return cookies.set('MyCookies', token, { path: '/' });
 }
@@ -22,8 +20,6 @@ export function getDatosUsuario() {
 
     return cookies.get('UsuarioDatos');
 }
-
-
 
 
 export function obtenerUser() {

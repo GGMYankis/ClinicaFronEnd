@@ -91,20 +91,13 @@ function Evaluacion() {
 
         console.log(e)
         if (e != null) {
-
-
             $('#FormModal').show();
-
-            // let nuevoPrecio = parseInt(prompt("¿ Deseas cambiar el precio ?" + "El precio actual es : " + e))
-
-            //    / console.log(nuevoPrecio)
             setIdTherapy(e)
-            //  setPriceEvaluacion(nuevoPrecio)
-            //console.log("esta es la terapia  : " + tera) 
+           
         }
-
-
     }
+
+
     const precioModal = (e) => {
 
         setPriceEvaluacion(e)

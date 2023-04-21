@@ -20,6 +20,7 @@ import ListasTerapias from './Vistas/ListasTerapias';
 import Login from './Vistas/Login';
 import Terapias from './Vistas/Terapias';
 import Users from './Vistas/Users';
+import Abono from './Vistas/Abono';
 
 
 import Contabilidad from './Vistas/Contabilidad';
@@ -64,7 +65,6 @@ function App() {
 
         cargarUsuario()
     }, []);
-
 
 
 
@@ -122,6 +122,7 @@ function App() {
                         <Route exact path="/contabilidad" element={<Contabilidad />} />
                         <Route exact path="/AgeCalculator" element={<AgeCalculator />} />
                         <Route exact path="/Users" element={<Users />} />
+                        <Route exact path="/abono" element={<Abono />} />
                     </Route>
                 </Routes>
             </HashRouter>
