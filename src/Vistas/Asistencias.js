@@ -5,7 +5,7 @@ import axios from 'axios';
 import Headers from '../Headers'
 import swal from 'sweetalert';
 import '../responsive.css'
-
+import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario } from '../auth-helpers'
 function Asistencias() {
 
     const [paciente, setPaciente] = useState()
@@ -22,7 +22,12 @@ function Asistencias() {
         setFecha(e)
     }
 
+    let id = getDatosUsuario()
 
+    const date = {
+        Idterapeuta:id
+    }
+   
     useEffect(() => {
 
 
@@ -31,11 +36,11 @@ function Asistencias() {
                 setDataPaciente(responses.data.lista)
             });
 
-        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
+            axios.post('https://localhost:63958/api/Clinica/GetEvaluacionByTerapeuta',date)
             .then(response => {
-                setData(response.data.lista)
+             
+                setData(response.data)
             });
-
         axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/terapeuta')
             .then(response => {
 
@@ -118,7 +123,7 @@ function Asistencias() {
                                 {
                                     data.map(item => [
                                         //<option key={item.value} value={item.value}>{item.value}</option>
-                                        <option value={item.idTherapy}>{item.label}</option>
+                                        <option value={item.idTherapy}>{item.nombreTerapia.label}</option>
                                     ])
                                 }
 

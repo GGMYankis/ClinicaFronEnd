@@ -52,6 +52,7 @@ function Terapias() {
     const data = {
 
         Label: label,
+        Value:label,
         Description: description,
         Price: price,
         Porcentaje: porcentaje
@@ -68,7 +69,7 @@ function Terapias() {
         }
 
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/CrearTerapia';
+        const url = 'https://localhost:63958/api/Clinica/CrearTerapia';
         axios.post(url, data).then((result) => {
 
 

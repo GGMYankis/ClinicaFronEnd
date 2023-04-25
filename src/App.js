@@ -21,6 +21,7 @@ import Login from './Vistas/Login';
 import Terapias from './Vistas/Terapias';
 import Users from './Vistas/Users';
 import Abono from './Vistas/Abono';
+import TerapiaTerapeuta from './Vistas/TerapiaTerapeuta';
 
 
 import Contabilidad from './Vistas/Contabilidad';
@@ -123,6 +124,7 @@ function App() {
                         <Route exact path="/AgeCalculator" element={<AgeCalculator />} />
                         <Route exact path="/Users" element={<Users />} />
                         <Route exact path="/abono" element={<Abono />} />
+                        <Route exact path="/TerapiaTerapeuta" element={<TerapiaTerapeuta />} />
                     </Route>
                 </Routes>
             </HashRouter>

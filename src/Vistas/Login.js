@@ -73,16 +73,15 @@ function Login() {
         };
 
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Autenticacion/Login';
+        const url = 'https://localhost:63958/api/Autenticacion/Login';
 
         axios.post(url, data).then((result) => {
      
             if (result.data.user == null) {
-                setError(result.data.mensaje)
+                setError(result.data.message)
             }else{
                 navigation("/admin")
             }
-
 
             const user = result.data.user.names.substring('', 1)
             setUsuarioM(user)

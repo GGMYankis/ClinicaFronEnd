@@ -37,14 +37,13 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.1",
     "react-scripts": "5.0.1",
-    "react-select": "^5.7.0",
+    "react-select": "^5.7.2",
     "styled-components": "^5.3.8",
     "sweetalert": "^2.1.2",
     "universal-cookie": "^4.0.4",
     "web-vitals": "^2.1.4",
     "yarn": "^1.22.19"
   },
-
   "homepage": "https://github.com/GGMYankis/ClinicaFronEnd.git",
   "scripts": {
     "start": "react-scripts start",
@@ -71,5 +70,3 @@
     ]
   }
 }
-
-

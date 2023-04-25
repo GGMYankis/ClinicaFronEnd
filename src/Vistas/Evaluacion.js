@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import $ from 'jquery';
 import { findDOMNode } from 'react-dom'
 import { FaUser } from 'react-icons/fa'
-
+import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario } from '../auth-helpers'
 
 
 
@@ -37,17 +37,24 @@ function Evaluacion() {
     const [idterapeuta, setIdterapeuta] = useState(0)
 
 
+    
+    let id = getDatosUsuario()
+
+    const date = {
+        Idterapeuta:id
+    }
+
     useEffect(() => {
-        axios.get('https://localhost:63958/api/Clinica/Lista')
+        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Lista')
             .then(responses => {
                
                 setDataPaciente(responses.data.lista)
             });
 
-        axios.get('https://localhost:63958/api/Clinica/ListaTerapia')
+        axios.post('https://localhost:63958/api/Clinica/GetEvaluacionByTerapeuta',date)
             .then(response => {
              
-                setData(response.data.lista)
+                setData(response.data)
             });
 
 
@@ -242,7 +249,7 @@ function Evaluacion() {
                             </select>
                         </div>
 
-
+{/*}
                         <div className='cont-select-evaluacion1'>
                             <p className='titu-barra'> Lista de Terapias </p>
 
@@ -250,11 +257,12 @@ function Evaluacion() {
                                 <option >Seleccione una terapia</option>
                                 {
                                     data.map(item => [
-                                        <option value={item.idTherapy}>{item.label}</option>
+                                        <option >{item.nombreTerapia.label}</option>
                                     ])
                                 }
                             </select>
                         </div>
+                            */}
 
                         <div className='cont-select-evaluacion1'>
                             <p className='titu-barra'> Terapeuta </p>
