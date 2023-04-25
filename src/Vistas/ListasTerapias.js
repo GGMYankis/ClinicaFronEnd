@@ -11,45 +11,23 @@ import { BrowserRouter, Routes, Route, Link, Redirect } from 'react-router-dom'
 import $ from 'jquery';
 import { findDOMNode } from 'react-dom'
 import swal from 'sweetalert';
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser } from '../auth-helpers'
+import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser,getNombreUsuario } from '../auth-helpers'
 import '../Tabla.css';
-
-
-
-const table = document.getElementById('table');
-const precio = document.getElementById('precio');
-
-
+import { useCookies } from 'react-cookie';
 
 function ListasTerapias() {
-
-
     obtenerUser()
-
-
-
     const [terapias, setTerapias] = useState([])
     const [nmTerapias, setNmTerapias] = useState('  ')
     const [descripcion, setDescripcion] = useState('  ')
     const [price, setPrice] = useState(0)
     const [porcentaje, setPorcentaje] = useState()
     const [idTerapiaEliminar, setIdTerapiaEliminar] = useState()
-    const [idEditarTerapia, setIdEditarTerapia] = useState([])
-
-
-
-
-
     const [id, setId] = useState()
-
-    const cookies = new Cookies();
     const navigation = useNavigate();
-
-
 
     useEffect(() => {
 
-        // { headers: { 'Authorization': `Bearer ${tokens}` } }
         axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
 
             .then(response => {
@@ -71,16 +49,10 @@ function ListasTerapias() {
 
     }
 
-
     const FormularioTherapy = document.getElementById("FormularioTherapy");
-
     const enviarDatosCrear = (e) => {
 
         e.preventDefault()
-
-        console.log(data2)
-
-
         const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/CrearTerapia';
         axios.post(url, data2).then(res => {
 
@@ -103,42 +75,22 @@ function ListasTerapias() {
         })
 
     }
-
-
-
+    
     const Fcterapia = (e) => {
-
         setNmTerapias(e)
     }
 
     const Fcdescripcion = (e) => {
-
         setDescripcion(e)
     }
 
-    const Fcprice = (e) => {
 
-
-
-
-        setPrice(e)
-
-    }
-
+  
     const logout = () => {
 
-
-        cookies.remove("MyCookies")
-        cookies.remove("Perfil")
-        cookies.remove("Usuario")
+        deleteToken()
         navigation("/login")
-
-
     }
-
-
-
-
 
     const dataEdi = {
 
@@ -149,14 +101,8 @@ function ListasTerapias() {
         Porcentaje: porcentaje
     }
 
-
-    const FormularioEditarTherapy = document.getElementById("FormularioEditarTherapy");
     const enviarDatos = (e) => {
-
         e.preventDefault()
-
-
-
         const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/EditarTerapia';
         axios.post(url, dataEdi).then(res => {
 
@@ -178,53 +124,40 @@ function ListasTerapias() {
             if (res) {
                 probar()
             }
-            //refreshPage()
         })
     }
-
-
 
     function editar(e) {
         $('#form-perfil').show();
         setId(e)
         const res = terapias.filter(item => item.idTherapy == e)
         res.map(item => [
-
-
             setNmTerapias(item.label),
             setDescripcion(item.description),
             setPrice(item.price),
             setPorcentaje(item.porcentaje),
-
-
         ])
 
     };
-
 
     function refreshPage() {
 
         window.location.reload();
     }
 
-
     function eliminar() {
 
         const idPa = { IdTherapy: idTerapiaEliminar }
-
         const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/EliminarTerapia';
         axios.post(url, idPa).then(res => {
-
 
             $('#eliminarPaciente').hide();
             const probar = async () => {
 
                 const ale = await swal({
-
                     title: "Correcto",
                     text: "Cambio guardado ",
                     icon: "success",
-
                 });
 
                 refreshPage()
@@ -238,43 +171,23 @@ function ListasTerapias() {
 
     };
 
-
-
     const modalCerrarEliminar = () => {
-
         $('#eliminarPaciente').hide();
-
     }
-
-   
 
     function quitarModal() {
-
         $('#form-perfil').hide();
         $('#form-perfil-registrar').hide();
-
-
     };
 
-
-
     const modalEliminar = (e) => {
-
         $('#eliminarPaciente').show();
         setIdTerapiaEliminar(e)
-
     }
-
-
 
     const crearTerapia = () => {
         $('#form-perfil-registrar').show();
-
     }
-
-
-    const dd = document.getElementById('key');
-
 
     const myElement = useRef(null);
 
@@ -282,11 +195,7 @@ function ListasTerapias() {
         myElement.current.classList.toggle('mi-clase-css');
     };
 
-
-
-
     return (
-
 
         <div>
             <header className='encabezado'>
@@ -321,6 +230,9 @@ function ListasTerapias() {
                                 <Link className='letras-menu' to="/calendario">Calendario</Link>
                             </li>
                             <li>
+                                <Link className='letras-menu' to="/TerapiaTerapeuta">Asignación</Link>
+                            </li>
+                            <li>
                                 <a className='Cerra-Sesion-ul' onClick={logout}>Cerra Sesión</a>
                             </li>
 
@@ -333,12 +245,15 @@ function ListasTerapias() {
                     <span className='ver'><span className='gg'>é</span>nfasis</span>
                 </div>
 
-                <div className='cont-btn-headers'>
-                    <div className='probarUs'>
-                        <Link className='Link' to="/perfilAdmin">{obtenerUser()}</Link>
+                <div className='contenedor-botones'>
+                    <div className='cont-btn-headers'>
+                        <div className='probarUs'>
+                            <Link className='Link' to="/perfilAdmin">{obtenerUser()}</Link>
+                        </div>
                     </div>
-
-
+                    <div className='cont-nombre-usuario'>
+                        <p className='nombreUsuario'>{getNombreUsuario()}</p>
+                    </div>
                 </div>
 
 

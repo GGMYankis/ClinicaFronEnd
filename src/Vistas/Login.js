@@ -11,7 +11,7 @@ import swal from 'sweetalert';
 import { FaFontAwesomeIcon, FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import jwt_decode from 'jwt-decode';
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario ,getDatosUsuario,setToken} from '../auth-helpers'
+import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario,setUsuarioCompleto, setToken, nombreUsuario } from '../auth-helpers'
 
 
 function Login() {
@@ -22,16 +22,9 @@ function Login() {
     const [Password, setPassword] = useState('');
     const [error, setError] = useState(false)
     const [valiEmail, setValiEmail] = useState(false)
-    const [mensajeError, setMensajeError] = useState(false)
+    const [mensajeError, setMensajeError] = useState(null)
 
-
-
-    const [text, setText] = useState(
-
-        window.localStorage.getItem('text')
-
-    );
-
+    
     const navigation = useNavigate();
 
     const handleNameChange = (value) => {
@@ -50,7 +43,7 @@ function Login() {
 
         if (email.length == 0 || Password.length == 0) {
 
-            setError(true)
+            setMensajeError('Debe de llenar los campos')
 
             return;
 
@@ -63,36 +56,38 @@ function Login() {
         if (esValido == true) {
 
         } else {
-            setValiEmail(true)
+           setMensajeError('La dirección del correo no es válida')
             return;
         }
-//  "homepage": "https://clinica14.000webhostapp.com/",
+        //  "homepage": "https://clinica14.000webhostapp.com/",
         const data = {
             Email: email,
             Password: Password
         };
 
 
-        const url = 'https://localhost:63958/api/Autenticacion/Login';
+        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Autenticacion/Login';
 
         axios.post(url, data).then((result) => {
-     
+
+            console.log(result.data.user)
+
             if (result.data.user == null) {
-                setError(result.data.message)
-            }else{
+                setMensajeError(result.data.message)
+            } else {
                 navigation("/admin")
             }
 
             const user = result.data.user.names.substring('', 1)
             setUsuarioM(user)
             setUsuario(result.data.user.idUser)
-            setToken( result.data.tokencreado)
+            nombreUsuario(result.data.user.names)
+            setToken(result.data.tokencreado)
+            setUsuarioCompleto(result.data.user.idRol)
             login.reset()
         })
 
     }
-
-
 
     return (
 
@@ -105,7 +100,7 @@ function Login() {
 
                 <div className='cont-email-login' >
                     <FontAwesomeIcon icon={faEnvelope} className='email' />
-                    <input type="text" placeholder='Email' onChange={(e) => handleNameChange(e.target.value)} />
+                    <input type="text" placeholder='Email' onChange={(e) => handleNameChange(e.target.value)} autoComplete='off' />
                 </div>
 
                 {error & email.length <= 0 ?
@@ -117,7 +112,7 @@ function Login() {
 
                 <div className='cont-email-login' >
                     <FontAwesomeIcon icon={faLock} className='email' />
-                    <input type="password" placeholder='Password' onChange={(e) => handlePhoneNoChange(e.target.value)} />
+                    <input type="password" placeholder='Password' onChange={(e) => handlePhoneNoChange(e.target.value)} autoComplete='off' />
                 </div>
 
                 {error && Password.length <= 0 ?
@@ -125,6 +120,12 @@ function Login() {
 
                 {error ?
                     <label className='campo-login'>{error}</label> : ""}
+                {mensajeError ?
+                    <div class="alert alert-danger" role="alert">
+                      {mensajeError}
+                    </div>
+                    : ""
+                }
 
                 <button className='btn'>Login</button>
             </form>

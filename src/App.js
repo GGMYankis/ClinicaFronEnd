@@ -1,6 +1,3 @@
-
-
-
 import Cookies from 'universal-cookie';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -22,28 +19,26 @@ import Terapias from './Vistas/Terapias';
 import Users from './Vistas/Users';
 import Abono from './Vistas/Abono';
 import TerapiaTerapeuta from './Vistas/TerapiaTerapeuta';
-
-
 import Contabilidad from './Vistas/Contabilidad';
 import ListasPacientes from './Vistas/ListasPacientes';
 import Asistencias from './Vistas/Asistencias';
 import Calendario from './Vistas/Calendario';
 import { Protect } from './components/Protect';
 import Autenticacion from './components/Autenticacion';
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario } from './auth-helpers'
-
+import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario,nombreUsuario } from './auth-helpers'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+const cookies = new Cookies();
 
 initAxiosInterceptors()
 
 function App() {
 
+
     useEffect(() => {
 
         getToken()
 
-
+        
         async function cargarUsuario() {
             if (!getToken) {
                 alert('no hay token')
@@ -56,6 +51,7 @@ function App() {
                         setUsuario(res.data.idUser)
                         const user = res.data.names.substring('', 1)
                         setUsuarioM(user)
+                        nombreUsuario(res.data.names)
                     })
 
 

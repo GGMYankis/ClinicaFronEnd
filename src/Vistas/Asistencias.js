@@ -5,7 +5,8 @@ import axios from 'axios';
 import Headers from '../Headers'
 import swal from 'sweetalert';
 import '../responsive.css'
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario } from '../auth-helpers'
+import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario ,getUsuarioCompleto} from '../auth-helpers'
+
 function Asistencias() {
 
     const [paciente, setPaciente] = useState()
@@ -27,7 +28,7 @@ function Asistencias() {
     const date = {
         Idterapeuta:id
     }
-   
+    let rol = getUsuarioCompleto()
     useEffect(() => {
 
 
@@ -36,11 +37,20 @@ function Asistencias() {
                 setDataPaciente(responses.data.lista)
             });
 
-            axios.post('https://localhost:63958/api/Clinica/GetEvaluacionByTerapeuta',date)
-            .then(response => {
-             
-                setData(response.data)
-            });
+            if (rol == 2) {
+                axios.post('https://localhost:63958/api/Clinica/GetEvaluacionByTerapeuta', date)
+                    .then(response => {
+    
+                        setData(response.data)
+                        console.log(response.data)
+                    });
+            } else {
+                axios.get('https://localhost:63958/api/Clinica/ListaTerapia')
+                    .then(response => {
+                        console.log(response.data)
+                        setData(response.data)
+                    });
+            }
         axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/terapeuta')
             .then(response => {
 
@@ -48,7 +58,6 @@ function Asistencias() {
             });
 
     }, []);
-
 
 
     const dataValor =
@@ -66,12 +75,10 @@ function Asistencias() {
 
     const enviar = (e) => {
         e.preventDefault()
+
         console.log(dataValor)
-
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Asistencias'
+        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Asistencias';
         axios.post(url, dataValor).then((result) => {
-
-
             swal({
                 title: "Correcto",
                 text: "Cambio guardado ",
@@ -123,7 +130,7 @@ function Asistencias() {
                                 {
                                     data.map(item => [
                                         //<option key={item.value} value={item.value}>{item.value}</option>
-                                        <option value={item.idTherapy}>{item.nombreTerapia.label}</option>
+                                        <option value={item.nombreTerapia.idTherapy}>{item.nombreTerapia.label}</option>
                                     ])
                                 }
 

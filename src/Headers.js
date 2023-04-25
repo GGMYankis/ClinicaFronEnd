@@ -4,42 +4,31 @@ import { BrowserRouter, Routes, Route, Link, Redirect } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import logo from "./imagenes/IMG-20230221-WA0009.png";
 import { FaUser } from 'react-icons/fa';
-import Cookies from 'universal-cookie';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser } from './auth-helpers'
+import { setUsuarioM, obtenerUser,getNombreUsuario, deleteToken } from './auth-helpers'
+
 
 
 function Headers({ }) {
 
-    const cookies = new Cookies();
     const navigation = useNavigate();
-    const [usuario, setUsuario] = useState(null)
 
+    
 
     obtenerUser()
-
-
+ 
     const logout = () => {
 
-        cookies.remove("MyCookies")
-        cookies.remove("Perfil")
-        cookies.remove("Usuario")
+        deleteToken()
         navigation("/login")
     }
-
-
+    
     const myElement = useRef(null);
 
     const handleClick = () => {
         myElement.current.classList.toggle('mi-clase-css');
     };
-
-
-    useEffect(() => {
-        const na = cookies.get('name')
-
-    }, [])
 
 
     return (
@@ -66,7 +55,7 @@ function Headers({ }) {
                             <li>
                                 <Link className='letras-menu' to="/listasPacientes">Listado de Pacientes</Link>
                             </li>
-                            
+
                             <li>
                                 <Link className='letras-menu' to="/listasTerapias">Listado de Terapias</Link>
                             </li>
@@ -76,12 +65,12 @@ function Headers({ }) {
                             <li>
                                 <Link className='letras-menu' to="/calendario">Calendario</Link>
                             </li>
-
+                            <li>
+                                <Link className='letras-menu' to="/TerapiaTerapeuta">Asignación</Link>
+                            </li>
                             <li>
                                 <a className='Cerra-Sesion-ul' onClick={logout}>Cerra Sesión</a>
                             </li>
-                            
-
                         </ul>
                     </nav>
                 </div>
@@ -90,22 +79,18 @@ function Headers({ }) {
                     <img className='img-admin-logo' src={logo} />
                     <span className='ver'><span className='gg'>é</span>nfasis</span>
                 </div>
-
-                <div className='cont-btn-headers'>
-                    <div className='probarUs'>
-                        <Link className='Link' to="/perfilAdmin">{obtenerUser()}</Link>
+                <div className='contenedor-botones'>
+                    <div className='cont-btn-headers'>
+                        <div className='probarUs'>
+                            <Link className='Link' to="/perfilAdmin">{obtenerUser()}</Link>
+                        </div>
                     </div>
-
-                   
+                    <div className='cont-nombre-usuario'>
+                        <p className='nombreUsuario'>{getNombreUsuario()}</p>
+                    </div>
                 </div>
 
-
             </header>
-
-            <div class="lds-roller"><div></div><div></div><div></div><div></div>
-            <div></div><div></div><div></div><div></div></div>
-
-
         </div>
     )
 }

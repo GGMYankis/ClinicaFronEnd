@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import $ from 'jquery';
 import { findDOMNode } from 'react-dom'
 import { FaUser } from 'react-icons/fa'
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario } from '../auth-helpers'
+import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario, getUsuarioCompleto } from '../auth-helpers'
 
 
 
@@ -36,26 +36,36 @@ function Evaluacion() {
     const [terapeuta, setTerapeuta] = useState([])
     const [idterapeuta, setIdterapeuta] = useState(0)
 
-
-    
     let id = getDatosUsuario()
+    let rol = getUsuarioCompleto()
 
     const date = {
-        Idterapeuta:id
+        Idterapeuta: id
     }
+
 
     useEffect(() => {
         axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Lista')
             .then(responses => {
-               
+
                 setDataPaciente(responses.data.lista)
             });
 
-        axios.post('https://localhost:63958/api/Clinica/GetEvaluacionByTerapeuta',date)
-            .then(response => {
-             
-                setData(response.data)
-            });
+        if (rol == 2) {
+            axios.post('https://localhost:63958/api/Clinica/GetEvaluacionByTerapeuta', date)
+                .then(response => {
+
+                    setData(response.data)
+                    console.log(response.data)
+                });
+        } else {
+            axios.get('https://localhost:63958/api/Clinica/ListaTerapia')
+                .then(response => {
+                    console.log(response.data)
+                    setData(response.data)
+                });
+        }
+
 
 
         axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/terapeuta')
@@ -90,7 +100,7 @@ function Evaluacion() {
         if (e != null) {
             $('#FormModal').show();
             setIdTherapy(e)
-           
+
         }
     }
 
@@ -113,7 +123,7 @@ function Evaluacion() {
         Frecuencia: frecuencia,
         Dias: day,
         IdTerapeuta: idterapeuta,
-        Hola:nom
+        Hola: nom
     };
 
 
@@ -143,7 +153,7 @@ function Evaluacion() {
     }
 
 
-    
+
     function cancelarModal() {
         $('#FormModal').hide();
     };
@@ -199,8 +209,8 @@ function Evaluacion() {
                             <div className="row  g-2">
                                 <div className="">
 
-                                <input type="checkbox" value="visitas" onChange={e => Fviistas(e.target.value)}/>Visitas<br></br>
-                                
+                                    <input type="checkbox" value="visitas" onChange={e => Fviistas(e.target.value)} />Visitas<br></br>
+
                                     <label htmlFor="txtnombres" className="form-label">Precio de la Terapia</label>
                                     <input type="text" className="form-control" id="txtnombres" onChange={(e) => precioModal(e.target.value)} autoComplete="off" />
                                 </div>
@@ -249,20 +259,22 @@ function Evaluacion() {
                             </select>
                         </div>
 
-{/*}
+
                         <div className='cont-select-evaluacion1'>
                             <p className='titu-barra'> Lista de Terapias </p>
 
                             <select className='form-select' onChange={e => terapias(e.target.value)} required >
                                 <option >Seleccione una terapia</option>
+
                                 {
                                     data.map(item => [
                                         <option >{item.nombreTerapia.label}</option>
                                     ])
                                 }
+
                             </select>
                         </div>
-                            */}
+
 
                         <div className='cont-select-evaluacion1'>
                             <p className='titu-barra'> Terapeuta </p>

@@ -4,18 +4,19 @@ import Cookies from "universal-cookie"
 
 
 
-export const Protect = ({  children }) => {
+export const Protect = ({ children }) => {
 
    const cookies = new Cookies();
 
-   const token = cookies.get('MyCookies')
+   const token = cookies.get('Token')
 
 
    if (!token) {
 
-   return <Navigate to="/login" />
+      return <Navigate to="/login" />
    }
- 
+
+
 
    return children ? children : <Outlet />
 

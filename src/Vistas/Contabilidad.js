@@ -25,7 +25,7 @@ function Contabilidad() {
 
     useEffect(() => {
 
-        axios.get('https://yanclinic.somee.com/api/Clinica/terapeuta')
+        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/terapeuta')
             .then(res => {
                 setTerapeuta(res.data.usuarios)
             });
@@ -64,7 +64,7 @@ function Contabilidad() {
         e.preventDefault()
 
 
-        const url = 'https://yanclinic.somee.com/api/Clinica/Buscar'
+        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Buscar'
         axios.post(url, datas).then((result) => {
 
             console.log(result.data)

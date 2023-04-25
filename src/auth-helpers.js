@@ -4,42 +4,58 @@ import axios from 'axios';
 const cookies = new Cookies();
 
 export function setToken(token) {
-    return cookies.set('MyCookies', token, { path: '/' });
+
+    return cookies.set('Token', token, { path: '/' });
+}
+
+export function setUsuarioCompleto(users) {
+
+    return cookies.set('UsuarioCompleto', users, { path: '/' });
 }
 
 export function setUsuarioM(usuario) {
 
-    return cookies.set('Usuario', usuario, { path: '/' });
+    return cookies.set('PrimeraLetra', usuario, { path: '/' });
+}
+export function nombreUsuario(name) {
+
+    return cookies.set('Nombre', name, { path: '/' });
 }
 
 export function setUsuario(user) {
-    return cookies.set('UsuarioDatos', user, { path: '/' });
+    return cookies.set('UsuarioId', user, { path: '/' });
 }
 
 export function getDatosUsuario() {
 
-    return cookies.get('UsuarioDatos');
+    return cookies.get('UsuarioId');
+}
+
+export function getNombreUsuario() {
+
+    return cookies.get('Nombre');
+}
+
+
+export function getUsuarioCompleto() {
+
+    return cookies.get('UsuarioCompleto');
 }
 
 
 export function obtenerUser() {
 
-    return cookies.get('Usuario');
+    return cookies.get('PrimeraLetra');
 }
-
-
 export function getToken() {
 
-    return cookies.get('MyCookies')
+    return cookies.get('Token')
 }
-
-
 export function deleteToken() {
-
-
-    cookies.remove('MyCookies')
-    cookies.remove('Usuario')
-
+    cookies.remove('Token')
+    cookies.remove('Nombre')
+    cookies.remove('UsuarioId')
+    cookies.remove('PrimeraLetra')
     return;
 }
 
@@ -52,9 +68,6 @@ export function initAxiosInterceptors() {
 
         return config;
     })
-
-    /*
-
     axios.interceptors.response.use(
         function (response) {
             return response;
@@ -69,5 +82,5 @@ export function initAxiosInterceptors() {
             }
         }
     )
-    */
+
 }

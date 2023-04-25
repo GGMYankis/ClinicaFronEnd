@@ -5,28 +5,24 @@
     text-decoration: none;
 }
 
-
-
 .checkbtn {
     font-size: 30px;
     color: white;
     margin-bottom: 5px;
 }
 
-
 .encabezado ul {
     position: fixed;
     width: 200px;
     height: 100vh;
     background-color: #0b2f57;
-    top: 70px;
+    top: 55px;
     text-align: center;
     transition: all .5s;
     left: -100%;
 }
 
 ul li {
-
     display: block;
     margin: 30px 0;
     line-height: 30px;
@@ -41,9 +37,20 @@ ul li {
 
 }
 
+.cont-nombre-usuario {
+    padding-right: 20px;
+}
 
+.cont-nombre-usuario .nombreUsuario {
+    color: orange;
+    margin-top: 15px;
+    font-weight: 700;
 
+}
 
+.contenedor-botones {
+    display: flex;
+}
 
 
 
@@ -107,13 +114,13 @@ ul li {
     right: 0;
     top: 0;
     display: flex;
-      background-color: #0b2f57;
+    background-color: #0b2f57;
     justify-content: space-between;
     align-items: center;
     padding: 10px;
     color: white;
     position: fixed;
-    height: 70px;
+    height: 55px;
 }
 
 
@@ -123,8 +130,8 @@ ul li {
 
 
 .img-admin-logo {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 500px;
 }
 
@@ -289,6 +296,7 @@ body {
     cursor: pointer;
     transition: all .2s;
     width: 200px;
+    margin-right: 20px;
 }
 
 .btn-cita:hover {
@@ -314,6 +322,7 @@ body {
     padding-left: 20px;
     padding-right: 20px;
 }
+
 .sub-elemento {
     display: block;
     margin: auto;
@@ -323,7 +332,7 @@ body {
     margin-bottom: 30px;
 }
 
-#eliminar-perfil{
+#eliminar-perfil {
     color: #fff;
     background-color: #de4b33;
     border-color: #dc3f25;
@@ -826,8 +835,8 @@ th {
 
 .probarUs {
     background-color: white;
-    width: 38px;
-    height: 38px;
+    width: 35px;
+    height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -836,17 +845,14 @@ th {
     transition: all .2s;
 }
 
-.probarUs:hover {
-    transform: scale(1.1);
-    transition: all .2s;
-}
 
 .probarUs .Link {
     text-decoration: none;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 20px;
+    font-size: 15px;
     color: #0b2f57;
+    margin-top: 3px;
 
 }
 
@@ -862,8 +868,9 @@ th {
     width: 80px;
     height: 80px;
     margin-top: 90px;
-  }
-  .lds-ring div {
+}
+
+.lds-ring div {
     box-sizing: border-box;
     display: block;
     position: absolute;
@@ -874,25 +881,30 @@ th {
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
     border-color: #fff transparent transparent transparent;
-  }
-  .lds-ring div:nth-child(1) {
-    animation-delay: -0.45s;
-  }
-  .lds-ring div:nth-child(2) {
-    animation-delay: -0.3s;
-  }
-  .lds-ring div:nth-child(3) {
-    animation-delay: -0.15s;
-  }
-  @keyframes lds-ring {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
+}
 
-  .mds{
+.lds-ring div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.mds {
     margin-top: 60px;
-  }
+}

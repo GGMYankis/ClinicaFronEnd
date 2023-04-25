@@ -15,52 +15,42 @@ import { FaUser } from 'react-icons/fa'
 import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario, setToken } from '../auth-helpers';
 
 
-
 function TerapiaTerapeuta() {
 
     const [data, setData] = useState([]);
     const [terapeuta, setTerapeuta] = useState([])
-    const [nombreTerapeuta, setNombreTerapeuta] = useState([])
-    const [nombreTerapia, setNombreTerapia] = useState([])
-    const [pro, setPro] = useState([])
-    const [datass, setDatass] = useState([]);
+
+    const [idTerapeuta, setIdTerapeuta] = useState([])
+
+    const [idTerapias, setIdTerapias] = useState([]);
 
     useEffect(() => {
 
         axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/terapeuta')
 
             .then(response => {
-
                 setTerapeuta(response.data.usuarios)
             })
 
-
-        axios.get('https://localhost:63958/api/Clinica/ListaTerapia')
+        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
             .then(response => {
                 setData(response.data.lista)
             });
-
     }, []);
 
 
-
-
-    // Idterapeuta: nombreTerapeuta,
-    //Idtherapia: nombreTerapia
-
-
     const datos = {
-        teras: 
-         datass
+        teras:
+            idTerapias
         ,
-        id: nombreTerapeuta
-      }
+        id: idTerapeuta
+    }
     const enviars = (e) => {
 
         e.preventDefault()
 
-        const url = 'https://localhost:63958/api/Clinica/Post'
-        axios.post(url,datos ).then((result) => {
+        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Post'
+        axios.post(url, datos).then((result) => {
 
             if (result) {
                 swal({
@@ -75,63 +65,72 @@ function TerapiaTerapeuta() {
     }
 
 
-   
 
-  
+    function handleTerapeuta(e) {
+
+        setIdTerapeuta(e.idUser)
+
+    }
+
+
 
     function handle(selectedItems) {
         const ids = [];
 
         selectedItems.map(item => {
+
             ids.push(item.idTherapy)
         })
 
-        setDatass(ids)
+        setIdTerapias(ids)
 
-        /*
-        const flavors = [];
-
-        for (let i = 0; i < selectedItems.length; i++) {
-
-            flavors.push(selectedItems[i].value);
-        }
-
-        setDatass(flavors)
-    
-       )    */
     }
 
 
     return (
 
         <div >
+            <Headers />
             <div className='cont-asignar'>
 
                 <div className='form-asignar'>
-
-                    <div className='row'>
-                        <div className='col'>
-                            <select required className='asignarBarra' onChange={e => setNombreTerapeuta(e.target.value)} >
-                                {
-                                    terapeuta.map(item => [
-                                        <option value={item.idUser}>{item.names}</option>
-
-                                    ])
-                                }
-                            </select>
-                        </div>
+                    <div className='cont-titu-asignacionTerapeuta'>
+                        <h1>Asignación Terapeuta</h1>
                     </div>
-                    <div className='row'>
-                        <div className='col'>
-                            <Select
-                                isMulti
-                                options={data}
-                                onChange={handle}
+                    <div className='sub-asignar'>
 
-                            />
+                        <div className='row' id='row-1-asignar' >
+                            <div className='col'>
+                                { /*
+                                <select required className='asignarBarra' onChange={e => setNombreTerapeuta(e.target.value)} >
+                                    <option selected>Select</option>
+                                    {
+                                        terapeuta.map(item => [
+                                            <option value={item.idUser}>{item.names}</option>
+
+                                        ])
+                                    }
+                                </select>
+                                
+                                */}
+                                <Select
+                                    options={terapeuta}
+                                    onChange={handleTerapeuta}
+                                />
+                            </div>
                         </div>
+                        <div className='row' id='id-react-select' >
+                            <div className='col'>
+                                <Select
+                                    isMulti
+                                    options={data}
+                                    onChange={handle}
+
+                                />
+                            </div>
+                        </div>
+                        <button className='btn-buscar-citas' onClick={enviars}>Buscar</button>
                     </div>
-                    <button className='btn-buscar-citas' onClick={enviars}>Buscar</button>
                 </div>
             </div>
 

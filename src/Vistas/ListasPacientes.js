@@ -13,7 +13,7 @@ import swal from 'sweetalert';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DataTable from 'react-data-table-component';
 import Headers from '../Headers'
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser } from '../auth-helpers'
+import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser ,getNombreUsuario} from '../auth-helpers'
 
 
 const btnColor = document.getElementById('btnColor')
@@ -446,39 +446,14 @@ function ListasPacientes() {
 
     }
 
-
-    const modal = () => {
-
-        $('#modal-paciente').show();
-    }
-
-
     const logout = () => {
-
-       
         cookies.remove("MyCookies")
-        cookies.remove("Perfil")
         cookies.remove("Usuario")
         navigation("/login")
 
     }
 
-    const quitarModal = () => {
-        $('#modal-paciente').hide();
-        $('#foock').hide();
-
-    }
-
-
-
-    const crearPaciente = () => {
-
-        navigation("/crearPaciente")
-
-    }
-
-
-
+   
     const myElement = useRef(null);
 
     const handleClick = () => {
@@ -486,10 +461,7 @@ function ListasPacientes() {
     };
 
 
-
-
-
-    <input type="checkbox" id="check" onClick={handleClick} />
+    
     return (
 
         <div>
@@ -527,6 +499,9 @@ function ListasPacientes() {
                             <li>
                                 <Link className='letras-menu' to="/calendario">Calendario</Link>
                             </li>
+                            <li>
+                                <Link className='letras-menu' to="/TerapiaTerapeuta">Asignación</Link>
+                            </li>
 
                             <li>
                                 <a className='Cerra-Sesion-ul' onClick={logout}>Cerra Sesión</a>
@@ -541,12 +516,15 @@ function ListasPacientes() {
                     <span className='ver'><span className='gg'>é</span>nfasis</span>
                 </div>
 
-                <div className='cont-btn-headers'>
-                    <div className='probarUs'>
-                    <Link className='Link' to="/perfilAdmin">{obtenerUser()}</Link>
+                <div className='contenedor-botones'>
+                    <div className='cont-btn-headers'>
+                        <div className='probarUs'>
+                            <Link className='Link' to="/perfilAdmin">{obtenerUser()}</Link>
+                        </div>
                     </div>
-
-
+                    <div className='cont-nombre-usuario'>
+                        <p className='nombreUsuario'>{getNombreUsuario()}</p>
+                    </div>
                 </div>
 
 

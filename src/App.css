@@ -947,6 +947,33 @@
   margin-top: 90px;
 }
 
+.btn-tabla-usuario{
+  width: 100px;
+  text-decoration: none;
+  line-height: 35px;
+  display: inline-block;
+  background-color: #0b2f57;
+  color: white;
+  text-align: center;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+}
+.btn-tabla-usuario-eliminar{
+  width: 100px;
+  text-decoration: none;
+  line-height: 35px;
+  display: inline-block;
+  background-color: #FF1046;
+  color: white;
+  text-align: center;
+  margin: 5px;
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+}
+
 .lds-ring div {
   box-sizing: border-box;
   display: block;
@@ -1051,9 +1078,12 @@
 
 .form-asignar {
   width: 500px;
-  padding: 20px;
   border-radius: 10px;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+}
+
+.sub-asignar {
+  padding: 20px;
 }
 
 .asignarBarra {
@@ -1064,9 +1094,35 @@
   border: 1px solid #ced4da;
   border-radius: 0.375rem;
   padding: 0.375rem 2.25rem 0.375rem 0.75rem;
- margin-bottom: 15px;
+  margin-bottom: 15px;
+  color: #817a7a;
 }
 
-.btn-login{
-  background-color: red;
+
+.cont-titu-asignacionTerapeuta {
+  background-color: #0b2f57;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.cont-titu-asignacionTerapeuta h1 {
+
+  color: white;
+  font-size: 25px;
+}
+
+#id-react-select {
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+
+.form-users {
+  border-radius: 8px;
+  border: 1px solid rgba(212, 206, 206, 0.531);
+  margin-bottom: 8px;
+  color: rgba(183, 176, 176, 0.828);
+  padding: 5px;
 }

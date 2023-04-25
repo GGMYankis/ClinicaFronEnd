@@ -83,7 +83,7 @@ function Abono() {
 
         console.log(dataEvaluacion)
 
-        const url = 'https://localhost:63958/api/Clinica/CrearAbono';
+        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/CrearAbono';
         axios.post(url, dataEvaluacion).then((resultEvaluacion) => {
 
 

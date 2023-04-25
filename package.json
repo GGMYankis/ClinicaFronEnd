@@ -29,6 +29,7 @@
     "react": "^18.2.0",
     "react-autosuggest": "^10.1.0",
     "react-bootstrap": "^2.7.3",
+    "react-cookie": "^4.1.1",
     "react-data-table-component": "^7.5.3",
     "react-date-range": "^1.4.0",
     "react-datepicker": "^4.11.0",
@@ -44,7 +45,7 @@
     "web-vitals": "^2.1.4",
     "yarn": "^1.22.19"
   },
-  "homepage": "https://github.com/GGMYankis/ClinicaFronEnd.git",
+  "homepage": "https://clinica14.000webhostapp.com/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
