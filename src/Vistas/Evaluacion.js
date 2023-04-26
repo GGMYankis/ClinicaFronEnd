@@ -342,11 +342,8 @@ function Evaluacion() {
                             </div>
 
                         </div>
-
+                        <button className='btn-evaluacion'>Guadar</button>
                     </div>
-
-
-                    <button className='btn-evaluacion'>Guadar</button>
                 </form>
             </div>
         </div>

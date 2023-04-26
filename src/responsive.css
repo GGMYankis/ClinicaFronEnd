@@ -8,13 +8,8 @@
 }
 
 
-
-
-
-
 @media(max-width:1200px){
  
-  
     #primeraFila{
         flex-direction: column;
     }
@@ -26,9 +21,7 @@
         flex-direction: column;
 
     }
-    .modal-paciente{
-        height: auto;
-    }
+
 }
 
 

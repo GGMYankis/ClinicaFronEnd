@@ -13,7 +13,7 @@ import swal from 'sweetalert';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DataTable from 'react-data-table-component';
 import Headers from '../Headers'
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser ,getNombreUsuario} from '../auth-helpers'
+import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser, getNombreUsuario } from '../auth-helpers'
 
 
 const btnColor = document.getElementById('btnColor')
@@ -26,11 +26,10 @@ function ListasPacientes() {
 
     const [ac, setAc] = useState([])
 
-    useEffect(() => {
-        $('#modal-paciente').hide();
-        $('#foock').hide();
+    const modalCrear = useRef()
+    const modalEditar = useRef()
 
-        const cookies = new Cookies();
+    useEffect(() => {
 
 
         axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Lista')
@@ -263,8 +262,7 @@ function ListasPacientes() {
 
     const modalCraePaciente = () => {
 
-        $('#modal-paciente').show();
-        $('#table-container').hide();
+        modalCrear.current.classList.add('active')
 
     }
 
@@ -337,8 +335,7 @@ function ListasPacientes() {
 
     const modaleditar = (e) => {
 
-        $('#foock').show();
-        $('#table-container').hide();
+        modalEditar.current.classList.add('active')
         setIdPaciente(e)
         const IdEditarPaciente = listaPaciente.filter(item => item.idPatients == e)
 
@@ -439,12 +436,16 @@ function ListasPacientes() {
     }
 
     const CancelarPaciente = () => {
+        modalCrear.current.classList.remove('active')
 
-        $('#foock').hide();
-        $('#modal-paciente').hide();
-        $('#table-container').show();
 
     }
+
+    const CancelarPacienteEditar = () => {
+        modalEditar.current.classList.remove('active')
+    }
+
+
 
     const logout = () => {
         cookies.remove("MyCookies")
@@ -453,7 +454,7 @@ function ListasPacientes() {
 
     }
 
-   
+
     const myElement = useRef(null);
 
     const handleClick = () => {
@@ -461,12 +462,10 @@ function ListasPacientes() {
     };
 
 
-    
+
     return (
 
         <div>
-
-
 
             <header className='encabezado'>
                 <div>
@@ -502,6 +501,12 @@ function ListasPacientes() {
                             <li>
                                 <Link className='letras-menu' to="/TerapiaTerapeuta">Asignación</Link>
                             </li>
+                            <li>
+                                <Link className='letras-menu' to="/Users">Usuario</Link>
+                            </li>
+                            <li>
+                                <Link className='letras-menu' to="/reportesContabilidad">Reportes</Link>
+                            </li>
 
                             <li>
                                 <a className='Cerra-Sesion-ul' onClick={logout}>Cerra Sesión</a>
@@ -530,7 +535,6 @@ function ListasPacientes() {
 
             </header>
 
-
             <div id='table-container' ref={myElement} className='table-container'>
 
 
@@ -549,10 +553,6 @@ function ListasPacientes() {
 
 
                     <div className='sub-2'>
-
-
-
-
                         <table className='table'>
 
                             <thead>
@@ -604,13 +604,8 @@ function ListasPacientes() {
 
             </div>
 
-
-
-
-
-
-            <div className='modal-paciente' tabIndex="-1" id="foock">
-                <form onSubmit={handleEditar} id="FormularioEditar" className='contenedor-cita'>
+            <div className='modal-paciente-editar' ref={modalEditar}>
+                <form onSubmit={handleEditar} className='contenedor-cita'>
 
                     <div className='cont-titulo-form'>
                         <h1>Editar Paciente </h1>
@@ -711,7 +706,7 @@ function ListasPacientes() {
                             <div className='row'>
                                 <div className="col">
                                     <label htmlFor="validationServer02" className='labelPaciente'>Activo</label>
-                                    <select id="cboactivo" class="form-select" value={ac} onChange={e => FActivo(e.target.value)} >
+                                    <select id="cboactivo" className="form-control" value={ac} onChange={e => FActivo(e.target.value)} >
                                         <option selected>seleccione una opción</option>
                                         <option value="1">Si</option>
                                         <option value="0">No</option>
@@ -744,16 +739,14 @@ function ListasPacientes() {
 
                         <div className="col" id='cont-btn-admin'>
                             <button className="btn-cita">Guardar</button>
-                            <button className="btn-cita" type='button' onClick={CancelarPaciente}>Cancelar</button>
+                            <button className="btn-cita" type='button' onClick={CancelarPacienteEditar}>Cancelar</button>
 
                         </div>
                     </div>
                 </form>
             </div>
 
-
-
-            <div className='modal-paciente' tabIndex="-1" id='modal-paciente'>
+            <div className='modal-paciente' ref={modalCrear}>
                 <form onSubmit={handleGuardar} className='contenedor-cita'>
 
                     <div className='cont-titulo-form'>
@@ -761,15 +754,11 @@ function ListasPacientes() {
                     </div>
 
                     <div className='paddd'>
-
                         <div className="row" id='primeraFila'>
                             <div className="col">
                                 <label htmlFor="validationServer01" className='labelPaciente'>Nombre</label>
                                 <input type="text" className="form-control " value={name} id="validationServer01" onChange={e => handleNameChange(e.target.value)} required />
-
                             </div>
-
-
                             <div className="col">
                                 <label htmlFor="validationServer01" className='labelPaciente'>Sexo</label>
                                 <select className="form-control" required onChange={e => handleSexChange(e.target.value)}>
@@ -794,10 +783,6 @@ function ListasPacientes() {
                             </div>
                         </div>
 
-
-
-
-
                         <div className='row' id='segundaFila'>
 
                             <div className="col">
@@ -808,7 +793,6 @@ function ListasPacientes() {
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Edad</label>
                                 <input type="number" className="form-control" value={calculateAge()} id="validationServer02" required />
-
                             </div>
 
                             <div className="col">
@@ -836,7 +820,6 @@ function ListasPacientes() {
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Configuración familiar</label>
                                 <input type="text" className="form-control " value={family_settings} id="validationServer02" required onChange={e => handlefamily_settingsChange(e.target.value)} />
-
                             </div>
 
                             <div className="col">
@@ -879,18 +862,14 @@ function ListasPacientes() {
 
                         </div>
 
-
-
-
                         <div className="col" id='cont-btn-admin'>
                             <button className="btn-cita">Guardar</button>
                             <button className="btn-cita" type='button' onClick={CancelarPaciente}>Cancelar</button>
-
                         </div>
+
                     </div>
                 </form>
             </div>
-
 
             <div className="modal" id='eliminarPaciente' >
 

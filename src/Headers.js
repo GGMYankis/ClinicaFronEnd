@@ -3,7 +3,7 @@ import React from 'react'
 import { BrowserRouter, Routes, Route, Link, Redirect } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import logo from "./imagenes/IMG-20230221-WA0009.png";
-import { FaUser } from 'react-icons/fa';
+import { FaUser,FaUsers } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { setUsuarioM, obtenerUser,getNombreUsuario, deleteToken } from './auth-helpers'
@@ -68,6 +68,13 @@ function Headers({ }) {
                             <li>
                                 <Link className='letras-menu' to="/TerapiaTerapeuta">Asignación</Link>
                             </li>
+                            <li>
+                                <Link className='letras-menu' to="/Users">Usuario</Link>
+                            </li>
+                            <li>
+                                <Link className='letras-menu' to="/reportesContabilidad">Reportes</Link>
+                            </li>
+                          
                             <li>
                                 <a className='Cerra-Sesion-ul' onClick={logout}>Cerra Sesión</a>
                             </li>

@@ -5,7 +5,7 @@ import axios from 'axios';
 import Headers from '../Headers'
 import swal from 'sweetalert';
 import '../responsive.css'
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario ,getUsuarioCompleto} from '../auth-helpers'
+import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario, getUsuarioCompleto } from '../auth-helpers'
 
 function Asistencias() {
 
@@ -26,7 +26,7 @@ function Asistencias() {
     let id = getDatosUsuario()
 
     const date = {
-        Idterapeuta:id
+        Idterapeuta: id
     }
     let rol = getUsuarioCompleto()
     useEffect(() => {
@@ -37,20 +37,20 @@ function Asistencias() {
                 setDataPaciente(responses.data.lista)
             });
 
-            if (rol == 2) {
-                axios.post('https://localhost:63958/api/Clinica/GetEvaluacionByTerapeuta', date)
-                    .then(response => {
-    
-                        setData(response.data)
-                        console.log(response.data)
-                    });
-            } else {
-                axios.get('https://localhost:63958/api/Clinica/ListaTerapia')
-                    .then(response => {
-                        console.log(response.data)
-                        setData(response.data)
-                    });
-            }
+        if (rol == 2) {
+            axios.post('https://localhost:63958/api/Clinica/GetEvaluacionByTerapeuta', date)
+                .then(response => {
+
+                    setData(response.data)
+                    console.log(response.data)
+                });
+        } else {
+            axios.get('https://localhost:63958/api/Clinica/ListaTerapia')
+                .then(response => {
+                    console.log(response.data)
+                    setData(response.data)
+                });
+        }
         axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/terapeuta')
             .then(response => {
 
@@ -102,7 +102,7 @@ function Asistencias() {
 
         <div>
             <Headers />
-            
+
             <div className='cont-padre-asistencia' >
                 <div className='contanedor-asistencias'>
                     <div className='cont-titu-asistencias'>
@@ -160,7 +160,10 @@ function Asistencias() {
                             <textarea required onChange={e => setObservaciones(e.target.value)} className='select-asistencia' />
                         </div>
                         <div className='row'>
-                            <button type='submit' className='btn-asistencia' >Guardar</button>
+                            <div className='col'>
+                                <button type='submit' className='btn-asistencia' >Guardar</button>
+                            </div>
+
                         </div>
 
                     </form>

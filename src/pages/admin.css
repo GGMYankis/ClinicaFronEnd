@@ -3,30 +3,57 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
+    transition: all 0.3s linear;
 }
 
 .checkbtn {
     font-size: 30px;
     color: white;
     margin-bottom: 5px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
 }
+
+.checkbtn:hover {
+    border: 1px solid white;
+}
+
+
 
 .encabezado ul {
     position: fixed;
-    width: 200px;
+    width: 220px;
     height: 100vh;
     background-color: #0b2f57;
     top: 55px;
     text-align: center;
     transition: all .5s;
     left: -100%;
+    overflow: auto;
+}
+
+.encabezado ul::-webkit-scrollbar {
+    background-color: #0b2f57;
+    width: 8px;
+}
+
+.encabezado ul::-webkit-scrollbar-thumb {
+    background-color: orange;
+    border-radius: 5px;
+    width: 0px;
+
 }
 
 ul li {
     display: block;
-    margin: 30px 0;
+    padding-top: 13px;
     line-height: 30px;
     color: red;
+    text-align: left;
 }
 
 .letras-menu {
@@ -100,7 +127,10 @@ ul li {
     text-align: center;
     padding: 3px;
     width: 100%;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
+
 
 .cont-titulo-form h1 {
 
@@ -238,7 +268,7 @@ body {
     margin: auto;
     background-color: white;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
-    margin-top: 100px;
+    border-radius: 10px;
 }
 
 .paddd {
@@ -254,10 +284,8 @@ body {
 }
 
 .form-select {
-
-    width: 250px;
-    background-color: red;
-
+    width: 100%;
+    background-color: rgba(196, 190, 190, 0.322);
 }
 
 .mostra {
@@ -289,20 +317,18 @@ body {
 
 .btn-cita {
     padding: 10px;
+    background-color: #0b2f57;
+    border: 3px solid #0b2f57;
     border-radius: 5px;
     color: white;
-    background-color: #134074;
-    border: none;
-    cursor: pointer;
-    transition: all .2s;
+    margin-left: 5px;
+    display: block;
+    margin: auto;
     width: 200px;
-    margin-right: 20px;
 }
 
 .btn-cita:hover {
-
-    transform: scale(1.1);
-    transition: all .2s;
+    background-color: #0b2e57c4;
 }
 
 .cont-btn {
@@ -546,7 +572,8 @@ tr:nth-child(even) {
 
 td,
 th {
-    border: 1px solid red;
+    border: 1px solid rgba(196, 190, 190, 0.322);
+    ;
     text-align: left;
 }
 
@@ -558,26 +585,48 @@ th {
     color: red;
 }
 
-
-
 .cont-Button {
     width: 200px;
 }
 
 
-
 /*modal terapia*/
 
 .cont-modal-lista-terapia {
+    position: fixed;
+    top: -120%;
+    left: 0;
+    min-height: 100vh;
     width: 100%;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.489);
-    position: absolute;
-    top: 0;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 10000;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
+.cont-modal-lista-terapiaEditar {
+    position: fixed;
+    top: -120%;
+    left: 0;
+    min-height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.cont-modal-lista-terapia.activo {
+    top: 0;
+}
+
+.cont-modal-lista-terapiaEditar.activoEditar {
+    top: 0;
+}
+
 
 .form-perfil-terapi {
     width: 40%;
@@ -600,7 +649,11 @@ th {
 }
 
 
-.box-con {
+.box-con-usuario{
+    padding: 20px;
+    margin-top: 30px;
+}
+.box-con{
     padding: 20px;
 }
 
@@ -712,18 +765,63 @@ th {
 
 
 .modal-paciente {
-    background-color: rgba(0, 0, 0, .4);
+
+    position: fixed;
+    top: -220%;
+    left: 0;
+    min-height: 100vh;
     width: 100%;
-    height: 100vh;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 10000;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
+    padding: 30px;
 }
 
+.modal-paciente-editar {
+    position: fixed;
+    top: -250%;
+    left: 0;
+    min-height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, .7);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+@media(max-width:1200px){
+    
+    .modal-paciente {
+        position: absolute;
+    }
+    
+    .modal-paciente-editar {
+        position: absolute;
+    }
+
+}
+
+.modal-paciente.active {
+    top: 0;
+}
+
+.modal-paciente-editar.active {
+    top: 0;
+}
+
+.cont-admin {
+    width: 100%;
+    min-height: 100vh;
+    margin-top: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+}
 
 .crearpaciente {
     padding: 10px;

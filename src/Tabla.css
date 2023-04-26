@@ -101,18 +101,15 @@
 }
 
 .btn-crear-Paciente-tabla {
+    padding: 10px;
     background-color: #0b2f57;
-    padding: 8px;
-    border-radius: 8px;
-    border: none;
+    border: 3px solid #0b2f57 ;
+    border-radius: 5px;
     color: white;
-    transition: all .2s;
 }
 
 .btn-crear-Paciente-tabla:hover {
-    transform: scale(1.1);
-    transition: all .2s;
-    color: orange;
+    background-color: #0b2e57c4;
 
 }
 

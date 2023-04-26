@@ -218,16 +218,19 @@
 
 .btn-terapia {
   padding: 10px;
+  background-color: #0b2f57;
+  border: 3px solid #0b2f57;
   border-radius: 5px;
   color: white;
-  background-color: #134074;
-  border: none;
-  cursor: pointer;
-  transition: all .2s;
-  width: 200px;
+  margin-left: 5px;
   display: block;
   margin: auto;
+  width: 200px;
   margin-top: 10px;
+}
+
+.btn-terapia:hover {
+  background-color: #0b2e57c4;
 }
 
 .cont-titu-Pagina-terapia {
@@ -242,18 +245,6 @@
   color: white;
   font-size: 25px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -386,8 +377,7 @@
 }
 
 .titu-barra {
-  font-weight: bold;
-  float: left;
+  text-align: left;
   color: #0b2f57;
 }
 
@@ -403,30 +393,21 @@
   padding: 10px;
 }
 
-
-
-
-
-
 .btn-evaluacion {
   padding: 10px;
   background-color: #0b2f57;
-  border: 1px solid #134070;
-  color: white;
+  border: 3px solid #0b2f57;
   border-radius: 5px;
-  margin: 10px;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
-  transition: all .2s;
+  color: white;
+  margin-left: 5px;
+  display: block;
+  margin: auto;
   width: 200px;
 
 }
 
 .btn-evaluacion:hover {
-  transform: scale(1.1);
-
-  transition: all .2s;
-
+  background-color: #0b2e57c4;
 }
 
 .cont-recurrence {
@@ -616,6 +597,9 @@
 .cont-select-evaluacion1 {
   width: 100%;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
 }
 
 
@@ -702,25 +686,22 @@
 }
 
 .btn-asistencia {
-  margin: auto;
-  background-color: #0b2f57;
-  color: white;
-  font-size: 20px;
-  font-weight: bold;
-  border-radius: 10px;
-  border: none;
   padding: 10px;
-  transition: all .2s;
-  margin-top: 15px;
-  width: 80%;
+  background-color: #0b2f57;
+  border: 3px solid #0b2f57;
+  border-radius: 5px;
+  color: white;
+  margin-left: 5px;
+  display: block;
+  margin: auto;
+  width: 200px;
 }
 
 .btn-asistencia:hover {
-
-  transform: scale(1.1);
-  transition: all .2s;
-
+  background-color: #0b2e57c4;
 }
+
+
 
 /* CALENDARIO */
 .calendario {
@@ -825,14 +806,18 @@
 
 .btn-buscar-citas {
   padding: 10px;
-  background-color: #0b2e57c4;
-  border: none;
+  background-color: #0b2f57;
+  border: 3px solid #0b2f57;
   border-radius: 5px;
   color: white;
   margin-left: 5px;
   display: block;
   margin: auto;
   width: 200px;
+}
+
+.btn-buscar-citas:hover {
+  background-color: #0b2e57c4;
 }
 
 .form-select-contabilidad {
@@ -845,9 +830,6 @@
 }
 
 
-.btn-buscar-citas:hover {
-  background-color: #0b2f57;
-}
 
 .form-contabilidad {
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
@@ -920,6 +902,42 @@
 }
 
 /* USUARIO */
+
+.cont-titu-crear-usuario {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #0b2f57;
+  color: white;
+  text-align: center;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  padding: 3px;
+}
+
+.cont-titu-crear-usuario h1 {
+  font-size: 25px;
+
+}
+
+.cont-titu-usuario {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #0b2f57;
+  color: white;
+  text-align: center;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  padding: 3px;
+}
+
+.cont-titu-usuario h1 {
+  font-size: 25px;
+}
+
 #tablaUsuarios {
   width: 100%;
 }
@@ -935,6 +953,148 @@
   display: none;
 }
 
+.card-header {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+
+.card-header h3 {
+  font-size: 20px;
+  padding-top: 5px;
+  padding-left: 10px;
+}
+
+.form-perfil-usuario {
+  position: relative;
+  width: 500px;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+  border-radius: 10px;
+  background-color: white;
+
+}
+
+.form-select-usuario {
+  border-radius: 8px;
+  border: 1px solid rgba(212, 206, 206, 0.531);
+  margin-bottom: 8px;
+  padding: 5px;
+  width: 100%;
+}
+
+
+
+.cont-modal-lista-usuario {
+  background-color: rgba(0, 0, 0, .7);
+  width: 100%;
+  min-height: 100vh;
+  position: fixed;
+  top: -120%;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cont-modal-lista-usuario.activeUsers {
+  top: 0;
+}
+
+.cont-modal-crear-usuario.activeCrear {
+  top: 0;
+}
+
+.modal-usuario-eliminar {
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+  top: -120%;
+  background-color: none;
+  padding-top: 80px;
+}
+.modal-usuario-eliminar.activeEli{
+  top: 0;
+}
+
+.modal-content-usuario .modal-header {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 10px;
+}
+
+.modal-content-usuario {
+  width: 500px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+}
+
+.modal-content-usuario .btn {
+  padding: 10px;
+  border-radius: 5px;
+
+}
+
+.modal-content-usuario .si {
+  background-color: #0b2f57;
+  border: 3px solid #0b2f57;
+  width: 100px;
+  color: white;
+}
+
+.modal-content-usuario .si:hover {
+  background-color: #0b2e57c4;
+  color: white;
+}
+
+.modal-content-usuario .no:hover {
+  background-color: #dc3546cd;
+
+  color: white;
+}
+
+.modal-content-usuario .no {
+  background-color: #dc3545;
+  border: 3px solid #dc3545;
+  width: 100px;
+  color: white;
+}
+
+.sub-box-usuario {
+  padding: 15px;
+}
+
+.sub-box-usuario p {
+  color: black;
+}
+
+
+.modal-content-usuario .modal-footer {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.cont-modal-crear-usuario {
+  background-color: rgba(0, 0, 0, .7);
+  width: 100%;
+  min-height: 100vh;
+  position: fixed;
+  top: -120%;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-crear-usuario {
+  position: relative;
+  width: 500px;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+  border-radius: 10px;
+  background-color: white;
+}
 
 /*sssssssssss*/
 
@@ -947,7 +1107,7 @@
   margin-top: 90px;
 }
 
-.btn-tabla-usuario{
+.btn-tabla-usuario {
   width: 100px;
   text-decoration: none;
   line-height: 35px;
@@ -960,7 +1120,8 @@
   border-radius: 5px;
   border: none;
 }
-.btn-tabla-usuario-eliminar{
+
+.btn-tabla-usuario-eliminar {
   width: 100px;
   text-decoration: none;
   line-height: 35px;
@@ -1123,6 +1284,5 @@
   border-radius: 8px;
   border: 1px solid rgba(212, 206, 206, 0.531);
   margin-bottom: 8px;
-  color: rgba(183, 176, 176, 0.828);
   padding: 5px;
 }

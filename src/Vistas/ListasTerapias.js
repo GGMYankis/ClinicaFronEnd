@@ -11,7 +11,7 @@ import { BrowserRouter, Routes, Route, Link, Redirect } from 'react-router-dom'
 import $ from 'jquery';
 import { findDOMNode } from 'react-dom'
 import swal from 'sweetalert';
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser,getNombreUsuario } from '../auth-helpers'
+import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser, getNombreUsuario } from '../auth-helpers'
 import '../Tabla.css';
 import { useCookies } from 'react-cookie';
 
@@ -26,6 +26,9 @@ function ListasTerapias() {
     const [id, setId] = useState()
     const navigation = useNavigate();
 
+    const modal = useRef()
+    const modalEditar = useRef()
+
     useEffect(() => {
 
         axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
@@ -34,8 +37,6 @@ function ListasTerapias() {
                 setTerapias(response.data.lista)
             })
 
-        $('#form-perfil').hide();
-        $('#form-perfil-registrar').hide();
 
     }, [])
 
@@ -75,7 +76,7 @@ function ListasTerapias() {
         })
 
     }
-    
+
     const Fcterapia = (e) => {
         setNmTerapias(e)
     }
@@ -85,7 +86,7 @@ function ListasTerapias() {
     }
 
 
-  
+
     const logout = () => {
 
         deleteToken()
@@ -128,7 +129,9 @@ function ListasTerapias() {
     }
 
     function editar(e) {
-        $('#form-perfil').show();
+
+        modalEditar.current.classList.add('activoEditar')
+
         setId(e)
         const res = terapias.filter(item => item.idTherapy == e)
         res.map(item => [
@@ -176,7 +179,7 @@ function ListasTerapias() {
     }
 
     function quitarModal() {
-        $('#form-perfil').hide();
+        modalEditar.current.classList.remove('activoEditar')
         $('#form-perfil-registrar').hide();
     };
 
@@ -184,16 +187,19 @@ function ListasTerapias() {
         $('#eliminarPaciente').show();
         setIdTerapiaEliminar(e)
     }
-
-    const crearTerapia = () => {
-        $('#form-perfil-registrar').show();
-    }
-
     const myElement = useRef(null);
 
     const handleClick = () => {
         myElement.current.classList.toggle('mi-clase-css');
     };
+
+    function modalF() {
+        modal.current.classList.add('activo')
+    }
+
+    function modalQuitarF() {
+        modal.current.classList.remove('activo')
+    }
 
     return (
 
@@ -233,6 +239,12 @@ function ListasTerapias() {
                                 <Link className='letras-menu' to="/TerapiaTerapeuta">Asignación</Link>
                             </li>
                             <li>
+                                <Link className='letras-menu' to="/Users">Usuario</Link>
+                            </li>
+                            <li>
+                                <Link className='letras-menu' to="/reportesContabilidad">Reportes</Link>
+                            </li>
+                            <li>
                                 <a className='Cerra-Sesion-ul' onClick={logout}>Cerra Sesión</a>
                             </li>
 
@@ -267,7 +279,7 @@ function ListasTerapias() {
                         <h1>Listado de Terapias</h1>
                     </div>
                     <div className='cont-crear-paciente'  >
-                        <button className="btn-crear-Paciente-tabla" onClick={crearTerapia}>Crear Terapia</button>
+                        <button className="btn-crear-Paciente-tabla" onClick={modalF}>Crear Terapia</button>
                     </div>
 
                     <div className='sub-2'>
@@ -289,8 +301,6 @@ function ListasTerapias() {
                                 {
                                     terapias.map(item => [
                                         <tr>
-
-
                                             <td data-label="Nombre" key={item.label} >{item.label}</td>
                                             <td data-label="Descripcion" key={item.description}>{item.description}</td>
                                             <td data-label="Price" key={item.price}>{item.price}</td>
@@ -299,14 +309,8 @@ function ListasTerapias() {
                                                 <button className='btn ' type='button' value={item.idTherapy} onClick={e => editar(e.target.value)} >Editar</button>
                                                 <button className='btn eliminar' type='button' value={item.idTherapy} onClick={e => modalEliminar(e.target.value)}>Eliminar</button>
                                             </td>
-
-
-
-
                                         </tr>
-
                                     ])
-
                                 }
 
                             </tbody>
@@ -319,7 +323,10 @@ function ListasTerapias() {
 
             </div>
 
-            <div className='cont-modal-lista-terapia' id="form-perfil-registrar">
+
+
+
+            <div className='cont-modal-lista-terapia' ref={modal}>
 
                 <form className='form-perfil-terapi' onSubmit={enviarDatosCrear} id="FormularioTherapy"   >
                     <div className='cont-titu-terapia'>
@@ -344,23 +351,19 @@ function ListasTerapias() {
                             <input placeholder='Precio' id="precio" required onChange={e => setPorcentaje(e.target.value)} />
                         </div>
                         <button className='btn-editar-terapia' >Crear</button>
-                        <button className='btn-eliminar-terapia' type='button' onClick={quitarModal}>Cancelar</button>
+                        <button className='btn-eliminar-terapia' type='button' onClick={modalQuitarF}>Cancelar</button>
                     </div>
                 </form>
             </div>
 
-
-
             {/*  EDITAR TERAPIA   onClick={Fcprice} */}
 
-            <div className='cont-modal-lista-terapia' id="form-perfil">
+            <div className='cont-modal-lista-terapiaEditar' ref={modalEditar} >
 
                 <form className='form-perfil-terapi' id="FormularioEditarTherapy" >
                     <div className='cont-titu-terapia'>
                         <h1>Editar Terapia</h1>
                     </div>
-
-
 
                     <div className='box-con'>
 
@@ -388,6 +391,7 @@ function ListasTerapias() {
                         <button className='btn-eliminar-terapia' onClick={quitarModal}>Cancelar</button>
                     </div>
                 </form>
+
             </div>
 
 

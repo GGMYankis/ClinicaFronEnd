@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { addUser } from './redux/userSlice';
 import jwt_decode from 'jwt-decode';
 import Admin from './Vistas/Admin';
+import ReportesContabilidad from './Vistas/ReportesContabilidad';
 import Evaluacion from './Vistas/Evaluacion';
 import AgeCalculator from './AgeCalculator';
 import PerfilAdmin from './Vistas/PerfilAdmin';
@@ -121,6 +122,7 @@ function App() {
                         <Route exact path="/Users" element={<Users />} />
                         <Route exact path="/abono" element={<Abono />} />
                         <Route exact path="/TerapiaTerapeuta" element={<TerapiaTerapeuta />} />
+                        <Route exact path="/reportesContabilidad" element={<ReportesContabilidad />} />
                     </Route>
                 </Routes>
             </HashRouter>
