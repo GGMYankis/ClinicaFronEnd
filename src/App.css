@@ -1286,3 +1286,11 @@
   margin-bottom: 8px;
   padding: 5px;
 }
+
+.hgb{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+}

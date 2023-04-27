@@ -152,12 +152,11 @@ function Users() {
 
 
     function EliminarUsuario(e) {
-
         setIdUser(e)
         modalEliminar.current.classList.add('activeEli')
-
     }
 
+    
     const idusers = {
         IdUser: idUser
     }

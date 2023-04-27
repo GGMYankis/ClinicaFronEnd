@@ -72,7 +72,7 @@ function Headers({ }) {
                                 <Link className='letras-menu' to="/Users">Usuario</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/reportesContabilidad">Reportes</Link>
+                                <Link className='letras-menu' to="/gastos">Reportes</Link>
                             </li>
                           
                             <li>
