@@ -12,6 +12,7 @@ import { FaUser, FaUsers } from 'react-icons/fa';
 function Gastos() {
 
     const [descripcion, setDescipcion] = useState('')
+    const [nombre, setNombre] = useState('')
     const [monto, setMonto] = useState('')
     const [fecha, setFecha] = useState('')
 
@@ -22,6 +23,7 @@ function Gastos() {
 
 
     const dataCrear = {
+        Nombre:nombre,
         Descripcion:descripcion,
         Amount:monto,
         DateOfInvestment:fecha
@@ -32,7 +34,7 @@ function Gastos() {
 
         e.preventDefault()
 
-        const url = 'https://localhost:63958/api/Clinica/ContabilidadReportes';
+        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ContabilidadReportes';
         axios.post(url, dataCrear).then((result) => {
             const probar = async () => {
                 const ale = await swal({
@@ -61,7 +63,10 @@ function Gastos() {
 
                     <div className='sub-box-Terapia'>
                         <div className='cont-sub-terapia'>
-
+                        <div className='cont-barra-tera'>
+                                <label>Nombre</label>
+                                <input placeholder='Nombre de la terapia' onChange={(e) => setNombre(e.target.value)} required />
+                            </div>
                             <div className='cont-barra-tera'>
                                 <label>Descripcion</label>
                                 <input placeholder='Nombre de la terapia' onChange={(e) => setDescipcion(e.target.value)} required />

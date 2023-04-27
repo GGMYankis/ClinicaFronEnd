@@ -17,29 +17,27 @@ const { RangePicker } = DatePicker;
 function FiltrarGastos() {
 
     const [citas, setCitas] = useState([]);
-
-
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
-
-
+    const [mensaje, setMensaje] = useState(null);
+    const [mostrarVacio, setMostrarVacio] = useState(true);
 
     const datas = {
         DateOfInvestment: startDate,
         EndDate: endDate
     }
 
-
     const enviars = (e) => {
-
         e.preventDefault()
 
-
-        const url = 'https://localhost:63958/api/Clinica/FiltrarGastos'
+        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/FiltrarGastos'
         axios.post(url, datas).then((result) => {
-
             console.log(result.data)
-            if (result.data != null) {
+
+            if (result.data.mensaje) {
+                setMensaje(result.data.mensaje)
+            } else {
+                setMostrarVacio(false)
                 setCitas(result.data)
             }
         })
@@ -51,39 +49,75 @@ function FiltrarGastos() {
 
         <div>
             <Headers />
-            <div className='contPadreContabilidad'>
-                <div className='cont-table-contabilidad'>
-                    <div className='RangePicker'>
-                        <div className='col'>
-                            <input type='date' onChange={e => setStartDate(e.target.value)} />
-                            <input type='date' onChange={e => setEndDate(e.target.value)} />
+            <div className='contenedor-FiltrarGastos'>
+
+                <div className='contTableGastos'>
+                    <div className='cont-titu-gastos'>
+                        <h1>Historial de gastos</h1>
+                    </div>
+
+                    <div className='cont-box-body-gastos'>
+                        <div className='row' id='cont-input-gastos'>
+                            <div className='col'>
+                                <label>Fecha Inicio</label>
+                                <input type='date' className='inputgastos' onChange={e => setStartDate(e.target.value)} />
+                            </div>
+                            <div className='col'>
+                                <label>Fecha Fin</label>
+                                <input type='date' className='inputgastos' onChange={e => setEndDate(e.target.value)} />
+                            </div>
+                            <div className='col'>
+                                <button className='btn-gastos' onClick={enviars}>Buscar</button>
+                            </div>
+
                         </div>
+                        <hr></hr>
+
+                        <div className='cont-table-gastos'>
+                            <div className='cont-titu-gastos-tabla'>
+                                <p>Gastos</p>
+                            </div>
+                            <table className='table-gastos'>
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Descripcion</th>
+                                        <th>Monto</th>
+                                        <th>Fecha</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody className='body-table-gastos'>
+
+                                    {
+                                        citas.map(item => [
+                                            <tr>
+                                                <td data-label="Descripcion">{item.nombre}</td>
+                                                <td data-label="Descripcion">{item.descripcion}</td>
+                                                <td data-label="Monto">{item.amount}</td>
+                                                <td data-label="Fecha">{item.dateOfInvestment}</td>
+                                            </tr>
+                                        ])
+                                    }
+
+                                    {mostrarVacio ?
+
+                                        <p className='sinbusqueda-gastos'>Sin busqueda...</p> : ""
+                                    }
+                                </tbody>
+                            </table>
+                            <div className='cont-titu-ganancia-tabla'>
+                                <p>Ganancia</p>
+                            </div>
+
+
+                        </div>
+
                     </div>
-                    <div className='subBoxContabilidad'>
-                        <table class="table" id='tabelContabilidad'>
-                            <thead className='head'>
-                                <tr>
-                                    <th className="col">Descripcion</th>
-                                    <th className="col">Monto</th>
-                                    <th className="col">Fecha</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {
-                                    citas.map(item => [
-                                        <tr>
-                                            <td data-label="Pacientes">{item.descripcion}</td>
-                                            <td data-label="Terapias">{item.amount}</td>
-                                            <td data-label="Precio">{item.dateOfInvestment}</td>
-                                        </tr>
-                                    ])
-                                }
-                            </tbody>
-                        </table>
-                        <button className='btn-buscar-citas' onClick={enviars}>Buscar</button>
-                    </div>
+
                 </div>
             </div>
+            
         </div>
     )
 }

@@ -28,7 +28,8 @@ function ListasTerapias() {
 
     const modal = useRef()
     const modalEditar = useRef()
-
+    const alertEliminar = useRef()
+    
     useEffect(() => {
 
         axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
@@ -175,7 +176,8 @@ function ListasTerapias() {
     };
 
     const modalCerrarEliminar = () => {
-        $('#eliminarPaciente').hide();
+        alertEliminar.current.classList.remove('activeEli')
+    
     }
 
     function quitarModal() {
@@ -184,7 +186,12 @@ function ListasTerapias() {
     };
 
     const modalEliminar = (e) => {
-        $('#eliminarPaciente').show();
+
+        const res = terapias.filter(item => item.idTherapy == e)
+        res.map(item => [
+            setNmTerapias(item.label),
+        ])
+        alertEliminar.current.classList.add('activeEli')
         setIdTerapiaEliminar(e)
     }
     const myElement = useRef(null);
@@ -242,7 +249,7 @@ function ListasTerapias() {
                                 <Link className='letras-menu' to="/Users">Usuario</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/reportesContabilidad">Reportes</Link>
+                                <Link className='letras-menu' to="/gastos">Gastos</Link>
                             </li>
                             <li>
                                 <a className='Cerra-Sesion-ul' onClick={logout}>Cerra Sesión</a>
@@ -395,30 +402,34 @@ function ListasTerapias() {
             </div>
 
 
-
-            <div className="modal" tabIndex="-1" id='eliminarPaciente' >
-
-                <div className="modal-dialog" role="document">
-                    <div className="modal-content">
+            <div className="modal-usuario-eliminar" ref={alertEliminar}>
+                <div className="modal-dialog-usuario" role="document">
+                    <div className="modal-content-usuario">
                         <div className="modal-header">
-                            <h5 className="modal-title">Eliminar Terapia</h5>
+                            <h5 className="modal-title">Eliminar Usuario</h5>
 
                         </div>
-                        <div className="modal-body">
-                            {
+                        <div className='sub-box-usuario'>
+                            <div className="modal-body">
+                                {
 
-                                <p>¿Deseas eliminar esta  Terapia?</p>
+                                    <p>¿Deseas eliminar la terapia: <span className='text-eliminar'>{nmTerapias}</span>?</p>
+                                }
+                            </div>
+                            <hr></hr>
+                            <div className="modal-footer">
 
-                            }
+                                <button type="button" className="btn si" data-dismiss="modal" onClick={eliminar}>Si</button>
+                                <button type="button" className="btn no" onClick={modalCerrarEliminar} >No</button>
+
+                            </div>
                         </div>
-                        <div className="modal-footer">
 
-                            <button type="button" className="btn btn-primary" onClick={modalCerrarEliminar}>No</button>
-                            <button type="button" className="btn btn-danger" data-dismiss="modal" onClick={eliminar}>Si</button>
-                        </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
     )
 }

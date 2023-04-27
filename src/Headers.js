@@ -72,7 +72,7 @@ function Headers({ }) {
                                 <Link className='letras-menu' to="/Users">Usuario</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/gastos">Reportes</Link>
+                                <Link className='letras-menu' to="/gastos">Gastos</Link>
                             </li>
                           
                             <li>
@@ -89,6 +89,7 @@ function Headers({ }) {
                 <div className='contenedor-botones'>
                     <div className='cont-btn-headers'>
                         <div className='probarUs'>
+                            
                             <Link className='Link' to="/perfilAdmin">{obtenerUser()}</Link>
                         </div>
                     </div>

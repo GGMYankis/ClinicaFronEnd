@@ -32,10 +32,11 @@ function Users() {
     useEffect(() => {
 
 
-        axios.get('https://localhost:63958/api/Clinica/ListaUsers')
+        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaUsers')
 
             .then(response => {
                 setTerapeuta(response.data.lista)
+             console.log(response.data.lista)
             })
 
     }, []);
@@ -59,7 +60,7 @@ function Users() {
         e.preventDefault()
         console.log(data)
 
-        const url = 'https://localhost:63958/api/Clinica/GuardarUsers';
+        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/GuardarUsers';
         axios.post(url, data).then((result) => {
 
             const probar = async () => {
@@ -99,7 +100,7 @@ function Users() {
 
         e.preventDefault()
 
-        const url = 'https://localhost:63958/api/Clinica/CrearUsuario';
+        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/CrearUsuario';
         axios.post(url, dataCrear).then((result) => {
             const probar = async () => {
                 const ale = await swal({
@@ -151,19 +152,26 @@ function Users() {
 
 
 
-    function EliminarUsuario(e) {
-        setIdUser(e)
+    function EliminarUsuario(valor) {
+
+        const encontrado = terapeuta.filter(e => e.idUser == valor)
+        encontrado.map(n => {
+            setNombre(n.names)
+        })
+     
+
+        setIdUser(valor)
         modalEliminar.current.classList.add('activeEli')
     }
 
-    
+
     const idusers = {
         IdUser: idUser
     }
 
     function enviarId() {
 
-        const url = 'https://localhost:63958/api/Clinica/EliminarUsuario';
+        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/EliminarUsuario';
         axios.post(url, idusers).then((result) => {
             const probar = async () => {
                 const ale = await swal({
@@ -367,7 +375,7 @@ function Users() {
                         <div className='sub-box-usuario'>
                             <div className="modal-body">
                                 {
-                                    <p>¿Deseas eliminar esta  Usuario?</p>
+                                    <p>¿Deseas eliminar el Usuario:<span className='text-eliminar'> {nombre}</span> ?</p>
                                 }
                             </div>
                             <hr></hr>

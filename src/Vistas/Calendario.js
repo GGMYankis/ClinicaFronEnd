@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import Cookies from 'universal-cookie';
 import swal from 'sweetalert';
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser } from '../auth-helpers'
+import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser,getNombreUsuario } from '../auth-helpers'
 
 
 
@@ -47,6 +47,7 @@ function Calendario() {
     }
 
     useEffect(() => {
+        
 
         axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/calendario')
             .then(res => {
@@ -115,11 +116,8 @@ function Calendario() {
 
     const logout = () => {
 
-        cookies.remove("MyCookies")
-        cookies.remove("Perfil")
-        cookies.remove("Usuario")
+        deleteToken()
         navigation("/login")
-
     }
 
     const modalCerrarEliminar = () => {
@@ -254,7 +252,7 @@ function Calendario() {
 
         <div>
 
-            <header className='encabezado'>
+<header className='encabezado'>
                 <div>
                     <nav>
                         <input type="checkbox" id="check" onClick={handleClick} />
@@ -282,9 +280,17 @@ function Calendario() {
                             <li>
                                 <Link className='letras-menu' to="/asistencias">Asistencia</Link>
                             </li>
-
                             <li>
                                 <Link className='letras-menu' to="/calendario">Calendario</Link>
+                            </li>
+                            <li>
+                                <Link className='letras-menu' to="/TerapiaTerapeuta">Asignación</Link>
+                            </li>
+                            <li>
+                                <Link className='letras-menu' to="/Users">Usuario</Link>
+                            </li>
+                            <li>
+                                <Link className='letras-menu' to="/gastos">Gastos</Link>
                             </li>
                             <li>
                                 <a className='Cerra-Sesion-ul' onClick={logout}>Cerra Sesión</a>
@@ -299,12 +305,15 @@ function Calendario() {
                     <span className='ver'><span className='gg'>é</span>nfasis</span>
                 </div>
 
-                <div className='cont-btn-headers'>
-                    <div className='probarUs'>
-                        <samp className='' to="/perfilAdmin">{obtenerUser()}</samp>
+                <div className='contenedor-botones'>
+                    <div className='cont-btn-headers'>
+                        <div className='probarUs'>
+                            <Link className='Link' to="/perfilAdmin">{obtenerUser()}</Link>
+                        </div>
                     </div>
-
-
+                    <div className='cont-nombre-usuario'>
+                        <p className='nombreUsuario'>{getNombreUsuario()}</p>
+                    </div>
                 </div>
 
 

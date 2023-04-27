@@ -605,6 +605,10 @@ th {
     align-items: center;
 }
 
+.text-eliminar{
+    color: red;
+    font-weight: 500;
+}
 .cont-modal-lista-terapiaEditar {
     position: fixed;
     top: -120%;

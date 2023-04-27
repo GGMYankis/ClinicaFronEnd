@@ -28,32 +28,7 @@ function ListasPacientes() {
 
     const modalCrear = useRef()
     const modalEditar = useRef()
-
-    useEffect(() => {
-
-
-        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Lista')
-            .then(res => {
-
-                res.data.lista.map(item => {
-                    if (item.activo == true) {
-
-                        setlistaPaciente(item.activo = 'si')
-                    }
-                    if (item.activo == false) {
-                        setlistaPaciente(item.activo = 'no')
-
-                    }
-                    setlistaPaciente(res.data.lista)
-
-                })
-
-            });
-    }, []);
-
-    obtenerUser()
-
-
+    const alertEliminar = useRef()
     const [idPaciente, setIdPaciente] = useState()
     const [idPacienteEliminar, setIdPacienteEliminar] = useState()
 
@@ -85,6 +60,33 @@ function ListasPacientes() {
     const [NumPadre, setNumPadre] = useState("");
     const [NumMadre, setNumMadre] = useState("");
 
+    useEffect(() => {
+
+
+        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Lista')
+            .then(res => {
+
+                res.data.lista.map(item => {
+                    if (item.activo == true) {
+
+                        setlistaPaciente(item.activo = 'si')
+                    }
+                    if (item.activo == false) {
+                        setlistaPaciente(item.activo = 'no')
+
+                    }
+                    setlistaPaciente(res.data.lista)
+
+                })
+
+            });
+    }, []);
+
+    obtenerUser()
+
+
+
+
     const handleNameChange = (value) => {
 
         setName(value);
@@ -98,11 +100,11 @@ function ListasPacientes() {
         if (value == 1) {
             value = true
             setActivo(value);
-            console.log('es true')
+
         } else {
             value = false
             setActivo(value);
-            console.log('es falso')
+
         }
 
     }
@@ -300,7 +302,6 @@ function ListasPacientes() {
 
         e.preventDefault()
 
-        console.log(dataEditar)
 
         const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/EditarPaciente';
         axios.put(url, dataEditar).then((result) => {
@@ -343,11 +344,11 @@ function ListasPacientes() {
             if (item.activo == 'si') {
 
                 setAc(1)
-                console.log('es de tipo true')
+
             }
             if (item.activo == 'no') {
                 setAc(0)
-                console.log('es de tipo false')
+
             }
 
         })
@@ -425,14 +426,19 @@ function ListasPacientes() {
 
         $('#eliminarPaciente').show();
 
+        const IdEliminarPaciente = listaPaciente.filter(item => item.idPatients == e)
+
+        IdEliminarPaciente.map(item => {
+            setName(item.name)
+
+        })
+        alertEliminar.current.classList.add('activeEli')
         setIdPacienteEliminar(e)
-
-
     }
 
     const modalCerrarEliminar = () => {
 
-        $('#eliminarPaciente').hide();
+        alertEliminar.current.classList.remove('activeEli')
     }
 
     const CancelarPaciente = () => {
@@ -448,10 +454,9 @@ function ListasPacientes() {
 
 
     const logout = () => {
-        cookies.remove("MyCookies")
-        cookies.remove("Usuario")
-        navigation("/login")
 
+        deleteToken()
+        navigation("/login")
     }
 
 
@@ -505,7 +510,7 @@ function ListasPacientes() {
                                 <Link className='letras-menu' to="/Users">Usuario</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/reportesContabilidad">Reportes</Link>
+                                <Link className='letras-menu' to="/gastos">Gastos</Link>
                             </li>
 
                             <li>
@@ -871,25 +876,31 @@ function ListasPacientes() {
                 </form>
             </div>
 
-            <div className="modal" id='eliminarPaciente' >
 
-                <div className="modal-dialog" role="document">
-                    <div className="modal-content">
+
+            <div className="modal-usuario-eliminar" ref={alertEliminar}>
+                <div className="modal-dialog-usuario" role="document">
+                    <div className="modal-content-usuario">
                         <div className="modal-header">
                             <h5 className="modal-title">Eliminar Paciente</h5>
 
                         </div>
-                        <div className="modal-body">
-                            {
+                        <div className='sub-box-usuario'>
+                            <div className="modal-body">
+                                {
 
-                                <p>¿Deseas  eliminar este Paciente?</p>
+                                    <p>¿Deseas  eliminar el paciente:<span className='text-eliminar'> {name}</span> ?</p>
+                                }
+                            </div>
+                            <hr></hr>
+                            <div className="modal-footer">
 
-                            }
+                                <button type="button" className="btn si" data-dismiss="modal" onClick={handleEliminar}>Si</button>
+                                <button type="button" className="btn no" onClick={modalCerrarEliminar} >No</button>
+
+                            </div>
                         </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-primary" onClick={modalCerrarEliminar}>No</button>
-                            <button type="button" className="btn btn-danger" data-dismiss="modal" onClick={handleEliminar}>Si</button>
-                        </div>
+
                     </div>
                 </div>
             </div>

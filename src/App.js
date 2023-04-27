@@ -124,11 +124,14 @@ function App() {
                         <Route exact path="/abono" element={<Abono />} />
                         <Route exact path="/TerapiaTerapeuta" element={<TerapiaTerapeuta />} />
                         <Route exact path="/gastos" element={<Gastos />} />
-                        <Route exact path="/filtrarGastos" element={<FiltrarGastos />} />
-                        
+                        <Route exact path="/filtrarGastos" element={<FiltrarGastos />} />               
                     </Route>
                 </Routes>
             </HashRouter>
+
+            <div className='cont-footer-web'>
+                <p>Contactanos en SaraClinica@gmail.com</p>
+            </div>
         </div>
     );
 }
