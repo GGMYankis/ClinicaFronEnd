@@ -293,7 +293,7 @@ function Calendario() {
                                 <Link className='letras-menu' to="/gastos">Gastos</Link>
                             </li>
                             <li>
-                                <a className='Cerra-Sesion-ul' onClick={logout}>Cerra Sesión</a>
+                                <a className='letras-menu'onClick={logout}>Cerra Sesión</a>
                             </li>
 
                         </ul>

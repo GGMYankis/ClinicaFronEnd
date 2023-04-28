@@ -11,7 +11,7 @@ import { BrowserRouter, Routes, Route, Link, Redirect } from 'react-router-dom'
 import $ from 'jquery';
 import { findDOMNode } from 'react-dom'
 import swal from 'sweetalert';
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser, getNombreUsuario } from '../auth-helpers'
+import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser, getNombreUsuario, getUsuarioCompleto, getDatosUsuario } from '../auth-helpers'
 import '../Tabla.css';
 import { useCookies } from 'react-cookie';
 
@@ -29,16 +29,26 @@ function ListasTerapias() {
     const modal = useRef()
     const modalEditar = useRef()
     const alertEliminar = useRef()
-    
+
+    let ids = getDatosUsuario()
+
+    const date = {
+        Idterapeuta: ids
+    }
+    let rol = getUsuarioCompleto()
     useEffect(() => {
-
-        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
-
-            .then(response => {
-                setTerapias(response.data.lista)
-            })
-
-
+        if (rol == 2) {
+            axios.post('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/GetEvaluacionByTerapeuta', date)
+                .then(response => {
+                    setTerapias(response.data)
+                });
+        } else {
+            axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
+                .then(response => {
+                    setTerapias(response.data)
+                    console.log(response.data)
+                });
+        }
     }, [])
 
 
@@ -177,7 +187,7 @@ function ListasTerapias() {
 
     const modalCerrarEliminar = () => {
         alertEliminar.current.classList.remove('activeEli')
-    
+
     }
 
     function quitarModal() {
@@ -224,7 +234,7 @@ function ListasTerapias() {
                                 <Link className='letras-menu' to="/admin">Paciente de ingreso</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/evaluacion">Evaluación</Link>
+                                <Link className='letras-menu' to="/evaluacion">Citas</Link>
                             </li>
                             <li>
                                 <Link className='letras-menu' to="/terapia">Crear terapia</Link>
@@ -252,7 +262,7 @@ function ListasTerapias() {
                                 <Link className='letras-menu' to="/gastos">Gastos</Link>
                             </li>
                             <li>
-                                <a className='Cerra-Sesion-ul' onClick={logout}>Cerra Sesión</a>
+                                <a className='letras-menu' onClick={logout}>Cerra Sesión</a>
                             </li>
 
                         </ul>
@@ -303,18 +313,18 @@ function ListasTerapias() {
                                 </tr>
                             </thead>
 
-
+                           
                             <tbody>
                                 {
                                     terapias.map(item => [
                                         <tr>
-                                            <td data-label="Nombre" key={item.label} >{item.label}</td>
-                                            <td data-label="Descripcion" key={item.description}>{item.description}</td>
-                                            <td data-label="Price" key={item.price}>{item.price}</td>
-                                            <td data-label="Price" key={item.porcentaje}>{item.porcentaje}</td>
+                                            <td data-label="Nombre" key={item.nombreTerapia.label} >{item.nombreTerapia.label}</td>
+                                            <td data-label="Descripcion" key={item.nombreTerapia.description}>{item.nombreTerapia.description}</td>
+                                            <td data-label="Price" key={item.nombreTerapia.price}>{item.nombreTerapia.price}</td>
+                                            <td data-label="Price" key={item.nombreTerapia.porcentaje}>{item.nombreTerapia.porcentaje}</td>
                                             <td>
-                                                <button className='btn ' type='button' value={item.idTherapy} onClick={e => editar(e.target.value)} >Editar</button>
-                                                <button className='btn eliminar' type='button' value={item.idTherapy} onClick={e => modalEliminar(e.target.value)}>Eliminar</button>
+                                                <button className='btn ' type='button' value={item.nombreTerapia.idTherapy} onClick={e => editar(e.target.value)} >Editar</button>
+                                                <button className='btn eliminar' type='button' value={item.nombreTerapia.idTherapy} onClick={e => modalEliminar(e.target.value)}>Eliminar</button>
                                             </td>
                                         </tr>
                                     ])

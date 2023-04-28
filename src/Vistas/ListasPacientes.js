@@ -485,7 +485,7 @@ function ListasPacientes() {
                                 <Link className='letras-menu' to="/admin">Paciente de ingreso</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/evaluacion">Evaluación</Link>
+                                <Link className='letras-menu' to="/evaluacion">Citas</Link>
                             </li>
                             <li>
                                 <Link className='letras-menu' to="/terapia">Crear terapia</Link>
@@ -514,7 +514,7 @@ function ListasPacientes() {
                             </li>
 
                             <li>
-                                <a className='Cerra-Sesion-ul' onClick={logout}>Cerra Sesión</a>
+                                <a className='letras-menu' onClick={logout}>Cerra Sesión</a>
                             </li>
 
                         </ul>
@@ -541,9 +541,6 @@ function ListasPacientes() {
             </header>
 
             <div id='table-container' ref={myElement} className='table-container'>
-
-
-
                 <div className='sex-tables'>
 
 
@@ -708,38 +705,33 @@ function ListasPacientes() {
                                 <input type="text" className="form-control " value={specific_medical_condition} id="validationServer02" required onChange={e => handlespecific_medical_conditionChange(e.target.value)} />
                             </div>
 
-                            <div className='row'>
-                                <div className="col">
-                                    <label htmlFor="validationServer02" className='labelPaciente'>Activo</label>
-                                    <select id="cboactivo" className="form-control" value={ac} onChange={e => FActivo(e.target.value)} >
-                                        <option selected>seleccione una opción</option>
-                                        <option value="1">Si</option>
-                                        <option value="0">No</option>
-                                    </select>
-                                </div>
+
+
+                        </div>
+                        <div className='row'>
+                            <div className="col">
+                                <label htmlFor="validationServer02" className='labelPaciente'>Activo</label>
+                                <select id="cboactivo" className="form-control" value={ac} onChange={e => FActivo(e.target.value)} >
+                                    <option selected>seleccione una opción</option>
+                                    <option value="1">Si</option>
+                                    <option value="0">No</option>
+                                </select>
                             </div>
-
-
-
-
-                            <div className='row'>
-                                <div className="col">
-                                    <label htmlFor="validationServer02" className='labelPaciente'>Preocupación de los familiares</label>
-                                    <input type="text" className="form-control " value={family_members_concerns} id="validationServer02" required onChange={e => handlefamily_members_concernsChange(e.target.value)} />
-                                </div>
-                            </div>
-
-                            <div className='row'>
-
-                                <div className="col">
-                                    <label htmlFor="validationServer02">Otro </label>
-                                    <textarea id="txtArea" rows="10" cols="70" value={other} onChange={e => handleotherChange(e.target.value)}></textarea>
-                                    {/*}  <input type="text" className="form-control " id="validationServer02" required onChange={e => handleotherChange(e.target.value)} /> */}
-                                </div>
+                        </div>
+                        <div className='row'>
+                            <div className="col">
+                                <label htmlFor="validationServer02" className='labelPaciente'>Preocupación de los familiares</label>
+                                <input type="text" className="form-control " value={family_members_concerns} id="validationServer02" required onChange={e => handlefamily_members_concernsChange(e.target.value)} />
                             </div>
 
                         </div>
+                        <div className='row'>
 
+                            <div className="col">
+                                <label htmlFor="validationServer02">Otro </label>
+                                <textarea id="txtArea" rows="10" cols="70" value={other} onChange={e => handleotherChange(e.target.value)}></textarea>
+                            </div>
+                        </div>
 
 
                         <div className="col" id='cont-btn-admin'>
@@ -843,34 +835,28 @@ function ListasPacientes() {
                                 <label htmlFor="validationServer02" className='labelPaciente'>Condición médica específica </label>
                                 <input type="text" className="form-control " value={specific_medical_condition} id="validationServer02" required onChange={e => handlespecific_medical_conditionChange(e.target.value)} />
                             </div>
+                        </div>
 
-
-
-                            <div className='row'>
-
-                                <div className="col">
-                                    <label htmlFor="validationServer02" className='labelPaciente'>Preocupación de los familiares</label>
-                                    <input type="text" className="form-control " value={family_members_concerns} id="validationServer02" required onChange={e => handlefamily_members_concernsChange(e.target.value)} />
-                                </div>
-
-
-
+                        <div className='row'>
+                            <div className="col">
+                                <label htmlFor="validationServer02" className='labelPaciente'>Preocupación de los familiares</label>
+                                <input type="text" className="form-control " value={family_members_concerns} id="validationServer02" required onChange={e => handlefamily_members_concernsChange(e.target.value)} />
                             </div>
 
-                            <div className='row'>
+                        </div>
+                        <div className='row'>
 
-                                <div className="col">
-                                    <label htmlFor="validationServer02">Otro </label>
-                                    <textarea id="txtArea" rows="10" cols="70" value={other} onChange={e => handleotherChange(e.target.value)}></textarea>
-                                </div>
+                            <div className="col">
+                                <label htmlFor="validationServer02">Otro </label>
+                                <textarea id="txtArea" rows="10" cols="70" value={other} onChange={e => handleotherChange(e.target.value)}></textarea>
                             </div>
-
                         </div>
 
                         <div className="col" id='cont-btn-admin'>
                             <button className="btn-cita">Guardar</button>
                             <button className="btn-cita" type='button' onClick={CancelarPaciente}>Cancelar</button>
                         </div>
+
 
                     </div>
                 </form>

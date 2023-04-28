@@ -256,7 +256,6 @@ li ul {
 
 li:hover>ul {
     display: block;
-
 }
 
 body {
@@ -264,8 +263,8 @@ body {
 }
 
 .contenedor-cita {
-    width: 90%;
-    margin: auto;
+    width: 1000px;
+    margin: 10px;
     background-color: white;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
     border-radius: 10px;
@@ -275,6 +274,26 @@ body {
     padding: 20px;
 }
 
+@media(max-width:525px){
+    .paddd {
+        padding: 14px;
+    }
+}
+@media(max-width:980px){
+    .contenedor-cita {
+       width: 800px;
+    }
+}
+@media(max-width:850px){
+    .contenedor-cita {
+       width: 600px;
+    }
+}
+@media(max-width:650px){
+    .contenedor-cita {
+       width: 500px;
+    }
+}
 
 .sub-cont-cita {
     background-color: white;
@@ -296,21 +315,17 @@ body {
     font-size: 30px
 }
 
-
 .mostra p {
     font-size: 30px;
 }
 
-
 .cont-input {
-
     width: 250px;
     margin: 10px 30px;
     background-color: white;
 }
 
 #cont-btn-admin {
-
     display: flex;
     justify-content: center;
 }
@@ -322,6 +337,7 @@ body {
     border-radius: 5px;
     color: white;
     margin-left: 5px;
+    margin-top: 14px;
     display: block;
     margin: auto;
     width: 200px;
@@ -338,8 +354,6 @@ body {
 }
 
 /* pagina de perfil */
-
-
 
 .contenedorPadre {
     margin-top: 80px;
@@ -388,7 +402,6 @@ body {
 
 }
 
-
 .alertPerfilActualiazado {
 
     background-color: #dbf5d3;
@@ -416,7 +429,6 @@ body {
     border: none;
 }
 
-
 .barra-perfil {
     width: 100%;
     height: 34px;
@@ -442,7 +454,6 @@ body {
 .btn-perfil:hover {
     background-color: #0b2f57;
 }
-
 
 .titulosPerfil {
     font-size: 40px;
@@ -478,13 +489,11 @@ body {
 }
 
 
-
 .sub-box {
     width: 90%;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
     border-radius: 15px;
     background-color: white;
-
 }
 
 .table-terapia {
@@ -507,11 +516,6 @@ body {
     font-size: 25px;
 }
 
-
-
-
-
-
 tr:nth-child(even) {
     background-color: #dddddd;
 }
@@ -526,9 +530,6 @@ tr:nth-child(even) {
     height: 50px;
 
 }
-
-
-
 
 
 .titu-listaTerapias h1 {
@@ -548,9 +549,6 @@ tr:nth-child(even) {
 }
 
 
-
-
-
 .btn-crear-Terapia {
 
     padding: 10px;
@@ -561,8 +559,6 @@ tr:nth-child(even) {
     background-color: red;
     border: 1px solid #0b2f57;
 }
-
-
 
 .btn-crear-Terapia:hover {
     color: orange;
@@ -577,9 +573,6 @@ th {
     text-align: left;
 }
 
-
-
-
 .mi-clase-css {
     margin-left: 175px;
     color: red;
@@ -588,7 +581,6 @@ th {
 .cont-Button {
     width: 200px;
 }
-
 
 /*modal terapia*/
 
@@ -605,10 +597,11 @@ th {
     align-items: center;
 }
 
-.text-eliminar{
+.text-eliminar {
     color: red;
     font-weight: 500;
 }
+
 .cont-modal-lista-terapiaEditar {
     position: fixed;
     top: -120%;
@@ -622,7 +615,6 @@ th {
     align-items: center;
 }
 
-
 .cont-modal-lista-terapia.activo {
     top: 0;
 }
@@ -631,33 +623,19 @@ th {
     top: 0;
 }
 
-
 .form-perfil-terapi {
-    width: 40%;
+    width: 500px;
+    margin: 10px;
     background-color: white;
     border-radius: 10px;
-
 }
 
-@media(max-width:500px) {
-    .form-perfil-terapi {
-        width: 100%;
-    }
-
-}
-
-@media(max-width:715px) {
-    .form-perfil-terapi {
-        width: 80%;
-    }
-}
-
-
-.box-con-usuario{
+.box-con-usuario {
     padding: 20px;
     margin-top: 30px;
 }
-.box-con{
+
+.box-con {
     padding: 20px;
 }
 
@@ -666,12 +644,10 @@ th {
     margin-top: 20px;
 }
 
-
 .con-input-terapia label {
     font-weight: bold;
     color: #0b2f57;
 }
-
 
 .con-input-terapia input {
     display: block;
@@ -696,8 +672,6 @@ th {
     font-size: 20px;
 }
 
-
-
 .btn-editar-terapia {
     padding: 10px;
     background-color: #0b2f57;
@@ -714,8 +688,6 @@ th {
     transition: all .2s;
 }
 
-
-
 .btn-eliminar-terapia {
     padding: 10px;
     background-color: rgb(193, 5, 5);
@@ -726,17 +698,12 @@ th {
     float: right;
     margin-top: 20px;
     transition: all .2s;
-
 }
 
 .btn-eliminar-terapia:hover {
     transform: scale(1.1);
     transition: all .2s;
 }
-
-
-
-
 
 /* lista de pacientes */
 
@@ -750,7 +717,6 @@ th {
     margin-top: 70px;
 }
 
-
 .modal-header {
     color: white;
     background-color: #dc3545;
@@ -761,15 +727,12 @@ th {
     background-color: white;
 }
 
-
 #hh {
     width: 100%;
     background-color: white;
 }
 
-
 .modal-paciente {
-
     position: fixed;
     top: -220%;
     left: 0;
@@ -780,12 +743,24 @@ th {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 30px;
+}
+
+
+@media(max-width:480px) {
+    .contenedor-cita {
+        width: 95%;
+    }
+}
+
+@media(max-width:530px) {
+    .contenedor-cita .btn-cita {
+        width: 100px;
+    }
 }
 
 .modal-paciente-editar {
     position: fixed;
-    top: -250%;
+    top: -220%;
     left: 0;
     min-height: 100vh;
     width: 100%;
@@ -794,14 +769,14 @@ th {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
 }
-@media(max-width:1200px){
-    
+
+@media(max-width:1200px) {
+
     .modal-paciente {
         position: absolute;
     }
-    
+
     .modal-paciente-editar {
         position: absolute;
     }

@@ -38,14 +38,13 @@ function Asistencias() {
             });
 
         if (rol == 2) {
-            axios.post('https://localhost:63958/api/Clinica/GetEvaluacionByTerapeuta', date)
+            axios.post('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/GetEvaluacionByTerapeuta', date)
                 .then(response => {
-
                     setData(response.data)
                     console.log(response.data)
                 });
         } else {
-            axios.get('https://localhost:63958/api/Clinica/ListaTerapia')
+            axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
                 .then(response => {
                     console.log(response.data)
                     setData(response.data)
@@ -66,6 +65,7 @@ function Asistencias() {
         idTherapy: terapia,
         IdTerapeuta: idTerapeuta,
         FechaInicio: fecha,
+        FechaFinal: '2023-04-20T01:40',
         remarks: observaciones
     }
 

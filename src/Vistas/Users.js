@@ -36,7 +36,7 @@ function Users() {
 
             .then(response => {
                 setTerapeuta(response.data.lista)
-             console.log(response.data.lista)
+                console.log(response.data.lista)
             })
 
     }, []);
@@ -158,7 +158,7 @@ function Users() {
         encontrado.map(n => {
             setNombre(n.names)
         })
-     
+
 
         setIdUser(valor)
         modalEliminar.current.classList.add('activeEli')

@@ -17,22 +17,40 @@ const { RangePicker } = DatePicker;
 function FiltrarGastos() {
 
     const [citas, setCitas] = useState([]);
+    const [tera, setTera] = useState([]);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
     const [mensaje, setMensaje] = useState(null);
     const [mostrarVacio, setMostrarVacio] = useState(true);
 
+    /*
     const datas = {
         DateOfInvestment: startDate,
         EndDate: endDate
+
+        where Attendance.FechaInicio = @fechainicio and Attendance.FechaFinal = @FechaFinal
+    }
+    */
+    const data = {
+        DateOfInvestment: startDate,
+        EndDate: endDate
+    }
+    const datas = {
+        FechaInicio: startDate,
+        FechaFinal: endDate
     }
 
     const enviars = (e) => {
         e.preventDefault()
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/FiltrarGastos'
+        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/traerpaciente/GastosGanancia'
         axios.post(url, datas).then((result) => {
             console.log(result.data)
+            setTera(result.data)
+        })
+
+        const urls = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/FiltrarGastos'
+        axios.post(urls, data).then((result) => {
 
             if (result.data.mensaje) {
                 setMensaje(result.data.mensaje)
@@ -43,10 +61,26 @@ function FiltrarGastos() {
         })
     }
 
-
-
+    /*
+   
+      const enviars = (e) => {
+          e.preventDefault()
+  
+          const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/FiltrarGastos'
+          axios.post(url, datas).then((result) => {
+              console.log(result.data)
+  
+              if (result.data.mensaje) {
+                  setMensaje(result.data.mensaje)
+              } else {
+                  setMostrarVacio(false)
+                  setCitas(result.data)
+              }
+          })
+      }
+      */
     return (
-
+    
         <div>
             <Headers />
             <div className='contenedor-FiltrarGastos'>
@@ -69,7 +103,6 @@ function FiltrarGastos() {
                             <div className='col'>
                                 <button className='btn-gastos' onClick={enviars}>Buscar</button>
                             </div>
-
                         </div>
                         <hr></hr>
 
@@ -85,7 +118,6 @@ function FiltrarGastos() {
                                         <th>Monto</th>
                                         <th>Fecha</th>
                                     </tr>
-
                                 </thead>
                                 <tbody className='body-table-gastos'>
 
@@ -95,7 +127,7 @@ function FiltrarGastos() {
                                                 <td data-label="Descripcion">{item.nombre}</td>
                                                 <td data-label="Descripcion">{item.descripcion}</td>
                                                 <td data-label="Monto">{item.amount}</td>
-                                                <td data-label="Fecha">{item.dateOfInvestment}</td>
+                                                <td data-label="Fecha">{item.dateOfInvestment.substring('', 10)}</td>
                                             </tr>
                                         ])
                                     }
@@ -109,6 +141,34 @@ function FiltrarGastos() {
                             <div className='cont-titu-ganancia-tabla'>
                                 <p>Ganancia</p>
                             </div>
+                            <table className='table-gastos'>
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Monto</th>
+                                        <th>Fecha</th>
+                                    </tr>
+
+                                </thead>
+                                <tbody className='body-table-gastos'>
+
+                                    {
+                                        tera.map(item => [
+                                            <tr>
+                                                <td data-label="Descripcion">{item.label}</td>
+                                                <td data-label="Descripcion">{item.price}</td>
+                                                <td data-label="Descripcion">{item.fechaInicio.substring('', 10)}</td>
+
+                                            </tr>
+                                        ])
+                                    }
+
+                                    {mostrarVacio ?
+
+                                        <p className='sinbusqueda-gastos'>Sin busqueda...</p> : ""
+                                    }
+                                </tbody>
+                            </table>
 
 
                         </div>
@@ -117,7 +177,7 @@ function FiltrarGastos() {
 
                 </div>
             </div>
-            
+
         </div>
     )
 }

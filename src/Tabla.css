@@ -145,11 +145,17 @@
     }
 }
 
-
-
 @media (max-width:525px) {
     .table tbody tr td .btn {
         width: 70px;
+    }
+    .btn-crear-Paciente-tabla {
+        font-size: 14px;
+        width: 120px;
+        padding: 8px;
+    }
+    .cont-titu-tables{
+        text-align: center;
     }
 }
 

@@ -176,15 +176,13 @@ const Admin = () => {
         }).catch((error) => {
             console.log(error)
         })
-
     }
 
 
     return (
 
-        < div >
+        <div>
             <Headers />
-
 
             <div className='cont-admin'>
                 <form onSubmit={handleGuardar} id="FormularioAdmin" className='contenedor-cita'>
@@ -250,22 +248,18 @@ const Admin = () => {
                             <div class="col">
                                 <label for="validationServer02" className='labelPaciente'>Recomendaciones </label>
                                 <input type="text" className="form-control " id="validationServer02" required onChange={e => handlerecommendationsChange(e.target.value)} />
-
                             </div>
                         </div>
-
                         <div className='row' id='terceraFila'>
                             <div class="col">
                                 <label for="validationServer02" className='labelPaciente'>Quien refiere</label>
                                 <input type="text" className="form-control " id="validationServer02" required onChange={e => handlewho_refersChange(e.target.value)} />
-
                             </div>
                             <div class="col">
                                 <label for="validationServer02" className='labelPaciente'>Configuración familiar</label>
                                 <input type="text" className="form-control " id="validationServer02" required onChange={e => handlefamily_settingsChange(e.target.value)} />
 
                             </div>
-
                             <div class="col">
                                 <label for="validationServer02" className='labelPaciente'>Terapias o servicio  </label>
                                 <input type="text" className="form-control " id="validationServer02" required onChange={e => handletherapies_or_service_you_will_receive_at_the_centerChange(e.target.value)} />
@@ -276,39 +270,24 @@ const Admin = () => {
                                 <input type="text" className="form-control" id="validationServer02" required onChange={e => handlediagnosisChange(e.target.value)} />
 
                             </div>
-
                             <div class="col">
                                 <label for="validationServer02" className='labelPaciente'>Condición médica específica </label>
                                 <input type="text" className="form-control " id="validationServer02" required onChange={e => handlespecific_medical_conditionChange(e.target.value)} />
                             </div>
-
-
-
-                            <div className='row'>
-
-                                <div class="col">
-                                    <label for="validationServer02" className='labelPaciente'>Preocupación de los familiares</label>
-                                    <input type="text" className="form-control " id="validationServer02" required onChange={e => handlefamily_members_concernsChange(e.target.value)} />
-                                </div>
-
-
-
-                            </div>
-
-                            <div className='row'>
-
-                                <div class="col">
-                                    <label for="validationServer02">Otro </label>
-                                    <textarea id="txtArea" onChange={e => handleotherChange(e.target.value)} rows="10" cols="70"></textarea>
-                                    {/*}  <input type="text" className="form-control " id="validationServer02" required onChange={e => handleotherChange(e.target.value)} /> */}
-                                </div>
-                            </div>
-
                         </div>
-
-
-
-
+                        <div className='row'>
+                            <div class="col">
+                                <label for="validationServer02" className='labelPaciente'>Preocupación de los familiares</label>
+                                <input type="text" className="form-control " id="validationServer02" required onChange={e => handlefamily_members_concernsChange(e.target.value)} />
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div class="col">
+                                <label for="validationServer02">Otro </label>
+                                <textarea id="txtArea" onChange={e => handleotherChange(e.target.value)} rows="10" cols="70"></textarea>
+                                {/*}  <input type="text" className="form-control " id="validationServer02" required onChange={e => handleotherChange(e.target.value)} /> */}
+                            </div>
+                        </div>
                         <div className="col" id='cont-btn-admin'>
                             <button className="btn-cita">Guardar</button>
                         </div>
