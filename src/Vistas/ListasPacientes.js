@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios';
 import logo from "../imagenes/IMG-20230221-WA0009.png"
 import { FaBars } from 'react-icons/fa'
-import { FaUser } from 'react-icons/fa'
+import { FaUser, FaUsers,FaTrash,FaEdit  } from 'react-icons/fa'
 import { FaCaretDown } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom';
 import { BrowserRouter, Routes, Route, Link, Redirect } from 'react-router-dom'
@@ -588,8 +588,8 @@ function ListasPacientes() {
                                             <td data-label="activo">{item.activo}</td>
 
                                             <td>
-                                                <button className='btn ' type='button' value={item.idPatients} onClick={e => modaleditar(e.target.value)}>Editar</button>
-                                                <button className='btn eliminar' type='button' value={item.idPatients} onClick={e => modalEliminar(e.target.value)}>Eliminar</button>
+                                                <button className='btn ' type='button' value={item.idPatients} onClick={e => modaleditar(e.target.value)}> <FaEdit/></button>
+                                                <button className='btn eliminar' type='button' value={item.idPatients} onClick={e => modalEliminar(e.target.value)}><FaTrash/></button>
                                             </td>
 
                                         </tr>

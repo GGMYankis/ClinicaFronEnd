@@ -128,10 +128,11 @@ function App() {
                     </Route>
                 </Routes>
             </HashRouter>
-
+{/*
             <div className='cont-footer-web'>
                 <p>Contactanos en SaraClinica@gmail.com</p>
             </div>
+            */}
         </div>
     );
 }

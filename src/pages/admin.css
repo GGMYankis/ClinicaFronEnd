@@ -9,7 +9,6 @@
 .checkbtn {
     font-size: 30px;
     color: white;
-    margin-bottom: 5px;
     width: 40px;
     height: 40px;
     display: flex;
@@ -168,11 +167,6 @@ ul li {
 
 .nom-logo {
     font-size: 20px;
-}
-
-
-.cont-logo-header {
-    margin-top: 10px;
 }
 
 .ver .gg {

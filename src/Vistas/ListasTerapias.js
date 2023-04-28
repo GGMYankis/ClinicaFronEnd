@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import logo from "../imagenes/IMG-20230221-WA0009.png"
-import { FaBars } from 'react-icons/fa'
+import { FaBars ,FaTrash,FaEdit } from 'react-icons/fa'
 import { FaUser } from 'react-icons/fa'
 import { FaCaretDown } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom';
@@ -323,8 +323,8 @@ function ListasTerapias() {
                                             <td data-label="Price" key={item.nombreTerapia.price}>{item.nombreTerapia.price}</td>
                                             <td data-label="Price" key={item.nombreTerapia.porcentaje}>{item.nombreTerapia.porcentaje}</td>
                                             <td>
-                                                <button className='btn ' type='button' value={item.nombreTerapia.idTherapy} onClick={e => editar(e.target.value)} >Editar</button>
-                                                <button className='btn eliminar' type='button' value={item.nombreTerapia.idTherapy} onClick={e => modalEliminar(e.target.value)}>Eliminar</button>
+                                                <button className='btn ' type='button' value={item.nombreTerapia.idTherapy} onClick={e => editar(e.target.value)} ><FaEdit/></button>
+                                                <button className='btn eliminar' type='button' value={item.nombreTerapia.idTherapy} onClick={e => modalEliminar(e.target.value)}><FaTrash/></button>
                                             </td>
                                         </tr>
                                     ])

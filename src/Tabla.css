@@ -41,6 +41,7 @@
     width: 100%;
     border-collapse: collapse;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+   
 }
 
 
@@ -174,9 +175,7 @@
         width: 100%;
     }
 
-
-
-    .table tr {
+    .table tr{
         margin-bottom: 15px;
     }
 
@@ -195,22 +194,15 @@
         font-weight: 600;
         text-align: left;
     }
-
 }
 
 
-
-
-
-
-
-
-
 @media (max-width:1150px) {
-
-
     .table thead {
         display: none;
+    }
+    .table{
+        background-color: #0b2f57;
     }
 
     .table,
@@ -222,21 +214,14 @@
         width: 100%;
     }
 
-
-
-
     .table tr {
         margin-bottom: 15px;
     }
 
-
-
     .table tbody tr td {
-
         text-align: right;
         padding-left: 50%;
         position: relative;
-
     }
 
     .table td::before {

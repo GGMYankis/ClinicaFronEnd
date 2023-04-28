@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import Headers from '../Headers'
 import swal from 'sweetalert';
-import { FaUser, FaUsers } from 'react-icons/fa';
+import { FaUser, FaUsers,FaTrash,FaEdit } from 'react-icons/fa';
 
 function Users() {
     const [terapeuta, setTerapeuta] = useState([])
@@ -223,8 +223,8 @@ function Users() {
                                             <td data-label="telefono">{item.telefono}</td>
                                             <td data-label="direccion">{item.email}</td>
                                             <td>
-                                                <button className='btn-tabla-usuario' type='button' value={item.idUser} onClick={e => EditarUsuario(e.target.value)}>Editar</button>
-                                                <button className='btn-tabla-usuario-eliminar ' type='button' value={item.idUser} onClick={e => EliminarUsuario(e.target.value)}>Eliminar</button>
+                                                <button className='btn-tabla-usuario' type='button' value={item.idUser} onClick={e => EditarUsuario(e.target.value)}><FaEdit/></button>
+                                                <button className='btn-tabla-usuario-eliminar ' type='button' value={item.idUser} onClick={e => EliminarUsuario(e.target.value)}><FaTrash/></button>
                                             </td>
                                         </tr>
                                     ])
