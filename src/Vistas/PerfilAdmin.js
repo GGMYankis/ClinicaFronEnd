@@ -29,15 +29,12 @@ function PerfilAdmin() {
     const nave = useNavigate()
     const id = getDatosUsuario()
 
-    function refreshPage() {
-        window.location.reload();
-    }
+   
 
     const formRef = useRef(null);
 
 
     const resetForm = () => {
-
         formRef.current.reset();
     };
 
@@ -105,7 +102,7 @@ function PerfilAdmin() {
         }
 
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/editarDatosUser';
+        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/EditarAdmin';
         axios.put(url, editarInfoUser).then((result) => {
 
             resetForm()

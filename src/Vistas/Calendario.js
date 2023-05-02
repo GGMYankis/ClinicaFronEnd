@@ -290,7 +290,10 @@ function Calendario() {
                                 <Link className='letras-menu' to="/Users">Usuario</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/gastos">Gastos</Link>
+                                <Link className='letras-menu' to="/gastos">Reportes</Link>
+                            </li>
+                            <li>
+                                <Link className='letras-menu' to="/VerGanancias">Ver Ganancias</Link>
                             </li>
                             <li>
                                 <a className='letras-menu'onClick={logout}>Cerra Sesión</a>

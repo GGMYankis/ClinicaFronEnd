@@ -76,6 +76,7 @@ function ListasPacientes() {
 
                     }
                     setlistaPaciente(res.data.lista)
+                    console.log(res.data.lista)
 
                 })
 
@@ -148,10 +149,6 @@ function ListasPacientes() {
     }
 
 
-
-    const handleageChange = (value) => {
-        setAge(value);
-    }
 
     const handleducational_institutionChange = (value) => {
         setEducational_institution(value);
@@ -306,7 +303,6 @@ function ListasPacientes() {
         const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/EditarPaciente';
         axios.put(url, dataEditar).then((result) => {
 
-            $('#foock').hide();
             const probar = async () => {
 
                 const ale = await swal({
@@ -323,7 +319,6 @@ function ListasPacientes() {
             }
 
             FormularioEditar.reset()
-            $('#table-container').show();
         }).catch((error) => {
             console.log(error)
         })
@@ -339,6 +334,7 @@ function ListasPacientes() {
         modalEditar.current.classList.add('active')
         setIdPaciente(e)
         const IdEditarPaciente = listaPaciente.filter(item => item.idPatients == e)
+        console.log(IdEditarPaciente)
 
         IdEditarPaciente.map(item => {
             if (item.activo == 'si') {
@@ -396,7 +392,6 @@ function ListasPacientes() {
         const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/EliminarPaciente';
         axios.post(url, idPa).then((result) => {
 
-            $('#eliminarPaciente').hide();
             const probar = async () => {
 
                 const ale = await swal({
@@ -510,7 +505,10 @@ function ListasPacientes() {
                                 <Link className='letras-menu' to="/Users">Usuario</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/gastos">Gastos</Link>
+                                <Link className='letras-menu' to="/gastos">Reportes</Link>
+                            </li>
+                            <li>
+                                <Link className='letras-menu' to="/VerGanancias">Ver Ganancias</Link>
                             </li>
 
                             <li>
@@ -587,8 +585,8 @@ function ListasPacientes() {
                                             <td data-label="edad">{item.age}</td>
                                             <td data-label="activo">{item.activo}</td>
 
-                                            <td>
-                                                <button className='btn ' type='button' value={item.idPatients} onClick={e => modaleditar(e.target.value)}> <FaEdit/></button>
+                                            <td className='tr-btn'>
+                                                <button className='btn ' type='button' value={item.idPatients} onClick={e => modaleditar(e.target.value)}><FaEdit className='hgico'/></button>
                                                 <button className='btn eliminar' type='button' value={item.idPatients} onClick={e => modalEliminar(e.target.value)}><FaTrash/></button>
                                             </td>
 

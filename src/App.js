@@ -12,7 +12,7 @@ import jwt_decode from 'jwt-decode';
 import Admin from './Vistas/Admin';
 import Gastos from './Vistas/Gastos';
 import Evaluacion from './Vistas/Evaluacion';
-import FiltrarGastos from './Vistas/FiltrarGastos';
+import VerGanancias from './Vistas/VerGanancias';
 import AgeCalculator from './AgeCalculator';
 import PerfilAdmin from './Vistas/PerfilAdmin';
 import ListasTerapias from './Vistas/ListasTerapias';
@@ -48,7 +48,7 @@ function App() {
 
             try {
 
-                axios.post('https://yankisggm12ffs-001-site1.dtempurl.com/api/Autenticacion/getUserByToken')
+                axios.post('https://localhost:63958/api/Autenticacion/getUserByToken')
                     .then(res => {
                         setUsuario(res.data.idUser)
                         const user = res.data.names.substring('', 1)
@@ -124,7 +124,7 @@ function App() {
                         <Route exact path="/abono" element={<Abono />} />
                         <Route exact path="/TerapiaTerapeuta" element={<TerapiaTerapeuta />} />
                         <Route exact path="/gastos" element={<Gastos />} />
-                        <Route exact path="/filtrarGastos" element={<FiltrarGastos />} />               
+                        <Route exact path="/verGanancias" element={<VerGanancias />} />               
                     </Route>
                 </Routes>
             </HashRouter>

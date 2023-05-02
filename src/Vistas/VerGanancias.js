@@ -14,23 +14,44 @@ import moment from 'moment'
 
 const { RangePicker } = DatePicker;
 
-function FiltrarGastos() {
+function VerGanancias() {
 
     const [citas, setCitas] = useState([]);
     const [tera, setTera] = useState([]);
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
-    const [mensaje, setMensaje] = useState(null);
+    const [mensaje, setMensaje] = useState(false);
     const [mostrarVacio, setMostrarVacio] = useState(true);
 
-    /*
-    const datas = {
-        DateOfInvestment: startDate,
-        EndDate: endDate
 
-        where Attendance.FechaInicio = @fechainicio and Attendance.FechaFinal = @FechaFinal
+    const [sumarGastos, setSumarGastos] = useState(0);
+    const [surmarAsistencia, setSurmarAsistencia] = useState(0);
+    const [acolumaldo, setAcolumaldo] = useState(0);
+
+    const negaClas = useRef(null);
+
+    function suma(monto) {
+
+        let acolumaldo = 0;
+        for (let i = 0; i < monto.length; i++) {
+            acolumaldo += monto[i]
+        }
+        setSumarGastos(acolumaldo)
     }
-    */
+
+
+
+    function ganancias() {
+
+        setAcolumaldo(sumarGastos - surmarAsistencia)
+
+        if (acolumaldo == 0) {
+        } else if (acolumaldo > 0) {
+        } else {
+            negaClas.current.classList.add('activoNega')
+        }
+    }
+
     const data = {
         DateOfInvestment: startDate,
         EndDate: endDate
@@ -41,46 +62,43 @@ function FiltrarGastos() {
     }
 
     const enviars = (e) => {
-        e.preventDefault()
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/traerpaciente/GastosGanancia'
-        axios.post(url, datas).then((result) => {
-            console.log(result.data)
-            setTera(result.data)
-        })
+        e.preventDefault()
 
         const urls = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/FiltrarGastos'
         axios.post(urls, data).then((result) => {
 
             if (result.data.mensaje) {
-                setMensaje(result.data.mensaje)
+                setMensaje(true)
             } else {
+                setMensaje(false)
                 setMostrarVacio(false)
                 setCitas(result.data)
+                const monto = result.data.map(m => m.amount)
+                const resultado = suma(monto)
+
             }
+        })
+
+        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/traerpaciente/GastosGanancia'
+        axios.post(url, datas).then((result) => {
+
+            if(result.data.length){
+            }else{
+            }
+            
+            setTera(result.data)
+            result.data.map(m => {
+                setSurmarAsistencia(m.price)
+                ganancias()
+            })
         })
     }
 
-    /*
-   
-      const enviars = (e) => {
-          e.preventDefault()
-  
-          const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/FiltrarGastos'
-          axios.post(url, datas).then((result) => {
-              console.log(result.data)
-  
-              if (result.data.mensaje) {
-                  setMensaje(result.data.mensaje)
-              } else {
-                  setMostrarVacio(false)
-                  setCitas(result.data)
-              }
-          })
-      }
-      */
+
+
     return (
-    
+
         <div>
             <Headers />
             <div className='contenedor-FiltrarGastos'>
@@ -114,7 +132,7 @@ function FiltrarGastos() {
                                 <thead>
                                     <tr>
                                         <th>Nombre</th>
-                                        <th>Descripcion</th>
+                                        <th>Descripción</th>
                                         <th>Monto</th>
                                         <th>Fecha</th>
                                     </tr>
@@ -170,19 +188,29 @@ function FiltrarGastos() {
                                 </tbody>
                             </table>
 
+                            <div className='cont-titu-ganancia-tabla'>
+                                <p>Ganancia del Periodo</p>
+                            </div>
+                            <div>
+                                {sumarGastos == false && surmarAsistencia == false ?
+                                    <p className='sinbusqueda-gastos' >Sin busqueda...</p> : <h1 className='negaClas'  ref={negaClas}>{sumarGastos - surmarAsistencia}</h1>
+                                }
+                                { mensaje ?
+                                    <div class="alert alert-danger" role="alert">
+                                   No se encontraron registros
+                                  </div>
+                                    : ""
+                                }
+                            </div>
 
                         </div>
-
                     </div>
-
                 </div>
             </div>
-
+        
         </div>
     )
 }
 
-export default FiltrarGastos
-
-
+export default VerGanancias
 

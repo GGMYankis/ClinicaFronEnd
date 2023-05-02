@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import Headers from '../Headers'
 import swal from 'sweetalert';
-import { FaUser, FaUsers,FaTrash,FaEdit } from 'react-icons/fa';
+import { FaUser, FaUsers, FaTrash, FaEdit } from 'react-icons/fa';
 
 function Users() {
     const [terapeuta, setTerapeuta] = useState([])
@@ -36,7 +36,6 @@ function Users() {
 
             .then(response => {
                 setTerapeuta(response.data.lista)
-                console.log(response.data.lista)
             })
 
     }, []);
@@ -45,6 +44,7 @@ function Users() {
     const data = {
         IdUser: idUser,
         Names: nombre,
+        Label: nombre,
         Apellido: apellido,
         Telefono: telefono,
         Direccion: direccion,
@@ -86,6 +86,7 @@ function Users() {
     const dataCrear = {
         IdUser: idUser,
         Names: nombre,
+        Label: nombre,
         Apellido: apellido,
         Telefono: telefono,
         Direccion: direccion,
@@ -222,9 +223,9 @@ function Users() {
                                             <td data-label="apellido">{item.apellido}</td>
                                             <td data-label="telefono">{item.telefono}</td>
                                             <td data-label="direccion">{item.email}</td>
-                                            <td>
-                                                <button className='btn-tabla-usuario' type='button' value={item.idUser} onClick={e => EditarUsuario(e.target.value)}><FaEdit/></button>
-                                                <button className='btn-tabla-usuario-eliminar ' type='button' value={item.idUser} onClick={e => EliminarUsuario(e.target.value)}><FaTrash/></button>
+                                            <td className='tr-btn'>
+                                                <button className='btn-tabla-usuario' type='button' value={item.idUser} onClick={e => EditarUsuario(e.target.value)}><FaEdit /></button>
+                                                <button className='btn-tabla-usuario-eliminar ' type='button' value={item.idUser} onClick={e => EliminarUsuario(e.target.value)}><FaTrash /></button>
                                             </td>
                                         </tr>
                                     ])

@@ -2,8 +2,6 @@
     box-sizing: border-box;
 }
 
-
-
 .table-container {
     margin-top: 70px;
     padding: 30px;
@@ -20,7 +18,6 @@
 
 .sub-2 {
     padding: 10px;
-
 }
 
 .cont-titu-tables {
@@ -35,28 +32,15 @@
     padding: 15px;
 }
 
-
-
 .table {
     width: 100%;
     border-collapse: collapse;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
-   
 }
-
-
-
 
 .table thead {
     background-color: #0b2f57;
 }
-
-.table thead tr th {
-    font-size: 14px;
-    font-weight: medium;
-}
-
-
 
 .table thead tr th {
     font-size: 14px;
@@ -67,18 +51,16 @@
     padding: 12px;
     vertical-align: top;
     border: 1px solid #dee2e685;
+    text-align: left;
 }
-
-
 
 .table tbody tr td {
     font-size: 14px;
-    letter-spacing: 0.35px;
     font-weight: normal;
     color: #0b2f57;
     background-color: white;
-    padding: 8px;
-    text-align: center;
+    text-align: left;
+    padding: 3;
 }
 
 .table .text_open {
@@ -88,17 +70,23 @@
     color: #FF1046;
 }
 
+.tr-btn{
+     display: flex;
+}
 
 .table tbody tr td .btn {
-    width: 100px;
+    width: 40px;
+    height: 30px;
     text-decoration: none;
     line-height: 35px;
     display: inline-block;
     background-color: #0b2f57;
     color: white;
-    text-align: center;
-    margin: 5px;
     padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
 }
 
 .btn-crear-Paciente-tabla {
@@ -111,16 +99,15 @@
 
 .btn-crear-Paciente-tabla:hover {
     background-color: #0b2e57c4;
-
 }
 
 .table tbody tr td .eliminar {
+    margin-left: 5px;
     background-color: #FF1046;
 }
 
 
 .cont-crear-paciente {
-
     margin-left: 10px;
     margin-top: 10px;
 }
@@ -170,7 +157,6 @@
     .table tbody,
     .table tr,
     .table td {
-
         display: block;
         width: 100%;
     }
@@ -209,10 +195,13 @@
     .table tbody,
     .table tr,
     .table td {
-
-        display: block;
         width: 100%;
     }
+    .tr-btn{
+        width: 100%;
+        display: flex;
+        background-color: yellow;
+   }
 
     .table tr {
         margin-bottom: 15px;

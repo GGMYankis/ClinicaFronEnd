@@ -96,8 +96,6 @@ function ListasTerapias() {
         setDescripcion(e)
     }
 
-
-
     const logout = () => {
 
         deleteToken()
@@ -144,7 +142,8 @@ function ListasTerapias() {
         modalEditar.current.classList.add('activoEditar')
 
         setId(e)
-        const res = terapias.filter(item => item.idTherapy == e)
+        const res = terapias.filter(item => item.nombreTerapia.idTherapy == e)
+        console.log(res)
         res.map(item => [
             setNmTerapias(item.label),
             setDescripcion(item.description),
@@ -259,8 +258,12 @@ function ListasTerapias() {
                                 <Link className='letras-menu' to="/Users">Usuario</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/gastos">Gastos</Link>
+                                <Link className='letras-menu' to="/gastos">Reportes</Link>
                             </li>
+                            <li>
+                                <Link className='letras-menu' to="/VerGanancias">Ver Ganancias</Link>
+                            </li>
+                            
                             <li>
                                 <a className='letras-menu' onClick={logout}>Cerra Sesión</a>
                             </li>
@@ -322,7 +325,7 @@ function ListasTerapias() {
                                             <td data-label="Descripcion" key={item.nombreTerapia.description}>{item.nombreTerapia.description}</td>
                                             <td data-label="Price" key={item.nombreTerapia.price}>{item.nombreTerapia.price}</td>
                                             <td data-label="Price" key={item.nombreTerapia.porcentaje}>{item.nombreTerapia.porcentaje}</td>
-                                            <td>
+                                            <td className='tr-btn'>
                                                 <button className='btn ' type='button' value={item.nombreTerapia.idTherapy} onClick={e => editar(e.target.value)} ><FaEdit/></button>
                                                 <button className='btn eliminar' type='button' value={item.nombreTerapia.idTherapy} onClick={e => modalEliminar(e.target.value)}><FaTrash/></button>
                                             </td>

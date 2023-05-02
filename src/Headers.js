@@ -13,13 +13,9 @@ import { setUsuarioM, obtenerUser, getNombreUsuario, deleteToken } from './auth-
 function Headers({ }) {
 
     const navigation = useNavigate();
-
-
-
     obtenerUser()
 
     const logout = () => {
-
         deleteToken()
         navigation("/login")
     }
@@ -30,10 +26,8 @@ function Headers({ }) {
         myElement.current.classList.toggle('mi-clase-css');
     };
 
-
     return (
         <div>
-
             <header className='encabezado'>
                 <div>
                     <nav>
@@ -71,7 +65,10 @@ function Headers({ }) {
                                 <Link className='letras-menu' to="/Users">Usuario</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/gastos">Gastos</Link>
+                                <Link className='letras-menu' to="/gastos">Reportes</Link>
+                            </li>
+                            <li>
+                                <Link className='letras-menu' to="/VerGanancias">Ver Ganancias</Link>
                             </li>
                             <li>
                                 <a className='letras-menu' onClick={logout}>Cerra Sesión</a>

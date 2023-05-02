@@ -15,13 +15,13 @@ import { FaUser } from 'react-icons/fa'
 import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario, setToken } from '../auth-helpers';
 
 
-function TerapiaTerapeuta() {
 
+
+function TerapiaTerapeuta() {
+  
     const [data, setData] = useState([]);
     const [terapeuta, setTerapeuta] = useState([])
-
     const [idTerapeuta, setIdTerapeuta] = useState([])
-
     const [idTerapias, setIdTerapias] = useState([]);
 
     useEffect(() => {
@@ -30,11 +30,18 @@ function TerapiaTerapeuta() {
 
             .then(response => {
                 setTerapeuta(response.data.usuarios)
+                //  console.log(response.data.usuarios)
             })
 
         axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
             .then(response => {
-                setData(response.data.lista)
+                const florw = []
+                response.data.map(tera => {
+                 florw.push(tera.nombreTerapia)
+                    
+                 setData(florw)
+                 
+                })
             });
     }, []);
 
@@ -45,8 +52,8 @@ function TerapiaTerapeuta() {
         ,
         id: idTerapeuta
     }
-    const enviars = (e) => {
 
+    const enviars = (e) => {
         e.preventDefault()
 
         const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Post'
@@ -64,15 +71,9 @@ function TerapiaTerapeuta() {
         })
     }
 
-
-
     function handleTerapeuta(e) {
-
         setIdTerapeuta(e.idUser)
-
     }
-
-
 
     function handle(selectedItems) {
         const ids = [];
@@ -81,14 +82,10 @@ function TerapiaTerapeuta() {
 
             ids.push(item.idTherapy)
         })
-
         setIdTerapias(ids)
-
     }
 
-
     return (
-
         <div >
             <Headers />
             <div className='cont-asignar'>
@@ -121,6 +118,17 @@ function TerapiaTerapeuta() {
                         </div>
                         <div className='row' id='id-react-select' >
                             <div className='col'>
+                                {/*
+                                <select required className='asignarBarra' onChange={e => handle(e.target.value)} >
+                                    <option selected>Select</option>
+                                    {
+                                        data.map(item => [
+                                            <option value={item.nombreTerapia.idTherapy}>{item.nombreTerapia.label}</option>
+                                        ])
+                                    }
+                                </select>
+  */}
+
                                 <Select
                                     isMulti
                                     options={data}
@@ -133,6 +141,7 @@ function TerapiaTerapeuta() {
                     </div>
                 </div>
             </div>
+
 
         </div>
     )
