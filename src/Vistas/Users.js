@@ -5,6 +5,11 @@ import axios from 'axios'
 import Headers from '../Headers'
 import swal from 'sweetalert';
 import { FaUser, FaUsers, FaTrash, FaEdit } from 'react-icons/fa';
+import { FaBars } from 'react-icons/fa'
+import { BrowserRouter, Routes, Route, Link, Redirect } from 'react-router-dom'
+import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser, getNombreUsuario } from '../auth-helpers'
+import { useNavigate } from 'react-router-dom';
+import logo from "../imagenes/IMG-20230221-WA0009.png"
 
 function Users() {
     const [terapeuta, setTerapeuta] = useState([])
@@ -18,7 +23,7 @@ function Users() {
     const [contraseñas, setContraseñas] = useState('')
     const [idRol, setIdRol] = useState(0)
 
-
+    const navigation = useNavigate();
     function refreshPage() {
         window.location.reload();
     }
@@ -35,10 +40,28 @@ function Users() {
         axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaUsers')
 
             .then(response => {
-                setTerapeuta(response.data.lista)
-            })
 
+
+                console.log(response.data.lista)
+
+                response.data.lista.map(a => {
+
+                    if (a.idRol == 1) {
+
+                        setTerapeuta(a.idRol = 'Administrador')
+                    }
+                    else if (a.idRol == 2) {
+                        setTerapeuta(a.idRol = 'Terapeuta')
+                    }
+
+
+                    setTerapeuta(response.data.lista)
+                })
+
+
+            })
     }, []);
+
 
 
     const data = {
@@ -52,8 +75,6 @@ function Users() {
         Password: contraseñas,
         IdRol: idRol
     };
-
-
 
     function enviar(e) {
 
@@ -188,12 +209,96 @@ function Users() {
         })
     }
 
+    const logout = () => {
+        deleteToken()
+        navigation("/login")
+    }
 
+    const myElement = useRef(null);
+
+
+    const handleClickOtro = () => {
+        myElement.current.classList.toggle('mi-clase-css');
+    };
     return (
 
         <div>
-            <Headers />
-            <div className='contCard'>
+            <header className='encabezado'>
+                <div>
+                    <nav>
+                        <input type="checkbox" id="check" />
+                        <input type="checkbox" id="checkOtro" onClick={handleClickOtro} />
+                        <label for="check" class="checkbtn">
+                            <FaBars id='bar' />
+                        </label>
+                        <label for="checkOtro" class="checkbtnOtro">
+                            <FaBars id='bar' />
+                        </label>
+
+                        <ul>
+                            <li>
+                                <Link className='letras-menu' to="/admin">Paciente de ingreso</Link>
+                            </li>
+                            <li>
+                                <Link className='letras-menu' to="/evaluacion">Citas</Link>
+                            </li>
+                            <li>
+                                <Link className='letras-menu' to="/terapia">Crear terapia</Link>
+                            </li>
+                            <li>
+                                <Link className='letras-menu' to="/listasPacientes">Listado de Pacientes</Link>
+                            </li>
+
+                            <li>
+                                <Link className='letras-menu' to="/listasTerapias">Listado de Terapias</Link>
+                            </li>
+                            <li>
+                                <Link className='letras-menu' to="/asistencias">Asistencia</Link>
+                            </li>
+                            <li>
+                                <Link className='letras-menu' to="/calendario">Calendario</Link>
+                            </li>
+                            <li>
+                                <Link className='letras-menu' to="/TerapiaTerapeuta">Asignación</Link>
+                            </li>
+                            <li>
+                                <Link className='letras-menu' to="/Users">Usuario</Link>
+                            </li>
+                            <li>
+                                <Link className='letras-menu' to="/gastos">Reportes</Link>
+                            </li>
+                            <li>
+                                <Link className='letras-menu' to="/VerGanancias">Ver Ganancias</Link>
+                            </li>
+
+                            <li>
+                                <a className='letras-menu' onClick={logout}>Cerra Sesión</a>
+                            </li>
+
+                        </ul>
+                    </nav>
+                </div>
+
+                <div className='cont-logo-header'>
+                    <img className='img-admin-logo' src={logo} />
+                    <span className='ver'><span className='gg'>é</span>nfasis</span>
+                </div>
+
+                <div className='contenedor-botones'>
+                    <div className='cont-btn-headers'>
+                        <div className='probarUs'>
+                            <Link className='Link' to="/perfilAdmin">{obtenerUser()}</Link>
+                        </div>
+                    </div>
+                    <div className='cont-nombre-usuario'>
+                        <p className='nombreUsuario'>{getNombreUsuario()}</p>
+                    </div>
+                </div>
+            </header>
+
+            
+          
+            <div className='contCard' ref={myElement}>
                 <div class="card">
                     <div class="card-header">
                         <FaUsers /><h3>Lista de Usarios</h3>
@@ -204,37 +309,52 @@ function Users() {
                                 <button type="button" class="btn-crear-Paciente-tabla" onClick={modalF}>Crear Nuevo</button>
                             </div>
                         </div>
+
                         <hr />
-                        <table id="tablaUsuarios" class="display cell-border" >
+                        <table className='table'>
+
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
                                     <th>Apellido</th>
                                     <th>Telefono</th>
                                     <th>Correo</th>
-                                    <th></th>
+                                    <th>Cargo</th>
+                                    <th> </th>
                                 </tr>
                             </thead>
+
                             <tbody>
                                 {
+
                                     terapeuta.map(item => [
                                         <tr>
                                             <td data-label="Nombre">{item.names}</td>
                                             <td data-label="apellido">{item.apellido}</td>
                                             <td data-label="telefono">{item.telefono}</td>
                                             <td data-label="direccion">{item.email}</td>
+                                            <td data-label="direccion">{item.idRol}</td>
                                             <td className='tr-btn'>
-                                                <button className='btn-tabla-usuario' type='button' value={item.idUser} onClick={e => EditarUsuario(e.target.value)}><FaEdit /></button>
-                                                <button className='btn-tabla-usuario-eliminar ' type='button' value={item.idUser} onClick={e => EliminarUsuario(e.target.value)}><FaTrash /></button>
+                                                <button className='btn-tabla-usuario' type='button' value={item.idUser} onClick={e => EditarUsuario(e.target.value)}>Editar</button>
+                                                <button className='btn-tabla-usuario-eliminar ' type='button' value={item.idUser} onClick={e => EliminarUsuario(e.target.value)}>Eliminar</button>
                                             </td>
                                         </tr>
                                     ])
+
                                 }
+
                             </tbody>
+
+
                         </table>
+
+                     
                     </div>
                 </div>
             </div>
+
+
+
 
             {/* MODAL EDITAR USUARIO */}
             <div className='cont-modal-lista-usuario' ref={modalEditar}>
@@ -395,3 +515,11 @@ function Users() {
     )
 }
 export default Users
+
+/*
+       <td className='tr-btn'>
+                                                <button className='btn-tabla-usuario' type='button' value={item.idUser} onClick={e => EditarUsuario(e.target.value)}><FaEdit /></button>
+                                                <button className='btn-tabla-usuario-eliminar ' type='button' value={item.idUser} onClick={e => EliminarUsuario(e.target.value)}><FaTrash /></button>
+                                            </td>
+
+*/

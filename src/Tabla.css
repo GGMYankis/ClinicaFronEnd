@@ -70,19 +70,19 @@
     color: #FF1046;
 }
 
-.tr-btn{
-     display: flex;
+.tr-btn {
+  display: flex;
 }
 
 .table tbody tr td .btn {
-    width: 40px;
-    height: 30px;
+    width: 100px;
+    height: 40px;
     text-decoration: none;
     line-height: 35px;
     display: inline-block;
     background-color: #0b2f57;
     color: white;
-    padding: 5px;
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -92,7 +92,7 @@
 .btn-crear-Paciente-tabla {
     padding: 10px;
     background-color: #0b2f57;
-    border: 3px solid #0b2f57 ;
+    border: 3px solid #0b2f57;
     border-radius: 5px;
     color: white;
 }
@@ -119,10 +119,11 @@
         padding: 5px;
     }
 }
-.activoLista{
+
+.activoLista {
     color: red;
-  }
-  
+}
+
 
 @media (max-width:750px) {
     .table td::before {
@@ -137,18 +138,20 @@
     .table tbody tr td .btn {
         width: 70px;
     }
+
     .btn-crear-Paciente-tabla {
         font-size: 14px;
         width: 120px;
         padding: 8px;
     }
-    .cont-titu-tables{
+
+    .cont-titu-tables {
         text-align: center;
     }
 }
 
 
-@media (max-width:768px) {
+@media (max-width:1150px) {
     .table thead {
         display: none;
     }
@@ -161,7 +164,7 @@
         width: 100%;
     }
 
-    .table tr{
+    .table tr {
         margin-bottom: 15px;
     }
 
@@ -187,7 +190,8 @@
     .table thead {
         display: none;
     }
-    .table{
+
+    .table {
         background-color: #0b2f57;
     }
 
@@ -197,11 +201,7 @@
     .table td {
         width: 100%;
     }
-    .tr-btn{
-        width: 100%;
-        display: flex;
-        background-color: yellow;
-   }
+
 
     .table tr {
         margin-bottom: 15px;

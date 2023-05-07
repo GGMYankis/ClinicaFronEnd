@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import logo from "../imagenes/IMG-20230221-WA0009.png"
-import { FaBars ,FaTrash,FaEdit } from 'react-icons/fa'
+import { FaBars, FaTrash, FaEdit } from 'react-icons/fa'
 import { FaUser } from 'react-icons/fa'
 import { FaCaretDown } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom';
@@ -33,32 +33,29 @@ function ListasTerapias() {
     let ids = getDatosUsuario()
 
     const date = {
+
         Idterapeuta: ids
     }
+
     let rol = getUsuarioCompleto()
+
     useEffect(() => {
-        if (rol == 2) {
-            axios.post('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/GetEvaluacionByTerapeuta', date)
-                .then(response => {
-                    setTerapias(response.data)
-                });
-        } else {
+      
             axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
                 .then(response => {
-                    setTerapias(response.data)
+                   setTerapias(response.data)
                     console.log(response.data)
+                    console.log("nada")
                 });
-        }
+       
     }, [])
 
 
     const data2 = {
-
         Label: nmTerapias,
         Description: descripcion,
         Price: price,
         Porcentaje: porcentaje
-
     }
 
     const FormularioTherapy = document.getElementById("FormularioTherapy");
@@ -145,10 +142,10 @@ function ListasTerapias() {
         const res = terapias.filter(item => item.nombreTerapia.idTherapy == e)
         console.log(res)
         res.map(item => [
-            setNmTerapias(item.label),
-            setDescripcion(item.description),
-            setPrice(item.price),
-            setPorcentaje(item.porcentaje),
+            setNmTerapias(item.nombreTerapia.label),
+            setDescripcion(item.nombreTerapia.description),
+            setPrice(item.nombreTerapia.price),
+            setPorcentaje(item.nombreTerapia.porcentaje),
         ])
 
     };
@@ -164,7 +161,6 @@ function ListasTerapias() {
         const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/EliminarTerapia';
         axios.post(url, idPa).then(res => {
 
-            $('#eliminarPaciente').hide();
             const probar = async () => {
 
                 const ale = await swal({
@@ -191,23 +187,20 @@ function ListasTerapias() {
 
     function quitarModal() {
         modalEditar.current.classList.remove('activoEditar')
-        $('#form-perfil-registrar').hide();
     };
 
     const modalEliminar = (e) => {
 
-        const res = terapias.filter(item => item.idTherapy == e)
+        const res = terapias.filter(item => item.nombreTerapia.idTherapy == e)
         res.map(item => [
-            setNmTerapias(item.label),
+            setNmTerapias(item.nombreTerapia.label),
         ])
         alertEliminar.current.classList.add('activeEli')
         setIdTerapiaEliminar(e)
     }
     const myElement = useRef(null);
 
-    const handleClick = () => {
-        myElement.current.classList.toggle('mi-clase-css');
-    };
+
 
     function modalF() {
         modal.current.classList.add('activo')
@@ -217,14 +210,22 @@ function ListasTerapias() {
         modal.current.classList.remove('activo')
     }
 
+    const handleClickOtro = () => {
+        myElement.current.classList.toggle('mi-clase-css');
+    };
+
     return (
 
         <div>
             <header className='encabezado'>
                 <div>
                     <nav>
-                        <input type="checkbox" id="check" onClick={handleClick} />
+                        <input type="checkbox" id="check" />
+                        <input type="checkbox" id="checkOtro" onClick={handleClickOtro} />
                         <label for="check" class="checkbtn">
+                            <FaBars id='bar' />
+                        </label>
+                        <label for="checkOtro" class="checkbtnOtro">
                             <FaBars id='bar' />
                         </label>
 
@@ -263,7 +264,7 @@ function ListasTerapias() {
                             <li>
                                 <Link className='letras-menu' to="/VerGanancias">Ver Ganancias</Link>
                             </li>
-                            
+
                             <li>
                                 <a className='letras-menu' onClick={logout}>Cerra Sesión</a>
                             </li>
@@ -316,9 +317,13 @@ function ListasTerapias() {
                                 </tr>
                             </thead>
 
+
+
                            
+                        
                             <tbody>
                                 {
+
                                     terapias.map(item => [
                                         <tr>
                                             <td data-label="Nombre" key={item.nombreTerapia.label} >{item.nombreTerapia.label}</td>
@@ -326,14 +331,19 @@ function ListasTerapias() {
                                             <td data-label="Price" key={item.nombreTerapia.price}>{item.nombreTerapia.price}</td>
                                             <td data-label="Price" key={item.nombreTerapia.porcentaje}>{item.nombreTerapia.porcentaje}</td>
                                             <td className='tr-btn'>
-                                                <button className='btn ' type='button' value={item.nombreTerapia.idTherapy} onClick={e => editar(e.target.value)} ><FaEdit/></button>
-                                                <button className='btn eliminar' type='button' value={item.nombreTerapia.idTherapy} onClick={e => modalEliminar(e.target.value)}><FaTrash/></button>
+                                                <button className='btn ' type='button' value={item.nombreTerapia.idTherapy} onClick={e => editar(e.target.value)} >Editar</button>
+                                                <button className='btn eliminar' type='button' value={item.nombreTerapia.idTherapy} onClick={e => modalEliminar(e.target.value)}>Eliminar</button>
                                             </td>
                                         </tr>
                                     ])
                                 }
 
+                          
+
                             </tbody>
+
+
+                       
 
                         </table>
                     </div>

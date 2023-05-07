@@ -154,14 +154,6 @@ function Calendario() {
     }
 
 
-    function limpiarFormulario() {
-
-        $('#Descripcion').val('');
-    }
-
-
-
-
     const [id, setId] = useState()
 
     async function handleEventClickFecha(info) {

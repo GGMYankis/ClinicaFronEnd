@@ -29,7 +29,7 @@ import { Protect } from './components/Protect';
 import Autenticacion from './components/Autenticacion';
 import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario,nombreUsuario } from './auth-helpers'
 import 'bootstrap/dist/css/bootstrap.min.css';
-const cookies = new Cookies();
+
 
 initAxiosInterceptors()
 
@@ -48,7 +48,7 @@ function App() {
 
             try {
 
-                axios.post('https://localhost:63958/api/Autenticacion/getUserByToken')
+                axios.post('https://yankisggm12ffs-001-site1.dtempurl.com/api/Autenticacion/getUserByToken')
                     .then(res => {
                         setUsuario(res.data.idUser)
                         const user = res.data.names.substring('', 1)

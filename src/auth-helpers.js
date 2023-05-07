@@ -75,7 +75,6 @@ export function initAxiosInterceptors() {
         ,
         function (error) {
             if (error.response.status === 401) {
-                console.log("el token ha vencido")
                 deleteToken();
             } else {
                 return Promise.reject(error)

@@ -3,7 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     text-decoration: none;
-    transition: all 0.3s linear;
+    transition: all .5s linear;
 }
 
 .checkbtn {
@@ -44,7 +44,6 @@
     background-color: orange;
     border-radius: 5px;
     width: 0px;
-
 }
 
 ul li {
@@ -71,7 +70,6 @@ ul li {
     color: orange;
     margin-top: 15px;
     font-weight: 700;
-
 }
 
 .contenedor-botones {
@@ -86,27 +84,62 @@ ul li {
 
 .letras-menu:hover {
     transition: all .1s;
-
     color: orange;
 }
 
 #check:checked~ul {
     left: 0;
+    transition: all .5s;
 }
 
 #check {
     display: none;
 }
 
+#checkOtro {
+    display: none;
+}
+
+#checkOtro:checked~ul {
+    left: 0;
+    transition: all .5s;
+}
+
+.checkbtnOtro {
+    font-size: 30px;
+    color: white;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    display: none;
+    margin-bottom: 15px;
+
+}
+
+@media (max-width:1150px) {
+    .checkbtn {
+        display: none;
+    }
+
+    .checkbtnOtro {  
+        display: block;
+    }
+}
+@media (max-width:450px) {
+    .mi-clase-css {
+        margin-left: 220px;
+    }
+}
 
 .perfil {
-
     padding: 10px;
     color: white;
     border-radius: 50%;
     margin-right: 10px;
     font-size: 20px;
-
 }
 
 .perfil:hover {
@@ -505,7 +538,6 @@ body {
     height: 40px;
     background-color: #0b2f57;
     color: white;
-
 }
 
 .cont-titu h1 {
@@ -525,12 +557,10 @@ tr:nth-child(even) {
     color: white;
     padding: 10px;
     height: 50px;
-
 }
 
 
 .titu-listaTerapias h1 {
-
     font-size: 25px;
     color: white;
     line-height: 25px;
@@ -547,7 +577,6 @@ tr:nth-child(even) {
 
 
 .btn-crear-Terapia {
-
     padding: 10px;
     color: white;
     transition: all .2s;
@@ -570,10 +599,20 @@ th {
     text-align: left;
 }
 
-.mi-clase-css {
-    margin-left: 175px;
-    color: red;
+
+
+/*
+
+.mi-clase
+-css {
+    padding-right: 0;
+    padding-left: 0;
+    position: absolute;
+    right: 0;
+    transform: translate(70px);
+    transition: all .5s;
 }
+*/
 
 .cont-Button {
     width: 200px;

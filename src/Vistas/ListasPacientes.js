@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import axios from 'axios';
 import logo from "../imagenes/IMG-20230221-WA0009.png"
 import { FaBars } from 'react-icons/fa'
-import { FaUser, FaUsers,FaTrash,FaEdit  } from 'react-icons/fa'
+import { FaUser, FaUsers, FaTrash, FaEdit } from 'react-icons/fa'
 import { FaCaretDown } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom';
 import { BrowserRouter, Routes, Route, Link, Redirect } from 'react-router-dom'
@@ -246,9 +246,6 @@ function ListasPacientes() {
                 probar()
             }
 
-            $('#table-container').show();
-            //  refreshPage()
-
 
 
         }).catch((error) => {
@@ -418,9 +415,6 @@ function ListasPacientes() {
 
 
     const modalEliminar = (e) => {
-
-        $('#eliminarPaciente').show();
-
         const IdEliminarPaciente = listaPaciente.filter(item => item.idPatients == e)
 
         IdEliminarPaciente.map(item => {
@@ -438,18 +432,13 @@ function ListasPacientes() {
 
     const CancelarPaciente = () => {
         modalCrear.current.classList.remove('active')
-
-
     }
 
     const CancelarPacienteEditar = () => {
         modalEditar.current.classList.remove('active')
     }
 
-
-
     const logout = () => {
-
         deleteToken()
         navigation("/login")
     }
@@ -457,7 +446,9 @@ function ListasPacientes() {
 
     const myElement = useRef(null);
 
-    const handleClick = () => {
+
+
+    const handleClickOtro = () => {
         myElement.current.classList.toggle('mi-clase-css');
     };
 
@@ -470,8 +461,12 @@ function ListasPacientes() {
             <header className='encabezado'>
                 <div>
                     <nav>
-                        <input type="checkbox" id="check" onClick={handleClick} />
+                        <input type="checkbox" id="check" />
+                        <input type="checkbox" id="checkOtro" onClick={handleClickOtro} />
                         <label for="check" class="checkbtn">
+                            <FaBars id='bar' />
+                        </label>
+                        <label for="checkOtro" class="checkbtnOtro">
                             <FaBars id='bar' />
                         </label>
 
@@ -534,8 +529,6 @@ function ListasPacientes() {
                         <p className='nombreUsuario'>{getNombreUsuario()}</p>
                     </div>
                 </div>
-
-
             </header>
 
             <div id='table-container' ref={myElement} className='table-container'>
@@ -570,8 +563,6 @@ function ListasPacientes() {
                                 </tr>
                             </thead>
 
-
-
                             <tbody>
                                 {
 
@@ -586,18 +577,15 @@ function ListasPacientes() {
                                             <td data-label="activo">{item.activo}</td>
 
                                             <td className='tr-btn'>
-                                                <button className='btn ' type='button' value={item.idPatients} onClick={e => modaleditar(e.target.value)}><FaEdit className='hgico'/></button>
-                                                <button className='btn eliminar' type='button' value={item.idPatients} onClick={e => modalEliminar(e.target.value)}><FaTrash/></button>
+                                                <button className='btn ' type='button' value={item.idPatients} onClick={e => modaleditar(e.target.value)}>Editar</button>
+                                                <button className='btn eliminar' type='button' value={item.idPatients} onClick={e => modalEliminar(e.target.value)}>Eliminar</button>
                                             </td>
-
                                         </tr>
                                     ])
 
                                 }
 
                             </tbody>
-
-
                         </table>
                     </div>
                 </div>
@@ -752,7 +740,7 @@ function ListasPacientes() {
                         <div className="row" id='primeraFila'>
                             <div className="col">
                                 <label htmlFor="validationServer01" className='labelPaciente'>Nombre</label>
-                                <input type="text" className="form-control " value={name} id="validationServer01" onChange={e => handleNameChange(e.target.value)} required />
+                                <input type="text" className="form-control "  id="validationServer01" onChange={e => handleNameChange(e.target.value)} required />
                             </div>
                             <div className="col">
                                 <label htmlFor="validationServer01" className='labelPaciente'>Sexo</label>
@@ -765,16 +753,16 @@ function ListasPacientes() {
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Nombre De Los Padres </label>
-                                <input type="text" className="form-control " value={parents_name} id="validationServer02" onChange={e => handleParents_NameChange(e.target.value)} required />
+                                <input type="text" className="form-control "  id="validationServer02" onChange={e => handleParents_NameChange(e.target.value)} required />
                             </div>
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPacienteCC' >Teléfono del padre</label>
-                                <input type="text" className="form-control " value={NumPadre} id="validationServer02" required onChange={handleparent_or_guardian_phone_numberChange} />
+                                <input type="text" className="form-control "  id="validationServer02" required onChange={handleparent_or_guardian_phone_numberChange} />
                             </div>
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPacienteCC' >Teléfono de la madre</label>
-                                <input type="text" className="form-control " value={NumMadre} id="validationServer02" required onChange={handlemothers_number} />
+                                <input type="text" className="form-control "  id="validationServer02" required onChange={handlemothers_number} />
                             </div>
                         </div>
 
@@ -782,7 +770,7 @@ function ListasPacientes() {
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Fecha de nacimiento</label>
-                                <input type="date" className="form-control " value={date_of_birth} id="validationServer02" required onChange={handledate_of_birthChange} />
+                                <input type="date" className="form-control "  id="validationServer02" required onChange={handledate_of_birthChange} />
                             </div>
 
                             <div className="col">
@@ -792,16 +780,16 @@ function ListasPacientes() {
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Centro de Estudios</label>
-                                <input type="text" className="form-control " value={educational_institution} id="validationServer02" required onChange={e => handleducational_institutionChange(e.target.value)} />
+                                <input type="text" className="form-control " id="validationServer02" required onChange={e => handleducational_institutionChange(e.target.value)} />
                             </div>
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Curso</label>
-                                <input type="text" className="form-control " value={course} id="validationServer02" required onChange={e => handleCurso(e.target.value)} />
+                                <input type="text" className="form-control "  id="validationServer02" required onChange={e => handleCurso(e.target.value)} />
                             </div>
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Recomendaciones </label>
-                                <input type="text" className="form-control " value={recommendations} id="validationServer02" required onChange={e => handlerecommendationsChange(e.target.value)} />
+                                <input type="text" className="form-control "  id="validationServer02" required onChange={e => handlerecommendationsChange(e.target.value)} />
 
                             </div>
                         </div>
@@ -809,36 +797,36 @@ function ListasPacientes() {
                         <div className='row' id='terceraFila'>
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Quien refiere</label>
-                                <input type="text" className="form-control " value={who_refers} id="validationServer02" required onChange={e => handlewho_refersChange(e.target.value)} />
+                                <input type="text" className="form-control "  id="validationServer02" required onChange={e => handlewho_refersChange(e.target.value)} />
 
                             </div>
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Configuración familiar</label>
-                                <input type="text" className="form-control " value={family_settings} id="validationServer02" required onChange={e => handlefamily_settingsChange(e.target.value)} />
+                                <input type="text" className="form-control "  id="validationServer02" required onChange={e => handlefamily_settingsChange(e.target.value)} />
                             </div>
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Terapias o servicio  </label>
-                                <input type="text" className="form-control " value={therapies_or_service_you_will_receive_at_the_center} id="validationServer02" required onChange={e => handletherapies_or_service_you_will_receive_at_the_centerChange(e.target.value)} />
+                                <input type="text" className="form-control " id="validationServer02" required onChange={e => handletherapies_or_service_you_will_receive_at_the_centerChange(e.target.value)} />
 
                             </div>
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Diagnóstico </label>
-                                <input type="text" className="form-control" value={diagnosis} id="validationServer02" required onChange={e => handlediagnosisChange(e.target.value)} />
+                                <input type="text" className="form-control" id="validationServer02" required onChange={e => handlediagnosisChange(e.target.value)} />
 
                             </div>
 
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Condición médica específica </label>
-                                <input type="text" className="form-control " value={specific_medical_condition} id="validationServer02" required onChange={e => handlespecific_medical_conditionChange(e.target.value)} />
+                                <input type="text" className="form-control "  id="validationServer02" required onChange={e => handlespecific_medical_conditionChange(e.target.value)} />
                             </div>
                         </div>
 
                         <div className='row'>
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Preocupación de los familiares</label>
-                                <input type="text" className="form-control " value={family_members_concerns} id="validationServer02" required onChange={e => handlefamily_members_concernsChange(e.target.value)} />
+                                <input type="text" className="form-control "  id="validationServer02" required onChange={e => handlefamily_members_concernsChange(e.target.value)} />
                             </div>
 
                         </div>
@@ -846,7 +834,7 @@ function ListasPacientes() {
 
                             <div className="col">
                                 <label htmlFor="validationServer02">Otro </label>
-                                <textarea id="txtArea" rows="10" cols="70" value={other} onChange={e => handleotherChange(e.target.value)}></textarea>
+                                <textarea id="txtArea" rows="10" cols="70"  onChange={e => handleotherChange(e.target.value)}></textarea>
                             </div>
                         </div>
 
@@ -900,3 +888,11 @@ function ListasPacientes() {
 }
 
 export default ListasPacientes
+
+/*
+
+  <td className='tr-btn'>
+                                                <button className='btn ' type='button' value={item.idPatients} onClick={e => modaleditar(e.target.value)}><FaEdit className='hgico'/></button>
+                                                <button className='btn eliminar' type='button' value={item.idPatients} onClick={e => modalEliminar(e.target.value)}><FaTrash/></button>
+                                            </td>
+*/

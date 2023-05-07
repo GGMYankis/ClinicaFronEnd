@@ -11,7 +11,7 @@ import swal from 'sweetalert';
 import { FaFontAwesomeIcon, FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import jwt_decode from 'jwt-decode';
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario,setUsuarioCompleto, setToken, nombreUsuario } from '../auth-helpers'
+import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario, setUsuarioCompleto, setToken, nombreUsuario } from '../auth-helpers'
 
 
 function Login() {
@@ -24,7 +24,7 @@ function Login() {
     const [valiEmail, setValiEmail] = useState(false)
     const [mensajeError, setMensajeError] = useState(null)
 
-    
+
     const navigation = useNavigate();
 
     const handleNameChange = (value) => {
@@ -56,7 +56,7 @@ function Login() {
         if (esValido == true) {
 
         } else {
-           setMensajeError('La dirección del correo no es válida')
+            setMensajeError('La dirección del correo no es válida')
             return;
         }
         //  "homepage": "https://clinica14.000webhostapp.com/",
@@ -70,19 +70,18 @@ function Login() {
 
         axios.post(url, data).then((result) => {
 
-            console.log(result.data.user)
-
             if (result.data.user == null) {
                 setMensajeError(result.data.message)
-            } else {
-                navigation("/admin")
+                return;
             }
+
+            setToken(result.data.tokencreado)
+            navigation("/admin")
 
             const user = result.data.user.names.substring('', 1)
             setUsuarioM(user)
             setUsuario(result.data.user.idUser)
             nombreUsuario(result.data.user.names)
-            setToken(result.data.tokencreado)
             setUsuarioCompleto(result.data.user.idRol)
             login.reset()
         })
@@ -122,7 +121,7 @@ function Login() {
                     <label className='campo-login'>{error}</label> : ""}
                 {mensajeError ?
                     <div class="alert alert-danger" role="alert">
-                      {mensajeError}
+                        {mensajeError}
                     </div>
                     : ""
                 }

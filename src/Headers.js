@@ -22,7 +22,8 @@ function Headers({ }) {
 
     const myElement = useRef(null);
 
-    const handleClick = () => {
+ 
+    const handleClickOtro = () => {
         myElement.current.classList.toggle('mi-clase-css');
     };
 
@@ -31,8 +32,12 @@ function Headers({ }) {
             <header className='encabezado'>
                 <div>
                     <nav>
-                        <input type="checkbox" id="check" onClick={handleClick} />
+                        <input type="checkbox" id="check" />
+                        <input type="checkbox" id="checkOtro" onClick={handleClickOtro} />
                         <label for="check" class="checkbtn">
+                            <FaBars id='bar' />
+                        </label>
+                        <label for="checkOtro" class="checkbtnOtro">
                             <FaBars id='bar' />
                         </label>
                         <ul>
