@@ -13,7 +13,7 @@ import swal from 'sweetalert';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DataTable from 'react-data-table-component';
 import Headers from '../Headers'
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser, getNombreUsuario } from '../auth-helpers'
+import { DeleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser, getNombreUsuario } from '../auth-helpers'
 
 
 const btnColor = document.getElementById('btnColor')
@@ -76,7 +76,6 @@ function ListasPacientes() {
 
                     }
                     setlistaPaciente(res.data.lista)
-                    console.log(res.data.lista)
 
                 })
 
@@ -145,7 +144,7 @@ function ListasPacientes() {
         const birthDate = new Date(inputValue);
         const differenceMs = currentDate - birthDate;
         const differenceYears = parseFloat((differenceMs / (1000 * 60 * 60 * 24 * 365)).toFixed(2));
-        return differenceYears;
+        return differenceYears.toString();
     }
 
 
@@ -439,7 +438,7 @@ function ListasPacientes() {
     }
 
     const logout = () => {
-        deleteToken()
+        DeleteToken()
         navigation("/login")
     }
 
@@ -463,10 +462,10 @@ function ListasPacientes() {
                     <nav>
                         <input type="checkbox" id="check" />
                         <input type="checkbox" id="checkOtro" onClick={handleClickOtro} />
-                        <label for="check" class="checkbtn">
+                        <label htmlFor="check" className="checkbtn">
                             <FaBars id='bar' />
                         </label>
-                        <label for="checkOtro" class="checkbtnOtro">
+                        <label htmlFor="checkOtro" className="checkbtnOtro">
                             <FaBars id='bar' />
                         </label>
 
@@ -568,7 +567,7 @@ function ListasPacientes() {
 
                                     listaPaciente.map(item => [
                                         <tr>
-                                            <td data-label="Nombre">{item.name}</td>
+                                            <td data-label="Nombre"  >{item.name}</td>
                                             <td data-label="Sexo">{item.sex}</td>
                                             <td data-label="Nombre De Los Padres">{item.parentsName}</td>
                                             <td data-label="Teléfono de los padres o tutores">{item.parentOrGuardianPhoneNumber}</td>
@@ -612,7 +611,7 @@ function ListasPacientes() {
                             <div className="col">
                                 <label htmlFor="validationServer01" className='labelPaciente'>Sexo</label>
                                 <select className="form-control" required value={sex} onChange={e => handleSexChange(e.target.value)}>
-                                    <option selected >seleccione una opción</option>
+                                    <option defaultValue >seleccione una opción</option>
                                     <option value="Masculino">Masculino</option>
                                     <option value="Femenina">Femenino</option>
                                 </select>
@@ -644,7 +643,7 @@ function ListasPacientes() {
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Edad</label>
-                                <input type="number" className="form-control" value={calculateAge()} id="validationServer02" />
+                                <input type="number" className="form-control" defaultValue={calculateAge()} id="validationServer02" />
                             </div>
 
                             <div className="col">
@@ -698,7 +697,7 @@ function ListasPacientes() {
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Activo</label>
                                 <select id="cboactivo" className="form-control" value={ac} onChange={e => FActivo(e.target.value)} >
-                                    <option selected>seleccione una opción</option>
+                                    <option defaultValue>seleccione una opción</option>
                                     <option value="1">Si</option>
                                     <option value="0">No</option>
                                 </select>
@@ -745,7 +744,7 @@ function ListasPacientes() {
                             <div className="col">
                                 <label htmlFor="validationServer01" className='labelPaciente'>Sexo</label>
                                 <select className="form-control" required onChange={e => handleSexChange(e.target.value)}>
-                                    <option selected>seleccione una opción</option>
+                                    <option defaultValue>seleccione una opción</option>
                                     <option value="Masculino">Masculino</option>
                                     <option value="Femenina">Femenino</option>
                                 </select>
@@ -775,7 +774,7 @@ function ListasPacientes() {
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Edad</label>
-                                <input type="number" className="form-control" value={calculateAge()} id="validationServer02" required />
+                                <input type="number" className="form-control" defaultValue={calculateAge()} id="validationServer02" required />
                             </div>
 
                             <div className="col">

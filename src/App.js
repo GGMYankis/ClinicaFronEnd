@@ -42,10 +42,7 @@ function App() {
 
         
         async function cargarUsuario() {
-            if (!getToken) {
-                alert('no hay token')
-            }
-
+          
             try {
 
                 axios.post('https://yankisggm12ffs-001-site1.dtempurl.com/api/Autenticacion/getUserByToken')

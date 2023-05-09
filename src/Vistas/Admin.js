@@ -84,7 +84,7 @@ const Admin = () => {
         const differenceMs = currentDate - birthDate;
         let differenceYears = parseFloat((differenceMs / (1000 * 60 * 60 * 24 * 365)).toFixed(2));
 
-        return differenceYears;
+        return differenceYears.toString();
 
     }
 
@@ -160,7 +160,6 @@ const Admin = () => {
 
         e.preventDefault()
 
-        console.log(data)
 
         const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/GuardarPaciente';
         axios.post(url, data).then((result) => {
@@ -193,13 +192,13 @@ const Admin = () => {
 
                     <div className='paddd'>
                         <div className="row" id='primeraFila'>
-                            <div class="col">
-                                <label for="validationServer01" className='labelPaciente'>Nombre</label>
+                            <div className="col">
+                                <label htmlFor="validationServer01" className='labelPaciente'>Nombre</label>
                                 <input type="text" className="form-control " id="validationServer01" onChange={e => handleNameChange(e.target.value)} required />
                             </div>
 
-                            <div class="col">
-                                <label for="validationServer01" className='labelPaciente'>Sexo</label>
+                            <div className="col">
+                                <label htmlFor="validationServer01" className='labelPaciente'>Sexo</label>
                                 <select className="form-control" required onChange={e => handleSexChange(e.target.value)}>
                                     <option >seleccione una opción</option>
                                     <option value="Masculino">Masculino</option>
@@ -207,83 +206,83 @@ const Admin = () => {
                                 </select>
                             </div>
 
-                            <div class="col">
-                                <label for="validationServer02" className='labelPaciente'>Nombre De Los Padres </label>
+                            <div className="col">
+                                <label htmlFor="validationServer02" className='labelPaciente'>Nombre De Los Padres </label>
                                 <input type="text" className="form-control " id="validationServer02" onChange={e => handleParents_NameChange(e.target.value)} required />
                             </div>
 
-                            <div class="col">
-                                <label for="validationServer02" className='labelPacienteCC' >Teléfono del padre</label>
+                            <div className="col">
+                                <label htmlFor="validationServer02" className='labelPacienteCC' >Teléfono del padre</label>
                                 <input type="text" className="form-control " id="validationServer02" value={NumPadre} required onChange={handleparent_or_guardian_phone_numberChange} />
                             </div>
-                            <div class="col">
-                                <label for="validationServer02" className='labelPacienteCC' >Teléfono de la madre</label>
+                            <div className="col">
+                                <label htmlFor="validationServer02" className='labelPacienteCC' >Teléfono de la madre</label>
                                 <input type="text" className="form-control " id="validationServer02" value={NumMadre} required onChange={handlemothers_number} />
                             </div>
                         </div>
 
                         <div className='row' id='segundaFila'>
 
-                            <div class="col">
-                                <label for="validationServer02" className='labelPaciente'>Fecha de nacimiento</label>
+                            <div className="col">
+                                <label htmlFor="validationServer02" className='labelPaciente'>Fecha de nacimiento</label>
                                 <input type="date" className="form-control" id="validationServer02" required onChange={e => handledate_of_birthChange(e.target.value)} />
                             </div>
 
 
-                            <div class="col">
-                                <label for="validationServer02" className='labelPaciente'>Edad</label>
-                                <input type="text" className="form-control" id="validationServer02" value={calculateAge()} />
+                            <div className="col">
+                                <label htmlFor="validationServer02" className='labelPaciente'>Edad</label>
+                                <input type="text" className="form-control" id="validationServer02" defaultValue={calculateAge()} />
 
                             </div>
 
-                            <div class="col">
-                                <label for="validationServer02" className='labelPaciente'>Centro de Estudios</label>
+                            <div className="col">
+                                <label htmlFor="validationServer02" className='labelPaciente'>Centro de Estudios</label>
                                 <input type="text" className="form-control " id="validationServer02" required onChange={e => handleducational_institutionChange(e.target.value)} />
                             </div>
 
-                            <div class="col">
-                                <label for="validationServer02" className='labelPaciente'>Curso</label>
+                            <div className="col">
+                                <label htmlFor="validationServer02" className='labelPaciente'>Curso</label>
                                 <input type="text" className="form-control " id="validationServer02" required onChange={e => handleCurso(e.target.value)} />
                             </div>
-                            <div class="col">
-                                <label for="validationServer02" className='labelPaciente'>Recomendaciones </label>
+                            <div className="col">
+                                <label htmlFor="validationServer02" className='labelPaciente'>Recomendaciones </label>
                                 <input type="text" className="form-control " id="validationServer02" required onChange={e => handlerecommendationsChange(e.target.value)} />
                             </div>
                         </div>
                         <div className='row' id='terceraFila'>
-                            <div class="col">
-                                <label for="validationServer02" className='labelPaciente'>Quien refiere</label>
+                            <div className="col">
+                                <label htmlFor="validationServer02" className='labelPaciente'>Quien refiere</label>
                                 <input type="text" className="form-control " id="validationServer02" required onChange={e => handlewho_refersChange(e.target.value)} />
                             </div>
-                            <div class="col">
-                                <label for="validationServer02" className='labelPaciente'>Configuración familiar</label>
+                            <div className="col">
+                                <label htmlFor="validationServer02" className='labelPaciente'>Configuración familiar</label>
                                 <input type="text" className="form-control " id="validationServer02" required onChange={e => handlefamily_settingsChange(e.target.value)} />
 
                             </div>
-                            <div class="col">
-                                <label for="validationServer02" className='labelPaciente'>Terapias o servicio  </label>
+                            <div className="col">
+                                <label htmlFor="validationServer02" className='labelPaciente'>Terapias o servicio  </label>
                                 <input type="text" className="form-control " id="validationServer02" required onChange={e => handletherapies_or_service_you_will_receive_at_the_centerChange(e.target.value)} />
 
                             </div>
-                            <div class="col">
-                                <label for="validationServer02" className='labelPaciente'>Diagnóstico </label>
+                            <div className="col">
+                                <label htmlFor="validationServer02" className='labelPaciente'>Diagnóstico </label>
                                 <input type="text" className="form-control" id="validationServer02" required onChange={e => handlediagnosisChange(e.target.value)} />
 
                             </div>
-                            <div class="col">
-                                <label for="validationServer02" className='labelPaciente'>Condición médica específica </label>
+                            <div className="col">
+                                <label htmlFor="validationServer02" className='labelPaciente'>Condición médica específica </label>
                                 <input type="text" className="form-control " id="validationServer02" required onChange={e => handlespecific_medical_conditionChange(e.target.value)} />
                             </div>
                         </div>
                         <div className='row'>
-                            <div class="col">
-                                <label for="validationServer02" className='labelPaciente'>Preocupación de los familiares</label>
+                            <div className="col">
+                                <label htmlFor="validationServer02" className='labelPaciente'>Preocupación de los familiares</label>
                                 <input type="text" className="form-control " id="validationServer02" required onChange={e => handlefamily_members_concernsChange(e.target.value)} />
                             </div>
                         </div>
                         <div className='row'>
-                            <div class="col">
-                                <label for="validationServer02">Otro </label>
+                            <div className="col">
+                                <label htmlFor="validationServer02">Otro </label>
                                 <textarea id="txtArea" onChange={e => handleotherChange(e.target.value)} rows="10" cols="70"></textarea>
                                 {/*}  <input type="text" className="form-control " id="validationServer02" required onChange={e => handleotherChange(e.target.value)} /> */}
                             </div>

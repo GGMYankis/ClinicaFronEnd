@@ -56,12 +56,10 @@ function Evaluacion() {
                 .then(response => {
 
                     setData(response.data)
-                    console.log(response.data)
                 });
         } else {
             axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
                 .then(response => {
-                    console.log(response.data)
                     setData(response.data)
                 });
         }
@@ -108,7 +106,6 @@ function Evaluacion() {
     const precioModal = (e) => {
 
         setPriceEvaluacion(e)
-        console.log(priceEvaluacion)
     }
 
 
@@ -238,7 +235,7 @@ function Evaluacion() {
 
                     <div className='cont-titu-select'>
                         <h1>Citas</h1>
-                        <i class="bi bi-person-circle"></i>
+                        <i className="bi bi-person-circle"></i>
                     </div>
 
                     <div className='sub-cont-evaluacion'>

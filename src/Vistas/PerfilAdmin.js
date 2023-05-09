@@ -8,7 +8,7 @@ import React from 'react'
 import { BrowserRouter, Routes, Route, Link, Redirect } from 'react-router-dom'
 import logo from "../imagenes/IMG-20230221-WA0009.png"
 import { useNavigate } from 'react-router-dom';
-import { setUsuarioM, obtenerUser, getDatosUsuario,setUsuario, deleteToken } from '../auth-helpers'
+import { setUsuarioM, obtenerUser, getDatosUsuario,setUsuario, DeleteToken } from '../auth-helpers'
 import $ from 'jquery';
 import { findDOMNode } from 'react-dom'
 import Headers from '../Headers'
@@ -17,8 +17,8 @@ import Headers from '../Headers'
 function PerfilAdmin() {
 
 
-    const [usuarioPerfil, setusuarioPerfil] = useState();
-    const [correoPerfil, setcorreoPerfil] = useState();
+    const [usuarioPerfil, setusuarioPerfil] = useState('');
+    const [correoPerfil, setcorreoPerfil] = useState('');
     const [contraseña, setContraseña] = useState('');
     const [confirmar, setConfirmar] = useState('');
     const [mensajeError, setMensajeError] = useState(false);
@@ -127,7 +127,7 @@ function PerfilAdmin() {
         axios.post(url, user).then((result) => {
 
              if(result){
-                deleteToken()
+                DeleteToken()
                 nave("/login")
              }
 

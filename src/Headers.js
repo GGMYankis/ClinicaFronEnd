@@ -6,7 +6,7 @@ import logo from "./imagenes/IMG-20230221-WA0009.png";
 import { FaUser, FaUsers,FaTrash,FaEdit } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import { setUsuarioM, obtenerUser, getNombreUsuario, deleteToken } from './auth-helpers'
+import { setUsuarioM, obtenerUser, getNombreUsuario, DeleteToken } from './auth-helpers'
 
 
 
@@ -16,7 +16,7 @@ function Headers({ }) {
     obtenerUser()
 
     const logout = () => {
-        deleteToken()
+        DeleteToken()
         navigation("/login")
     }
 
@@ -34,10 +34,10 @@ function Headers({ }) {
                     <nav>
                         <input type="checkbox" id="check" />
                         <input type="checkbox" id="checkOtro" onClick={handleClickOtro} />
-                        <label for="check" class="checkbtn">
+                        <label htmlFor="check" className="checkbtn">
                             <FaBars id='bar' />
                         </label>
-                        <label for="checkOtro" class="checkbtnOtro">
+                        <label htmlFor="checkOtro" className="checkbtnOtro">
                             <FaBars id='bar' />
                         </label>
                         <ul>

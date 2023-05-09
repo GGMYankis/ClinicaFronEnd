@@ -1,7 +1,9 @@
-
+import { useNavigate } from 'react-router-dom';
 import Cookies from 'universal-cookie';
 import axios from 'axios';
 const cookies = new Cookies();
+
+
 
 export function setToken(token) {
 
@@ -51,11 +53,17 @@ export function getToken() {
 
     return cookies.get('Token')
 }
-export function deleteToken() {
+
+
+
+
+export function DeleteToken() {
     cookies.remove('Token')
     cookies.remove('Nombre')
     cookies.remove('UsuarioId')
     cookies.remove('PrimeraLetra')
+    const navigation = useNavigate();
+    navigation("/login")
     return;
 }
 
@@ -75,7 +83,7 @@ export function initAxiosInterceptors() {
         ,
         function (error) {
             if (error.response.status === 401) {
-                deleteToken();
+                DeleteToken();
             } else {
                 return Promise.reject(error)
             }

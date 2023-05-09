@@ -7,7 +7,7 @@ import swal from 'sweetalert';
 import { FaUser, FaUsers, FaTrash, FaEdit } from 'react-icons/fa';
 import { FaBars } from 'react-icons/fa'
 import { BrowserRouter, Routes, Route, Link, Redirect } from 'react-router-dom'
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser, getNombreUsuario } from '../auth-helpers'
+import { DeleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser, getNombreUsuario } from '../auth-helpers'
 import { useNavigate } from 'react-router-dom';
 import logo from "../imagenes/IMG-20230221-WA0009.png"
 
@@ -42,7 +42,6 @@ function Users() {
             .then(response => {
 
 
-                console.log(response.data.lista)
 
                 response.data.lista.map(a => {
 
@@ -79,7 +78,6 @@ function Users() {
     function enviar(e) {
 
         e.preventDefault()
-        console.log(data)
 
         const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/GuardarUsers';
         axios.post(url, data).then((result) => {
@@ -210,7 +208,7 @@ function Users() {
     }
 
     const logout = () => {
-        deleteToken()
+        DeleteToken()
         navigation("/login")
     }
 
@@ -228,10 +226,10 @@ function Users() {
                     <nav>
                         <input type="checkbox" id="check" />
                         <input type="checkbox" id="checkOtro" onClick={handleClickOtro} />
-                        <label for="check" class="checkbtn">
+                        <label htmlFor="check" className="checkbtn">
                             <FaBars id='bar' />
                         </label>
-                        <label for="checkOtro" class="checkbtnOtro">
+                        <label htmlFor="checkOtro" className="checkbtnOtro">
                             <FaBars id='bar' />
                         </label>
 
@@ -296,17 +294,17 @@ function Users() {
                 </div>
             </header>
 
-            
-          
+
+
             <div className='contCard' ref={myElement}>
-                <div class="card">
-                    <div class="card-header">
+                <div className="card">
+                    <div className="card-header">
                         <FaUsers /><h3>Lista de Usarios</h3>
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <button type="button" class="btn-crear-Paciente-tabla" onClick={modalF}>Crear Nuevo</button>
+                    <div className="card-body">
+                        <div className="row">
+                            <div className="col-sm-6">
+                                <button type="button" className="btn-crear-Paciente-tabla" onClick={modalF}>Crear Nuevo</button>
                             </div>
                         </div>
 
@@ -348,7 +346,7 @@ function Users() {
 
                         </table>
 
-                     
+
                     </div>
                 </div>
             </div>
@@ -402,7 +400,7 @@ function Users() {
                         <div className='row'>
                             <div className='col'>
                                 <select onChange={e => setIdRol(e.target.value)} values={idRol} className='form-select-usuario' required>
-                                    <option selected> seleccione un Rol</option>
+                                    <option defaultValue> seleccione un Rol</option>
                                     <option value="1">Administrador</option>
                                     <option value="2">Terapeuta</option>
                                     <option value="3">Usuario</option>
@@ -468,7 +466,7 @@ function Users() {
                         <div className='row'>
                             <div className='col'>
                                 <select onChange={e => setIdRol(e.target.value)} className='form-select-usuario' required>
-                                    <option selected> seleccione un Rol</option>
+                                    <option defaultValue> seleccione un Rol</option>
                                     <option value="1">Administrador</option>
                                     <option value="2">Terapeuta</option>
                                     <option value="3">Usuario</option>

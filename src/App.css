@@ -1421,6 +1421,18 @@
   border-right: 1px solid rgba(0, 0, 0, 0.125);
 }
 
+.mostrarMensaje {
+  width: 100%;
+  min-height: 50px;
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  border-left: 1px solid rgba(0, 0, 0, 0.125);
+  border-right: 1px solid rgba(0, 0, 0, 0.125);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .sinbusqueda-gastos {
   color: black;
   padding-left: 10px;

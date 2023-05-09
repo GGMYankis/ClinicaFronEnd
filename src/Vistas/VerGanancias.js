@@ -28,10 +28,10 @@ function VerGanancias() {
     const [surmarAsistencia, setSurmarAsistencia] = useState(0);
     const [acolumaldo, setAcolumaldo] = useState(0);
 
+
     const negaClas = useRef(null);
 
     function suma(monto) {
-
         let acolumaldo = 0;
         for (let i = 0; i < monto.length; i++) {
             acolumaldo += monto[i]
@@ -39,6 +39,7 @@ function VerGanancias() {
         setSumarGastos(acolumaldo)
     }
 
+    const gana = sumarGastos - surmarAsistencia
 
 
     function ganancias() {
@@ -76,25 +77,25 @@ function VerGanancias() {
                 setCitas(result.data)
                 const monto = result.data.map(m => m.amount)
                 const resultado = suma(monto)
-
             }
         })
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/traerpaciente/GastosGanancia'
+        //   const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/traerpaciente/GastosGanancia'
+        const url = 'https://localhost:63958/api/traerpaciente/GastosGanancia'
         axios.post(url, datas).then((result) => {
 
-            if(result.data.length){
-            }else{
+            if (result.data.length) {
+            } else {
             }
-            
+
             setTera(result.data)
             result.data.map(m => {
                 setSurmarAsistencia(m.price)
                 ganancias()
             })
+
         })
     }
-
 
 
     return (
@@ -150,14 +151,18 @@ function VerGanancias() {
                                         ])
                                     }
 
-                                    {mostrarVacio ?
 
-                                        <p className='sinbusqueda-gastos'>Sin busqueda...</p> : ""
-                                    }
                                 </tbody>
                             </table>
+                            {mostrarVacio ?
+                                <div className='mostrarMensaje'>
+                                    <p className='sinbusqueda-gastos'>Sin busqueda...</p>
+
+                                </div>
+                                : ""
+                            }
                             <div className='cont-titu-ganancia-tabla'>
-                                <p>Ganancia</p>
+                                <p>Ingresos</p>
                             </div>
                             <table className='table-gastos'>
                                 <thead>
@@ -166,7 +171,6 @@ function VerGanancias() {
                                         <th>Monto</th>
                                         <th>Fecha</th>
                                     </tr>
-
                                 </thead>
                                 <tbody className='body-table-gastos'>
 
@@ -180,34 +184,36 @@ function VerGanancias() {
                                             </tr>
                                         ])
                                     }
-
-                                    {mostrarVacio ?
-
-                                        <p className='sinbusqueda-gastos'>Sin busqueda...</p> : ""
-                                    }
                                 </tbody>
                             </table>
+
+                            {mostrarVacio ?
+                                <div className='mostrarMensaje'>
+                                    <p className='sinbusqueda-gastos'>Sin busqueda...</p>
+                                </div>
+                                : ""
+                            }
 
                             <div className='cont-titu-ganancia-tabla'>
                                 <p>Ganancia del Periodo</p>
                             </div>
                             <div>
                                 {sumarGastos == false && surmarAsistencia == false ?
-                                    <p className='sinbusqueda-gastos' >Sin busqueda...</p> : <h1 className='negaClas'  ref={negaClas}>{sumarGastos - surmarAsistencia}</h1>
+                                    <div className='mostrarMensaje'>
+                                        <p className='sinbusqueda-gastos'>Sin busqueda...</p>
+                                    </div> : <h1 className='negaClas' ref={negaClas}>${gana.toFixed(2)}</h1>
                                 }
-                                { mensaje ?
-                                    <div class="alert alert-danger" role="alert">
-                                   No se encontraron registros
-                                  </div>
+                                {mensaje ?
+                                    <div className="alert alert-danger" role="alert">
+                                        No se encontraron registros
+                                    </div>
                                     : ""
                                 }
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-        
         </div>
     )
 }

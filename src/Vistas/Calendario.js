@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import Cookies from 'universal-cookie';
 import swal from 'sweetalert';
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser,getNombreUsuario } from '../auth-helpers'
+import { DeleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser, getNombreUsuario } from '../auth-helpers'
 
 
 
@@ -47,7 +47,7 @@ function Calendario() {
     }
 
     useEffect(() => {
-        
+
 
         axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/calendario')
             .then(res => {
@@ -116,7 +116,7 @@ function Calendario() {
 
     const logout = () => {
 
-        deleteToken()
+        DeleteToken()
         navigation("/login")
     }
 
@@ -239,16 +239,23 @@ function Calendario() {
     }
 
 
+    const handleClickOtro = () => {
+        myElement.current.classList.toggle('mi-clase-css');
+    };
 
     return (
 
         <div>
 
-<header className='encabezado'>
+            <header className='encabezado'>
                 <div>
                     <nav>
-                        <input type="checkbox" id="check" onClick={handleClick} />
-                        <label for="check" class="checkbtn">
+                        <input type="checkbox" id="check" />
+                        <input type="checkbox" id="checkOtro" onClick={handleClickOtro} />
+                        <label htmlFor="check" className="checkbtn">
+                            <FaBars id='bar' />
+                        </label>
+                        <label htmlFor="checkOtro" className="checkbtnOtro">
                             <FaBars id='bar' />
                         </label>
 
@@ -257,7 +264,7 @@ function Calendario() {
                                 <Link className='letras-menu' to="/admin">Paciente de ingreso</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/evaluacion">Evaluación</Link>
+                                <Link className='letras-menu' to="/evaluacion">Citas</Link>
                             </li>
                             <li>
                                 <Link className='letras-menu' to="/terapia">Crear terapia</Link>
@@ -287,8 +294,9 @@ function Calendario() {
                             <li>
                                 <Link className='letras-menu' to="/VerGanancias">Ver Ganancias</Link>
                             </li>
+
                             <li>
-                                <a className='letras-menu'onClick={logout}>Cerra Sesión</a>
+                                <a className='letras-menu' onClick={logout}>Cerra Sesión</a>
                             </li>
 
                         </ul>
@@ -310,8 +318,6 @@ function Calendario() {
                         <p className='nombreUsuario'>{getNombreUsuario()}</p>
                     </div>
                 </div>
-
-
             </header>
 
             <div className='cont-padre' ref={myElement}>

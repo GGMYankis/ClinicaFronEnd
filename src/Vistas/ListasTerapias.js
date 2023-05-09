@@ -11,7 +11,7 @@ import { BrowserRouter, Routes, Route, Link, Redirect } from 'react-router-dom'
 import $ from 'jquery';
 import { findDOMNode } from 'react-dom'
 import swal from 'sweetalert';
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser, getNombreUsuario, getUsuarioCompleto, getDatosUsuario } from '../auth-helpers'
+import { DeleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser, getNombreUsuario, getUsuarioCompleto, getDatosUsuario } from '../auth-helpers'
 import '../Tabla.css';
 import { useCookies } from 'react-cookie';
 
@@ -30,24 +30,16 @@ function ListasTerapias() {
     const modalEditar = useRef()
     const alertEliminar = useRef()
 
-    let ids = getDatosUsuario()
 
-    const date = {
 
-        Idterapeuta: ids
-    }
-
-    let rol = getUsuarioCompleto()
 
     useEffect(() => {
-      
-            axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
-                .then(response => {
-                   setTerapias(response.data)
-                    console.log(response.data)
-                    console.log("nada")
-                });
-       
+
+        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
+            .then(response => {
+                setTerapias(response.data)
+            });
+
     }, [])
 
 
@@ -95,7 +87,7 @@ function ListasTerapias() {
 
     const logout = () => {
 
-        deleteToken()
+        DeleteToken()
         navigation("/login")
     }
 
@@ -222,10 +214,10 @@ function ListasTerapias() {
                     <nav>
                         <input type="checkbox" id="check" />
                         <input type="checkbox" id="checkOtro" onClick={handleClickOtro} />
-                        <label for="check" class="checkbtn">
+                        <label htmlFor="check" className="checkbtn">
                             <FaBars id='bar' />
                         </label>
-                        <label for="checkOtro" class="checkbtnOtro">
+                        <label htmlFor="checkOtro" className="checkbtnOtro">
                             <FaBars id='bar' />
                         </label>
 
@@ -319,17 +311,17 @@ function ListasTerapias() {
 
 
 
-                           
-                        
+
+
                             <tbody>
                                 {
 
                                     terapias.map(item => [
                                         <tr>
-                                            <td data-label="Nombre" key={item.nombreTerapia.label} >{item.nombreTerapia.label}</td>
-                                            <td data-label="Descripcion" key={item.nombreTerapia.description}>{item.nombreTerapia.description}</td>
-                                            <td data-label="Price" key={item.nombreTerapia.price}>{item.nombreTerapia.price}</td>
-                                            <td data-label="Price" key={item.nombreTerapia.porcentaje}>{item.nombreTerapia.porcentaje}</td>
+                                            <td data-label="Nombre">{item.nombreTerapia.label}</td>
+                                            <td data-label="Descripcion">{item.nombreTerapia.description}</td>
+                                            <td data-label="Price" >{item.nombreTerapia.price}</td>
+                                            <td data-label="Price" >{item.nombreTerapia.porcentaje}</td>
                                             <td className='tr-btn'>
                                                 <button className='btn ' type='button' value={item.nombreTerapia.idTherapy} onClick={e => editar(e.target.value)} >Editar</button>
                                                 <button className='btn eliminar' type='button' value={item.nombreTerapia.idTherapy} onClick={e => modalEliminar(e.target.value)}>Eliminar</button>
@@ -338,12 +330,12 @@ function ListasTerapias() {
                                     ])
                                 }
 
-                          
+
 
                             </tbody>
 
 
-                       
+
 
                         </table>
                     </div>

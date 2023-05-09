@@ -41,12 +41,10 @@ function Asistencias() {
             axios.post('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/GetEvaluacionByTerapeuta', date)
                 .then(response => {
                     setData(response.data)
-                    console.log(response.data)
                 });
         } else {
             axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
                 .then(response => {
-                    console.log(response.data)
                     setData(response.data)
                 });
         }
