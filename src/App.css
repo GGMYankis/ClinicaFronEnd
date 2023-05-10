@@ -895,8 +895,6 @@
   margin-left: 5px;
 }
 
-
-
 .head .col {
   text-align: center;
 }
@@ -918,7 +916,6 @@
 
 .cont-titu-crear-usuario h1 {
   font-size: 25px;
-
 }
 
 .cont-titu-usuario {
@@ -968,12 +965,15 @@
   text-align: left;
 }
 
-
-
 .contCard {
   margin-top: 80px;
   padding: 20px;
   width: 100%;
+}
+
+.card-box {
+  border-radius: 10px;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
 }
 
 .modalFade {
@@ -981,10 +981,29 @@
   display: none;
 }
 
-.card-header {
+.cont-bnt-crear {
+  margin-top: 10px;
+}
+
+.subBoxTableUsuario {
+  padding: 10px;
+}
+
+.contTituUsuario {
+  background-color: #0b2f57;
+  color: white;
   display: flex;
   justify-content: left;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 40px;
   align-items: center;
+}
+
+.contTituUsuario p {
+  margin-top: 15px;
+  padding-left: 10px;
+
 }
 
 .card-header h3 {
@@ -999,7 +1018,6 @@
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
   border-radius: 10px;
   background-color: white;
-
 }
 
 .form-select-usuario {
@@ -1009,8 +1027,6 @@
   padding: 5px;
   width: 100%;
 }
-
-
 
 .cont-modal-lista-usuario {
   background-color: rgba(0, 0, 0, .7);
@@ -1062,7 +1078,6 @@
 .modal-content-usuario .btn {
   padding: 10px;
   border-radius: 5px;
-
 }
 
 .modal-content-usuario .si {
@@ -1098,11 +1113,9 @@
   color: black;
 }
 
-
 .modal-content-usuario .modal-footer {
   display: flex;
   justify-content: space-between;
-
 }
 
 .cont-modal-crear-usuario {
@@ -1126,7 +1139,6 @@
 }
 
 /*sssssssssss*/
-
 
 .lds-ring {
   display: inline-block;
@@ -1156,7 +1168,6 @@
   color: red;
 }
 
-
 .btn-tabla-usuario-eliminar {
   width: 100px;
   height: 40px;
@@ -1173,7 +1184,6 @@
   border: none;
   margin-left: 5px;
 }
-
 
 .lds-ring div {
   box-sizing: border-box;
@@ -1326,6 +1336,7 @@
   border: 1px solid rgba(212, 206, 206, 0.531);
   margin-bottom: 8px;
   padding: 5px;
+  background-color: white;
 }
 
 .hgb {
@@ -1352,6 +1363,7 @@
   border-radius: 8px;
   background-color: white;
   margin: 10px;
+  width: 80%;
 }
 
 .cont-box-body-gastos {
@@ -1455,6 +1467,10 @@
   padding-top: 15px;
   padding-left: 10px;
   font-weight: 400;
+}
+
+.negaClas {
+  font-size: 20px;
 }
 
 .cont-titu-ganancia-tabla {

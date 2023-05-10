@@ -24,10 +24,3 @@ export const Protect = ({ children }) => {
 
 
 
-
-/*
- email de Heroku : giancarlosgenao7@gmail.com
- contrasena  del nuevo hosting : HerokyYankis$1
-
- dashboard.heroku.com/new-app
-*/

@@ -161,7 +161,7 @@ const Admin = () => {
         e.preventDefault()
 
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/GuardarPaciente';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/GuardarPaciente';
         axios.post(url, data).then((result) => {
             swal({
                 title: "Correcto",
@@ -231,7 +231,7 @@ const Admin = () => {
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Edad</label>
-                                <input type="text" className="form-control" id="validationServer02" defaultValue={calculateAge()} />
+                                <input type="text" className="form-control" id="validationServer02" value={calculateAge()} />
 
                             </div>
 

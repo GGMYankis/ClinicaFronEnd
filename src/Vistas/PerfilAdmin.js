@@ -45,7 +45,7 @@ function PerfilAdmin() {
             idUser: id
         }
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/TraerUsuario';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/TraerUsuario';
         axios.post(url, data).then((result) => {
 
             setusuarioPerfil(result.data.users.names)
@@ -77,7 +77,7 @@ function PerfilAdmin() {
             return;
         }
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/editarPassword';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/editarPassword';
         axios.put(url, editarDatos).then((result) => {
 
             resetForm()
@@ -102,7 +102,7 @@ function PerfilAdmin() {
         }
 
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/EditarAdmin';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/EditarAdmin';
         axios.put(url, editarInfoUser).then((result) => {
 
             resetForm()
@@ -123,7 +123,7 @@ function PerfilAdmin() {
     function eliminarCuenta(e) {
         e.preventDefault()
         console.log(user)
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/EliminarUsuario';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/EliminarUsuario';
         axios.post(url, user).then((result) => {
 
              if(result){
@@ -166,6 +166,12 @@ function PerfilAdmin() {
                                 <label>Email</label><br></br>
                                 <input className='barra-perfil' type='text' value={correoPerfil} onChange={e => setcorreoPerfil(e.target.value)} />
                             </div>
+                            
+
+
+
+
+
                             <div className='con-barra'>
                                 <label>Nombre</label><br></br>
                                 <input className='barra-perfil' type='text' value={usuarioPerfil} onChange={e => setusuarioPerfil(e.target.value)} />

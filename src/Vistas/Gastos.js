@@ -34,7 +34,7 @@ function Gastos() {
 
         e.preventDefault()
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ContabilidadReportes';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/ContabilidadReportes';
         axios.post(url, dataCrear).then((result) => {
             const probar = async () => {
                 const ale = await swal({

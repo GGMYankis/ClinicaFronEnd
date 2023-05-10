@@ -20,12 +20,12 @@ function Contabilidad() {
     const [terapeuta, setTerapeuta] = useState([])
     const [citas, setCitas] = useState([]);
 
-   
-    
+
+
 
     useEffect(() => {
 
-        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/terapeuta')
+        axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/terapeuta')
             .then(res => {
                 setTerapeuta(res.data.usuarios)
             });
@@ -64,7 +64,7 @@ function Contabilidad() {
         e.preventDefault()
 
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Buscar'
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/Buscar'
         axios.post(url, datas).then((result) => {
 
             console.log(result.data)
@@ -88,21 +88,34 @@ function Contabilidad() {
 
                     <div className='RangePicker'>
                         <div className='col'>
-                        <RangePicker onChange={handleDateChange} className='probarKi' />
+                            <div className='row' id='cont-input-gastos'>
+                                <div className='col'>
+                                    <label>Fecha Inicio</label>
+                                    <input type='date' className='inputgastos' onChange={e => setStartDate(e.target.value)} />
+                                </div>
+                                <div className='col'>
+                                    <label>Fecha Fin</label>
+                                    <input type='date' className='inputgastos' onChange={e => setEndDate(e.target.value)} />
+                                </div>
+                                <div className='col'>
+                                    <button className='btn-gastos' onClick={enviars}>Buscar</button>
+                                </div>
+                            </div>
+                            {/*<RangePicker onChange={handleDateChange} className='probarKi' />*/}
                         </div>
-                      
-                      <div className='col'>
-                      <select className='form-select-contabilidad' onChange={e => setIdterapeuta(e.target.value)} >
-                            {
-                                terapeuta.map(item => [
-                                    <option value={item.idUser}>{item.names} {item.apellido}</option>
-                                ])
-                            }
-                        </select>
-                      </div>
+
+                        <div className='col'>
+                            <select className='form-select-contabilidad' onChange={e => setIdterapeuta(e.target.value)} >
+                                {
+                                    terapeuta.map(item => [
+                                        <option value={item.idUser}>{item.names} {item.apellido}</option>
+                                    ])
+                                }
+                            </select>
+                        </div>
 
 
-                       
+
                     </div>
 
                     <div className='subBoxContabilidad'>

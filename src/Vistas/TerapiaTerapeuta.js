@@ -26,14 +26,14 @@ function TerapiaTerapeuta() {
 
     useEffect(() => {
 
-        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/terapeuta')
+        axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/terapeuta')
 
             .then(response => {
                 setTerapeuta(response.data.usuarios)
                 //  console.log(response.data.usuarios)
             })
 
-        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
+        axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/ListaTerapia')
             .then(response => {
                 const florw = []
                 response.data.map(tera => {
@@ -56,7 +56,7 @@ function TerapiaTerapeuta() {
     const enviars = (e) => {
         e.preventDefault()
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Post'
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/Post'
         axios.post(url, datos).then((result) => {
 
             if (result) {

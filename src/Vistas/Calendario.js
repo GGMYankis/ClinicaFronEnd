@@ -49,7 +49,7 @@ function Calendario() {
     useEffect(() => {
 
 
-        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/calendario')
+        axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/calendario')
             .then(res => {
                 console.log(res.data.lista)
 
@@ -86,7 +86,7 @@ function Calendario() {
 
         console.log(data)
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/AgregarEvento'
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/AgregarEvento'
         axios.post(url, data).then((result) => {
             const probar = async () => {
 
@@ -177,7 +177,7 @@ function Calendario() {
 
         console.log(datas)
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Fecha';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/Fecha';
         axios.post(url, datas)
             .then(response => {
 
@@ -289,10 +289,10 @@ function Calendario() {
                                 <Link className='letras-menu' to="/Users">Usuario</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/gastos">Reportes</Link>
+                                <Link className='letras-menu' to="/gastos">Registro de gastos</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/VerGanancias">Ver Ganancias</Link>
+                                <Link className='letras-menu' to="/VerGanancias">Reporte</Link>
                             </li>
 
                             <li>

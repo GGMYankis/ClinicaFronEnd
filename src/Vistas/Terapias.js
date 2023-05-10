@@ -69,7 +69,7 @@ function Terapias() {
         }
 
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/CrearTerapia';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/CrearTerapia';
         axios.post(url, data).then((result) => {
 
 

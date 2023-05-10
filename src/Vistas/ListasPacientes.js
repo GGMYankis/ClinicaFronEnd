@@ -16,9 +16,7 @@ import Headers from '../Headers'
 import { DeleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser, getNombreUsuario } from '../auth-helpers'
 
 
-const btnColor = document.getElementById('btnColor')
-const check = document.getElementById('check')
-const tableContainer = document.getElementById('table-container')
+
 
 
 
@@ -31,11 +29,8 @@ function ListasPacientes() {
     const alertEliminar = useRef()
     const [idPaciente, setIdPaciente] = useState()
     const [idPacienteEliminar, setIdPacienteEliminar] = useState()
-
-    const cookies = new Cookies();
     const navigation = useNavigate();
     const [listaPaciente, setlistaPaciente] = useState([])
-
     const [name, setName] = useState('');
     const [sex, setSex] = useState('');
     const [parents_name, setParents_Name] = useState('');
@@ -59,11 +54,15 @@ function ListasPacientes() {
     const [number_Mothers, setNumber_Mothers] = useState('');
     const [NumPadre, setNumPadre] = useState("");
     const [NumMadre, setNumMadre] = useState("");
+    const FormularioTherapy = document.getElementById("txtCrearPaciente");
 
     useEffect(() => {
+        cargar()
+    }, []);
 
+    const cargar = async => {
 
-        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Lista')
+        axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/Lista')
             .then(res => {
 
                 res.data.lista.map(item => {
@@ -80,19 +79,16 @@ function ListasPacientes() {
                 })
 
             });
-    }, []);
+    }
+
 
     obtenerUser()
-
-
-
 
     const handleNameChange = (value) => {
 
         setName(value);
     }
 
-    // Obteniendo el nombre del paciente
     const FActivo = (value) => {
 
         setAc(value)
@@ -198,8 +194,6 @@ function ListasPacientes() {
         setOther(value);
     }
 
-
-
     const data = ({
         Name: name,
         Sex: sex,
@@ -224,27 +218,24 @@ function ListasPacientes() {
 
         e.preventDefault()
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/GuardarPaciente';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/GuardarPaciente';
         axios.post(url, data).then((result) => {
 
-            $('#modal-paciente').hide();
             const probar = async () => {
-
+                modalCrear.current.classList.remove('active')
+                cargar()
                 const ale = await swal({
 
                     title: "Correcto",
                     text: "Cambio guardado ",
                     icon: "success",
-
                 });
-
-                refreshPage()
             }
 
             if (result) {
                 probar()
             }
-
+            FormularioTherapy.reset()
 
 
         }).catch((error) => {
@@ -286,30 +277,22 @@ function ListasPacientes() {
         Other: other,
         Activo: activos
     })
-
-
-
     const FormularioEditar = document.getElementById("FormularioEditar");
 
     const handleEditar = async (e) => {
-
         e.preventDefault()
-
-
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/EditarPaciente';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/EditarPaciente';
         axios.put(url, dataEditar).then((result) => {
 
             const probar = async () => {
-
+                modalEditar.current.classList.remove('active')
+                cargar()
                 const ale = await swal({
                     title: "Correcto",
                     text: "Cambio guardado ",
                     icon: "success",
                 });
-
-                refreshPage()
             }
-
             if (result) {
                 probar()
             }
@@ -385,20 +368,19 @@ function ListasPacientes() {
 
         const idPa = { IdPatients: idPacienteEliminar }
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/EliminarPaciente';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/EliminarPaciente';
         axios.post(url, idPa).then((result) => {
 
             const probar = async () => {
-
+                alertEliminar.current.classList.remove('activeEli')
+                cargar()
                 const ale = await swal({
 
                     title: "Correcto",
                     text: "Cambio guardado ",
                     icon: "success",
-
                 });
 
-                refreshPage()
             }
 
             if (result) {
@@ -431,6 +413,7 @@ function ListasPacientes() {
 
     const CancelarPaciente = () => {
         modalCrear.current.classList.remove('active')
+        FormularioTherapy.reset()
     }
 
     const CancelarPacienteEditar = () => {
@@ -499,16 +482,15 @@ function ListasPacientes() {
                                 <Link className='letras-menu' to="/Users">Usuario</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/gastos">Reportes</Link>
+                                <Link className='letras-menu' to="/gastos">Registro de gastos</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/VerGanancias">Ver Ganancias</Link>
+                                <Link className='letras-menu' to="/VerGanancias">Reporte</Link>
                             </li>
 
                             <li>
                                 <a className='letras-menu' onClick={logout}>Cerra Sesión</a>
                             </li>
-
                         </ul>
                     </nav>
                 </div>
@@ -632,10 +614,7 @@ function ListasPacientes() {
                             </div>
                         </div>
 
-
-
                         <div className='row' id='segundaFila'>
-
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Fecha de nacimiento</label>
                                 <input type="date" className="form-control" value={date_of_birth} id="validationServer02" required onChange={handledate_of_birthChange} />
@@ -643,7 +622,7 @@ function ListasPacientes() {
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Edad</label>
-                                <input type="number" className="form-control" defaultValue={calculateAge()} id="validationServer02" />
+                                <input type="number" className="form-control" value={calculateAge()} id="validationServer02" />
                             </div>
 
                             <div className="col">
@@ -660,8 +639,6 @@ function ListasPacientes() {
                                 <input type="text" className="form-control " value={recommendations} id="validationServer02" required onChange={e => handlerecommendationsChange(e.target.value)} />
                             </div>
                         </div>
-
-
 
                         <div className='row' id='terceraFila'>
                             <div className="col">
@@ -683,15 +660,10 @@ function ListasPacientes() {
                                 <label htmlFor="validationServer02" className='labelPaciente'>Diagnóstico </label>
                                 <input type="text" className="form-control" value={diagnosis} id="validationServer02" required onChange={e => handlediagnosisChange(e.target.value)} />
                             </div>
-
-
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Condición médica específica </label>
                                 <input type="text" className="form-control " value={specific_medical_condition} id="validationServer02" required onChange={e => handlespecific_medical_conditionChange(e.target.value)} />
                             </div>
-
-
-
                         </div>
                         <div className='row'>
                             <div className="col">
@@ -708,28 +680,23 @@ function ListasPacientes() {
                                 <label htmlFor="validationServer02" className='labelPaciente'>Preocupación de los familiares</label>
                                 <input type="text" className="form-control " value={family_members_concerns} id="validationServer02" required onChange={e => handlefamily_members_concernsChange(e.target.value)} />
                             </div>
-
                         </div>
                         <div className='row'>
-
                             <div className="col">
                                 <label htmlFor="validationServer02">Otro </label>
                                 <textarea id="txtArea" rows="10" cols="70" value={other} onChange={e => handleotherChange(e.target.value)}></textarea>
                             </div>
                         </div>
-
-
                         <div className="col" id='cont-btn-admin'>
                             <button className="btn-cita">Guardar</button>
                             <button className="btn-cita" type='button' onClick={CancelarPacienteEditar}>Cancelar</button>
-
                         </div>
                     </div>
                 </form>
             </div>
 
             <div className='modal-paciente' ref={modalCrear}>
-                <form onSubmit={handleGuardar} className='contenedor-cita'>
+                <form onSubmit={handleGuardar} className='contenedor-cita' id="txtCrearPaciente">
 
                     <div className='cont-titulo-form'>
                         <h1>Pacientes de nuevo ingreso </h1>
@@ -739,7 +706,7 @@ function ListasPacientes() {
                         <div className="row" id='primeraFila'>
                             <div className="col">
                                 <label htmlFor="validationServer01" className='labelPaciente'>Nombre</label>
-                                <input type="text" className="form-control "  id="validationServer01" onChange={e => handleNameChange(e.target.value)} required />
+                                <input type="text" className="form-control " id="validationServer01" onChange={e => handleNameChange(e.target.value)} required />
                             </div>
                             <div className="col">
                                 <label htmlFor="validationServer01" className='labelPaciente'>Sexo</label>
@@ -752,16 +719,16 @@ function ListasPacientes() {
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Nombre De Los Padres </label>
-                                <input type="text" className="form-control "  id="validationServer02" onChange={e => handleParents_NameChange(e.target.value)} required />
+                                <input type="text" className="form-control " id="validationServer02" onChange={e => handleParents_NameChange(e.target.value)} required />
                             </div>
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPacienteCC' >Teléfono del padre</label>
-                                <input type="text" className="form-control "  id="validationServer02" required onChange={handleparent_or_guardian_phone_numberChange} />
+                                <input type="text" className="form-control " id="validationServer02" required onChange={handleparent_or_guardian_phone_numberChange} />
                             </div>
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPacienteCC' >Teléfono de la madre</label>
-                                <input type="text" className="form-control "  id="validationServer02" required onChange={handlemothers_number} />
+                                <input type="text" className="form-control " id="validationServer02" required onChange={handlemothers_number} />
                             </div>
                         </div>
 
@@ -769,12 +736,12 @@ function ListasPacientes() {
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Fecha de nacimiento</label>
-                                <input type="date" className="form-control "  id="validationServer02" required onChange={handledate_of_birthChange} />
+                                <input type="date" className="form-control " id="validationServer02" required onChange={handledate_of_birthChange} />
                             </div>
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Edad</label>
-                                <input type="number" className="form-control" defaultValue={calculateAge()} id="validationServer02" required />
+                                <input type="number" className="form-control" value={calculateAge()} id="validationServer02" required />
                             </div>
 
                             <div className="col">
@@ -784,11 +751,11 @@ function ListasPacientes() {
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Curso</label>
-                                <input type="text" className="form-control "  id="validationServer02" required onChange={e => handleCurso(e.target.value)} />
+                                <input type="text" className="form-control " id="validationServer02" required onChange={e => handleCurso(e.target.value)} />
                             </div>
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Recomendaciones </label>
-                                <input type="text" className="form-control "  id="validationServer02" required onChange={e => handlerecommendationsChange(e.target.value)} />
+                                <input type="text" className="form-control " id="validationServer02" required onChange={e => handlerecommendationsChange(e.target.value)} />
 
                             </div>
                         </div>
@@ -796,12 +763,12 @@ function ListasPacientes() {
                         <div className='row' id='terceraFila'>
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Quien refiere</label>
-                                <input type="text" className="form-control "  id="validationServer02" required onChange={e => handlewho_refersChange(e.target.value)} />
+                                <input type="text" className="form-control " id="validationServer02" required onChange={e => handlewho_refersChange(e.target.value)} />
 
                             </div>
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Configuración familiar</label>
-                                <input type="text" className="form-control "  id="validationServer02" required onChange={e => handlefamily_settingsChange(e.target.value)} />
+                                <input type="text" className="form-control " id="validationServer02" required onChange={e => handlefamily_settingsChange(e.target.value)} />
                             </div>
 
                             <div className="col">
@@ -818,14 +785,14 @@ function ListasPacientes() {
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Condición médica específica </label>
-                                <input type="text" className="form-control "  id="validationServer02" required onChange={e => handlespecific_medical_conditionChange(e.target.value)} />
+                                <input type="text" className="form-control " id="validationServer02" required onChange={e => handlespecific_medical_conditionChange(e.target.value)} />
                             </div>
                         </div>
 
                         <div className='row'>
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Preocupación de los familiares</label>
-                                <input type="text" className="form-control "  id="validationServer02" required onChange={e => handlefamily_members_concernsChange(e.target.value)} />
+                                <input type="text" className="form-control " id="validationServer02" required onChange={e => handlefamily_members_concernsChange(e.target.value)} />
                             </div>
 
                         </div>
@@ -833,7 +800,7 @@ function ListasPacientes() {
 
                             <div className="col">
                                 <label htmlFor="validationServer02">Otro </label>
-                                <textarea id="txtArea" rows="10" cols="70"  onChange={e => handleotherChange(e.target.value)}></textarea>
+                                <textarea id="txtArea" rows="10" cols="70" onChange={e => handleotherChange(e.target.value)}></textarea>
                             </div>
                         </div>
 
@@ -846,8 +813,6 @@ function ListasPacientes() {
                     </div>
                 </form>
             </div>
-
-
 
             <div className="modal-usuario-eliminar" ref={alertEliminar}>
                 <div className="modal-dialog-usuario" role="document">
@@ -876,14 +841,8 @@ function ListasPacientes() {
                 </div>
             </div>
 
-
-
-
-
         </div >
     )
-
-
 }
 
 export default ListasPacientes

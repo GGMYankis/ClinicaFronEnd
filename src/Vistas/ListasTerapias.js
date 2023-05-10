@@ -29,18 +29,21 @@ function ListasTerapias() {
     const modal = useRef()
     const modalEditar = useRef()
     const alertEliminar = useRef()
-
-
-
+    const formRef = useRef(null);
 
     useEffect(() => {
+        cargar()
+    }, []);
 
-        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
+
+    const cargar = async => {
+
+        axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/ListaTerapia')
             .then(response => {
                 setTerapias(response.data)
             });
+    }
 
-    }, [])
 
 
     const data2 = {
@@ -54,18 +57,17 @@ function ListasTerapias() {
     const enviarDatosCrear = (e) => {
 
         e.preventDefault()
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/CrearTerapia';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/CrearTerapia';
         axios.post(url, data2).then(res => {
 
             const probar = async () => {
-
+                modal.current.classList.remove('activo')
+                cargar()
                 const ale = await swal({
                     title: "Correcto",
                     text: "Cambio guardado ",
                     icon: "success",
                 });
-
-                refreshPage()
             }
 
             if (res) {
@@ -102,22 +104,16 @@ function ListasTerapias() {
 
     const enviarDatos = (e) => {
         e.preventDefault()
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/EditarTerapia';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/EditarTerapia';
         axios.post(url, dataEdi).then(res => {
-
-            $('#form-perfil').hide();
-
             const probar = async () => {
-
+                modalEditar.current.classList.remove('activoEditar')
+                cargar()
                 const ale = await swal({
-
                     title: "Correcto",
                     text: "Cambio guardado ",
                     icon: "success",
-
                 });
-
-                refreshPage()
             }
 
             if (res) {
@@ -150,19 +146,20 @@ function ListasTerapias() {
     function eliminar() {
 
         const idPa = { IdTherapy: idTerapiaEliminar }
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/EliminarTerapia';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/EliminarTerapia';
         axios.post(url, idPa).then(res => {
 
             const probar = async () => {
-
+                alertEliminar.current.classList.remove('activeEli')
+                cargar()
                 const ale = await swal({
                     title: "Correcto",
                     text: "Cambio guardado ",
                     icon: "success",
                 });
 
-                refreshPage()
             }
+
 
             if (res) {
                 probar()
@@ -195,11 +192,14 @@ function ListasTerapias() {
 
 
     function modalF() {
+       
         modal.current.classList.add('activo')
+     
     }
 
     function modalQuitarF() {
         modal.current.classList.remove('activo')
+        FormularioTherapy.reset()
     }
 
     const handleClickOtro = () => {
@@ -251,12 +251,11 @@ function ListasTerapias() {
                                 <Link className='letras-menu' to="/Users">Usuario</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/gastos">Reportes</Link>
+                                <Link className='letras-menu' to="/gastos">Registro de gastos</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/VerGanancias">Ver Ganancias</Link>
+                                <Link className='letras-menu' to="/VerGanancias">Reporte</Link>
                             </li>
-
                             <li>
                                 <a className='letras-menu' onClick={logout}>Cerra Sesión</a>
                             </li>
@@ -336,13 +335,9 @@ function ListasTerapias() {
 
 
 
-
                         </table>
                     </div>
                 </div>
-
-
-
             </div>
 
 
@@ -380,7 +375,7 @@ function ListasTerapias() {
 
             {/*  EDITAR TERAPIA   onClick={Fcprice} */}
 
-            <div className='cont-modal-lista-terapiaEditar' ref={modalEditar} >
+            <div className='cont-modal-lista-terapiaEditar' ref={modalEditar}   >
 
                 <form className='form-perfil-terapi' id="FormularioEditarTherapy" >
                     <div className='cont-titu-terapia'>

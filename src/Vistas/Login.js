@@ -66,7 +66,7 @@ function Login() {
         };
 
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Autenticacion/Login';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Autenticacion/Login';
 
         axios.post(url, data).then((result) => {
 

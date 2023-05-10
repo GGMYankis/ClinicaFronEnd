@@ -32,23 +32,23 @@ function Asistencias() {
     useEffect(() => {
 
 
-        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Lista')
+        axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/Lista')
             .then(responses => {
                 setDataPaciente(responses.data.lista)
             });
 
         if (rol == 2) {
-            axios.post('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/GetEvaluacionByTerapeuta', date)
+            axios.post('http://yankisggm-001-site1.ctempurl.com/api/Clinica/GetEvaluacionByTerapeuta', date)
                 .then(response => {
                     setData(response.data)
                 });
         } else {
-            axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
+            axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/ListaTerapia')
                 .then(response => {
                     setData(response.data)
                 });
         }
-        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/terapeuta')
+        axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/terapeuta')
             .then(response => {
 
                 setTerapeuta(response.data.usuarios)
@@ -63,11 +63,8 @@ function Asistencias() {
         idTherapy: terapia,
         IdTerapeuta: idTerapeuta,
         FechaInicio: fecha,
-        FechaFinal: '2023-04-20T01:40',
         remarks: observaciones
     }
-
-
 
     const formAsistensscia = document.getElementById("formAsistencia");
 
@@ -75,7 +72,7 @@ function Asistencias() {
         e.preventDefault()
 
         console.log(dataValor)
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Asistencias';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/Asistencias';
         axios.post(url, dataValor).then((result) => {
             swal({
                 title: "Correcto",

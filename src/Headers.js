@@ -70,10 +70,10 @@ function Headers({ }) {
                                 <Link className='letras-menu' to="/Users">Usuario</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/gastos">Reportes</Link>
+                                <Link className='letras-menu' to="/gastos">Registro de gastos</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/VerGanancias">Ver Ganancias</Link>
+                                <Link className='letras-menu' to="/VerGanancias">Reportes</Link>
                             </li>
                             <li>
                                 <a className='letras-menu' onClick={logout}>Cerra Sesión</a>

@@ -39,6 +39,18 @@ function VerGanancias() {
         setSumarGastos(acolumaldo)
     }
 
+
+
+    function sumas(monto) {
+        let acolumaldo = 0;
+        for (let i = 0; i < monto.length; i++) {
+            acolumaldo += monto[i]
+        }
+        setSurmarAsistencia(acolumaldo)
+    }
+
+
+
     const gana = sumarGastos - surmarAsistencia
 
 
@@ -57,16 +69,22 @@ function VerGanancias() {
         DateOfInvestment: startDate,
         EndDate: endDate
     }
+
+
     const datas = {
         FechaInicio: startDate,
-        FechaFinal: endDate
+        FechaFinal: endDate,
     }
+
+
 
     const enviars = (e) => {
 
         e.preventDefault()
 
-        const urls = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/FiltrarGastos'
+
+
+        const urls = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/FiltrarGastos'
         axios.post(urls, data).then((result) => {
 
             if (result.data.mensaje) {
@@ -80,23 +98,30 @@ function VerGanancias() {
             }
         })
 
-        //   const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/traerpaciente/GastosGanancia'
-        const url = 'https://localhost:63958/api/traerpaciente/GastosGanancia'
+
+
+
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/GastosGanancia'
         axios.post(url, datas).then((result) => {
 
             if (result.data.length) {
+
             } else {
+
             }
 
-            setTera(result.data)
-            result.data.map(m => {
-                setSurmarAsistencia(m.price)
-                ganancias()
-            })
+            setTera(result.data.viewModal)
+            const montos = result.data.viewModal.map(m => m.nombreTerapia.price)
+            const resultados = sumas(montos)
+
+            ganancias()
+
 
         })
-    }
 
+
+
+    }
 
     return (
 
@@ -177,10 +202,9 @@ function VerGanancias() {
                                     {
                                         tera.map(item => [
                                             <tr>
-                                                <td data-label="Descripcion">{item.label}</td>
-                                                <td data-label="Descripcion">{item.price}</td>
-                                                <td data-label="Descripcion">{item.fechaInicio.substring('', 10)}</td>
-
+                                                <td data-label="Descripcion">{item.nombreTerapia.label}</td>
+                                                <td data-label="Descripcion">{item.nombreTerapia.price}</td>
+                                                <td data-label="Descripcion">{item.fechaInicio.fechaInicio.substring('', 10)}</td>
                                             </tr>
                                         ])
                                     }

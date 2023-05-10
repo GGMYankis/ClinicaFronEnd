@@ -12,37 +12,33 @@ import { useNavigate } from 'react-router-dom';
 import logo from "../imagenes/IMG-20230221-WA0009.png"
 
 function Users() {
+
+    useEffect(() => {
+        cargar()
+    }, []);
+
+
     const [terapeuta, setTerapeuta] = useState([])
-    const [accion, setAccion] = useState(0)
     const [idUser, setIdUser] = useState(0)
     const [nombre, setNombre] = useState('')
     const [apellido, setApellido] = useState('')
     const [telefono, setTelefono] = useState('')
     const [direccion, setDireccion] = useState('')
-    const [correo, setCorreo] = useState('')
-    const [contraseñas, setContraseñas] = useState('')
+    const [correo, setCorreo] = useState(null)
+    const [contraseñas, setContraseñas] = useState(null)
     const [idRol, setIdRol] = useState(0)
-
+    const FormularioTherapy = document.getElementById("txtCrearUusario");
     const navigation = useNavigate();
-    function refreshPage() {
-        window.location.reload();
-    }
 
     const modalEditar = useRef()
     const modalCrear = useRef()
     const modalEliminar = useRef()
 
+    const cargar = async => {
 
-
-    useEffect(() => {
-
-
-        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaUsers')
+        axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/ListaUsers')
 
             .then(response => {
-
-
-
                 response.data.lista.map(a => {
 
                     if (a.idRol == 1) {
@@ -52,15 +48,10 @@ function Users() {
                     else if (a.idRol == 2) {
                         setTerapeuta(a.idRol = 'Terapeuta')
                     }
-
-
                     setTerapeuta(response.data.lista)
                 })
-
-
             })
-    }, []);
-
+    }
 
 
     const data = {
@@ -75,23 +66,21 @@ function Users() {
         IdRol: idRol
     };
 
-    function enviar(e) {
 
+    function enviar(e) {
         e.preventDefault()
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/GuardarUsers';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/GuardarUsers';
         axios.post(url, data).then((result) => {
 
             const probar = async () => {
-
+                modalEditar.current.classList.remove('activeUsers')
+                cargar()
                 const ale = await swal({
-
                     title: "Correcto",
                     text: "Cambio guardado ",
                     icon: "success",
-
                 });
-                refreshPage()
             }
 
             if (result) {
@@ -120,19 +109,22 @@ function Users() {
 
         e.preventDefault()
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/CrearUsuario';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/CrearUsuario';
         axios.post(url, dataCrear).then((result) => {
             const probar = async () => {
+                modalCrear.current.classList.remove('activeCrear')
+                cargar()
                 const ale = await swal({
                     title: "Correcto",
                     text: "Cambio guardado ",
                     icon: "success",
                 });
-                refreshPage()
             }
             if (result) {
                 probar()
             }
+
+            FormularioTherapy.reset()
         })
     }
 
@@ -156,17 +148,16 @@ function Users() {
     }
 
 
-
-
-
     function Cancelar() {
         modalCrear.current.classList.remove('activeCrear')
         modalEditar.current.classList.remove('activeUsers')
         modalEliminar.current.classList.remove('activeEli')
+        FormularioTherapy.reset()
     }
 
     function modalF() {
         modalCrear.current.classList.add('activeCrear')
+
     }
 
 
@@ -191,15 +182,16 @@ function Users() {
 
     function enviarId() {
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/EliminarUsuario';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/EliminarUsuario';
         axios.post(url, idusers).then((result) => {
             const probar = async () => {
+                modalEliminar.current.classList.remove('activeEli')
+                cargar()
                 const ale = await swal({
                     title: "Correcto",
                     text: "Cambio guardado ",
                     icon: "success",
                 });
-                refreshPage()
             }
             if (result) {
                 probar()
@@ -218,6 +210,7 @@ function Users() {
     const handleClickOtro = () => {
         myElement.current.classList.toggle('mi-clase-css');
     };
+
     return (
 
         <div>
@@ -263,10 +256,10 @@ function Users() {
                                 <Link className='letras-menu' to="/Users">Usuario</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/gastos">Reportes</Link>
+                                <Link className='letras-menu' to="/gastos">Registro de gastos</Link>
                             </li>
                             <li>
-                                <Link className='letras-menu' to="/VerGanancias">Ver Ganancias</Link>
+                                <Link className='letras-menu' to="/VerGanancias">Reporte</Link>
                             </li>
 
                             <li>
@@ -294,59 +287,54 @@ function Users() {
                 </div>
             </header>
 
-
-
             <div className='contCard' ref={myElement}>
-                <div className="card">
-                    <div className="card-header">
-                        <FaUsers /><h3>Lista de Usarios</h3>
-                    </div>
+                <div className="card-box ">
+
                     <div className="card-body">
-                        <div className="row">
-                            <div className="col-sm-6">
-                                <button type="button" className="btn-crear-Paciente-tabla" onClick={modalF}>Crear Nuevo</button>
-                            </div>
+                        <div className='contTituUsuario'>
+                            <p>Lista de Usuario</p>
                         </div>
 
-                        <hr />
-                        <table className='table'>
+                        <div className='subBoxTableUsuario'>
+                            <div className="cont-bnt-crear">
+                                <div className="col-sm-6">
+                                    <button type="button" className="btn-crear-Paciente-tabla" onClick={modalF}>Crear Nuevo</button>
+                                </div>
+                            </div>
+                            <hr />
+                            <table className='table'>
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>Telefono</th>
+                                        <th>Correo</th>
+                                        <th>Cargo</th>
+                                        <th> </th>
+                                    </tr>
+                                </thead>
 
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Apellido</th>
-                                    <th>Telefono</th>
-                                    <th>Correo</th>
-                                    <th>Cargo</th>
-                                    <th> </th>
-                                </tr>
-                            </thead>
+                                <tbody>
+                                    {
 
-                            <tbody>
-                                {
+                                        terapeuta.map(item => [
+                                            <tr>
+                                                <td data-label="Nombre">{item.names}</td>
+                                                <td data-label="apellido">{item.apellido}</td>
+                                                <td data-label="telefono">{item.telefono}</td>
+                                                <td data-label="direccion">{item.email}</td>
+                                                <td data-label="direccion">{item.idRol}</td>
+                                                <td className='tr-btn'>
+                                                    <button className='btn-tabla-usuario' type='button' value={item.idUser} onClick={e => EditarUsuario(e.target.value)}>Editar</button>
+                                                    <button className='btn-tabla-usuario-eliminar ' type='button' value={item.idUser} onClick={e => EliminarUsuario(e.target.value)}>Eliminar</button>
+                                                </td>
+                                            </tr>
+                                        ])
 
-                                    terapeuta.map(item => [
-                                        <tr>
-                                            <td data-label="Nombre">{item.names}</td>
-                                            <td data-label="apellido">{item.apellido}</td>
-                                            <td data-label="telefono">{item.telefono}</td>
-                                            <td data-label="direccion">{item.email}</td>
-                                            <td data-label="direccion">{item.idRol}</td>
-                                            <td className='tr-btn'>
-                                                <button className='btn-tabla-usuario' type='button' value={item.idUser} onClick={e => EditarUsuario(e.target.value)}>Editar</button>
-                                                <button className='btn-tabla-usuario-eliminar ' type='button' value={item.idUser} onClick={e => EliminarUsuario(e.target.value)}>Eliminar</button>
-                                            </td>
-                                        </tr>
-                                    ])
-
-                                }
-
-                            </tbody>
-
-
-                        </table>
-
-
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -393,7 +381,7 @@ function Users() {
                             </div>
                             <div className='col'>
                                 <label>contraseñas</label>
-                                <input className='form-users' value={contraseñas} required onChange={e => setContraseñas(e.target.value)} />
+                                <input className='form-users' type='password' value={contraseñas} required onChange={e => setContraseñas(e.target.value)} />
                             </div>
                         </div>
 
@@ -421,9 +409,9 @@ function Users() {
 
             {/* MODAL CREAR USUARIO */}
 
-            <div className='cont-modal-crear-usuario' ref={modalCrear}>
+            <div className='cont-modal-crear-usuario' ref={modalCrear} >
 
-                <form className='form-crear-usuario' onSubmit={CrearUsuario} >
+                <form className='form-crear-usuario' onSubmit={CrearUsuario} id="txtCrearUusario" >
                     <div className='cont-titu-crear-usuario'>
                         <h1>Crear Usuario</h1>
                     </div>
@@ -454,12 +442,12 @@ function Users() {
 
                         <div className='row'>
                             <div className='col'>
-                                <label>Correo</label><br></br>
+                                <label>Correo</label><br></br >
                                 <input className='form-users' onChange={e => setCorreo(e.target.value)} required />
                             </div>
                             <div className='col'>
                                 <label>contraseñas</label>
-                                <input className='form-users' onChange={e => setContraseñas(e.target.value)} required />
+                                <input className='form-users' type='password' onChange={e => setContraseñas(e.target.value)} required />
                             </div>
                         </div>
 

@@ -45,20 +45,20 @@ function Evaluacion() {
 
 
     useEffect(() => {
-        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Lista')
+        axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/Lista')
             .then(responses => {
 
                 setDataPaciente(responses.data.lista)
             });
 
         if (rol == 2) {
-            axios.post('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/GetEvaluacionByTerapeuta', date)
+            axios.post('http://yankisggm-001-site1.ctempurl.com/api/Clinica/GetEvaluacionByTerapeuta', date)
                 .then(response => {
 
                     setData(response.data)
                 });
         } else {
-            axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
+            axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/ListaTerapia')
                 .then(response => {
                     setData(response.data)
                 });
@@ -66,7 +66,7 @@ function Evaluacion() {
 
 
 
-        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/terapeuta')
+        axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/terapeuta')
 
             .then(response => {
 
@@ -134,7 +134,7 @@ function Evaluacion() {
         }
 
 
-        const url = 'https://yankisggm12ffs-001-site1.dtempurl.com/api/traerpaciente/CrearEvaluacion';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/traerpaciente/CrearEvaluacion';
         axios.post(url, dataEvaluacion).then((resultEvaluacion) => {
             console.log(resultEvaluacion)
 

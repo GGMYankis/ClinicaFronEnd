@@ -29,14 +29,14 @@ function Abono() {
     useEffect(() => {
 
 
-        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/Lista')
+        axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/Lista')
             .then(responses => {
-                setDataPaciente(responses.data.lista)
+              //  setDataPaciente(responses.data.lista)
             });
 
-        axios.get('https://yankisggm12ffs-001-site1.dtempurl.com/api/Clinica/ListaTerapia')
+        axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/ListaTerapia')
             .then(response => {
-                setData(response.data.lista)
+               // setData(response.data.lista)
             });
     }, []);
 
