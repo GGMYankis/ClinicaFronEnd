@@ -52,7 +52,7 @@ function Terapias() {
     const data = {
 
         Label: label,
-        Value:label,
+        Value: label,
         Description: description,
         Price: price,
         Porcentaje: porcentaje
@@ -121,19 +121,20 @@ function Terapias() {
 
                             <div className='cont-barra-tera'>
                                 <label>Terapia</label>
-                                <input placeholder='Nombre de la terapia' onChange={(e) => handleTerapia(e.target.value)} required />
+                                <input  onChange={(e) => handleTerapia(e.target.value)} required />
                             </div>
-                            <div className='cont-barra-tera'>
-                                <label>Descripcion</label>
-                                <input placeholder='Descripcion' onChange={(e) => handleDescripcion(e.target.value)} />
-                            </div>
+
                             <div className='cont-barra-tera'>
                                 <label>Precio</label>
-                                <input type="text" placeholder='Precio' onChange={handlePrecio} required />
+                                <input type="text"  onChange={handlePrecio} required />
                             </div>
                             <div className='cont-barra-tera'>
                                 <label>Porcentaje</label>
-                                <input type="text" placeholder='Porcentaje' onChange={e => setPorcentaje(e.target.value)} required />
+                                <input type="text" onChange={e => setPorcentaje(e.target.value)} required />
+                            </div>
+                            <div className='cont-barra-tera'>
+                                <label>Descripcion</label>
+                                <textarea  onChange={(e) => handleDescripcion(e.target.value)} ></textarea>
                             </div>
                             <button className='btn-terapia'>Guardar</button>
                         </div>

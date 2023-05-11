@@ -24,8 +24,8 @@ function Users() {
     const [apellido, setApellido] = useState('')
     const [telefono, setTelefono] = useState('')
     const [direccion, setDireccion] = useState('')
-    const [correo, setCorreo] = useState(null)
-    const [contraseñas, setContraseñas] = useState(null)
+    const [correo, setCorreo] = useState('')
+    const [contraseñas, setContraseñas] = useState('')
     const [idRol, setIdRol] = useState(0)
     const FormularioTherapy = document.getElementById("txtCrearUusario");
     const navigation = useNavigate();
@@ -55,7 +55,7 @@ function Users() {
 
 
     const data = {
-        IdUser: idUser,
+        IdUser: parseInt(idUser),
         Names: nombre,
         Label: nombre,
         Apellido: apellido,
@@ -63,13 +63,24 @@ function Users() {
         Direccion: direccion,
         Email: correo,
         Password: contraseñas,
-        IdRol: idRol
+        IdRol: parseInt(idRol)
     };
 
 
     function enviar(e) {
+
         e.preventDefault()
 
+        /*
+       
+        if(idRol = "Terapeuta"){
+            data.IdRol = 2
+        }else{
+            data.IdRol = 1
+        }
+        */
+
+        console.log(data)
         const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/GuardarUsers';
         axios.post(url, data).then((result) => {
 
@@ -92,7 +103,7 @@ function Users() {
     }
 
     const dataCrear = {
-        IdUser: idUser,
+       
         Names: nombre,
         Label: nombre,
         Apellido: apellido,
@@ -100,7 +111,7 @@ function Users() {
         Direccion: direccion,
         Email: correo,
         Password: contraseñas,
-        IdRol: idRol
+        IdRol: parseInt(idRol)
     };
 
 
@@ -108,6 +119,8 @@ function Users() {
     function CrearUsuario(e) {
 
         e.preventDefault()
+        console.log(dataCrear)
+
 
         const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/CrearUsuario';
         axios.post(url, dataCrear).then((result) => {
@@ -134,7 +147,9 @@ function Users() {
         modalEditar.current.classList.add('activeUsers')
 
         const encontrado = terapeuta.filter(e => e.idUser == valor)
-        console.log(encontrado)
+
+        console.log(encontrado.IdRol)
+
         encontrado.map(item => {
             setNombre(item.names)
             setApellido(item.apellido)
@@ -160,16 +175,12 @@ function Users() {
 
     }
 
-
-
-
     function EliminarUsuario(valor) {
 
         const encontrado = terapeuta.filter(e => e.idUser == valor)
         encontrado.map(n => {
             setNombre(n.names)
         })
-
 
         setIdUser(valor)
         modalEliminar.current.classList.add('activeEli')

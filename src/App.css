@@ -187,7 +187,7 @@
 
 .form-terapias {
   background-color: white;
-  width: 500px;
+  width: 50%;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
   border-radius: 10px;
   margin: 10px;
@@ -201,10 +201,16 @@
 .cont-barra-tera {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
 }
 
 .cont-barra-tera input {
   padding: 6px;
+  border-radius: .375rem;
+  border: 1px solid #ced4da;
+}
+
+.cont-barra-tera textarea {
   border-radius: .375rem;
   border: 1px solid #ced4da;
 }
@@ -296,19 +302,16 @@
   width: auto;
 }
 
-
-
 .btn-primary {
   margin: 10px;
 }
 
 .contenedor-evaluacion {
-
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
-  margin-top: 70px;
+  margin-top: 55px;
   background-color: white;
 }
 
@@ -1364,10 +1367,15 @@
   background-color: white;
   margin: 10px;
   width: 80%;
+  height: 550px;
 }
 
 .cont-box-body-gastos {
   padding: 10px;
+}
+
+.cont-box-body-gastos label {
+  padding-right: 10px;
 }
 
 .cont-titu-gastos h1 {
@@ -1400,7 +1408,6 @@
   color: white;
   width: 100px;
   padding: 5px;
-  margin-top: 19px;
 }
 
 .btn-gastos:hover {
@@ -1598,4 +1605,27 @@
 #saludo-menu {
   padding-right: 10px;
   color: rgb(255, 187, 0);
+}
+
+.formReportesGastos {
+  width: 50%;
+  background-color: white;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+  border-radius: 10px;
+}
+
+#myTable {
+  width: 800px;
+  height: auto;
+  background-color: white;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+}
+
+.conTbale {
+  width: 100%;
+  height: 100vh;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

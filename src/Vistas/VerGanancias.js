@@ -113,14 +113,8 @@ function VerGanancias() {
             setTera(result.data.viewModal)
             const montos = result.data.viewModal.map(m => m.nombreTerapia.price)
             const resultados = sumas(montos)
-
             ganancias()
-
-
         })
-
-
-
     }
 
     return (
@@ -164,7 +158,6 @@ function VerGanancias() {
                                     </tr>
                                 </thead>
                                 <tbody className='body-table-gastos'>
-
                                     {
                                         citas.map(item => [
                                             <tr>
@@ -175,14 +168,11 @@ function VerGanancias() {
                                             </tr>
                                         ])
                                     }
-
-
                                 </tbody>
                             </table>
                             {mostrarVacio ?
                                 <div className='mostrarMensaje'>
                                     <p className='sinbusqueda-gastos'>Sin busqueda...</p>
-
                                 </div>
                                 : ""
                             }

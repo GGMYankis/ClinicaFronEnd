@@ -23,10 +23,10 @@ function Gastos() {
 
 
     const dataCrear = {
-        Nombre:nombre,
-        Descripcion:descripcion,
-        Amount:monto,
-        DateOfInvestment:fecha
+        Nombre: nombre,
+        Descripcion: descripcion,
+        Amount: parseFloat(monto),
+        DateOfInvestment: fecha
     };
 
 
@@ -56,28 +56,30 @@ function Gastos() {
         <div>
             <Headers />
             <div className='cont-form-terapia' >
-                <form className='form-terapias' onSubmit={enviarReporte} id="formterapia">
+                <form className='formReportesGastos' onSubmit={enviarReporte} id="formterapia">
                     <div className='cont-titu-Pagina-terapia'>
                         <h1>Gastos</h1>
                     </div>
 
                     <div className='sub-box-Terapia'>
                         <div className='cont-sub-terapia'>
-                        <div className='cont-barra-tera'>
-                                <label>Nombre</label>
-                                <input placeholder='Nombre de la terapia' onChange={(e) => setNombre(e.target.value)} required />
-                            </div>
                             <div className='cont-barra-tera'>
-                                <label>Descripcion</label>
-                                <input placeholder='Nombre de la terapia' onChange={(e) => setDescipcion(e.target.value)} required />
+                                <label>Nombre</label>
+                                <input onChange={(e) => setNombre(e.target.value)} required />
                             </div>
+
                             <div className='cont-barra-tera'>
                                 <label>Monto</label>
-                                <input placeholder='Descripcion' onChange={(e) => setMonto(e.target.value)}  required/>
+                                <input onChange={(e) => setMonto(e.target.value)} required />
                             </div>
                             <div className='cont-barra-tera'>
                                 <label>Fecha</label>
-                                <input type="date" placeholder='Precio' onChange={(e) => setFecha(e.target.value)} required />
+                                <input type="date" onChange={(e) => setFecha(e.target.value)} required />
+                            </div>
+
+                            <div className='cont-barra-tera'>
+                                <label>Descripcion</label>
+                                <textarea className='txtdescripciongastos' onChange={(e) => setDescipcion(e.target.value)} required></textarea>
                             </div>
                             <button className='btn-terapia' type='submit'>Guardar</button>
                         </div>

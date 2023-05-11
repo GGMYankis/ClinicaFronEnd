@@ -16,40 +16,7 @@ import { FaUser } from 'react-icons/fa'
 import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario, getUsuarioCompleto } from '../auth-helpers'
 
 
-
-
-function Evaluacion() {
-    const [data, setData] = useState([]);
-    const [dataPaciente, setDataPaciente] = useState([]);
-    const [listapacientes, setListaPasientes] = useState([]);
-    const [listaTerapia, setListaTerapia] = useState([]);
-    const cookies = new Cookies();
-    const navigation = useNavigate();
-    const [idPatients, setIdPatients] = useState()
-    const [idTherapy, setIdTherapy] = useState()
-    const [priceEvaluacion, setPriceEvaluacion] = useState()
-    const [day, setDay] = useState('')
-    const [frecuencia, setFrecuencia] = useState('')
-    const [repetir, setRepetir] = useState(null)
-    const [fechaInicio, setFechaInicio] = useState(null)
-    const [nom, setNom] = useState("")
-    const [terapeuta, setTerapeuta] = useState([])
-    const [idterapeuta, setIdterapeuta] = useState(0)
-
-    let id = getDatosUsuario()
-    let rol = getUsuarioCompleto()
-
-    const date = {
-        Idterapeuta: id
-    }
-
-
-    useEffect(() => {
-        axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/Lista')
-            .then(responses => {
-
-                setDataPaciente(responses.data.lista)
-            });
+/*
 
         if (rol == 2) {
             axios.post('http://yankisggm-001-site1.ctempurl.com/api/Clinica/GetEvaluacionByTerapeuta', date)
@@ -64,7 +31,50 @@ function Evaluacion() {
                 });
         }
 
+*/
 
+
+function Evaluacion() {
+    const [data, setData] = useState([]);
+    const [dataPaciente, setDataPaciente] = useState([]);
+    const [listapacientes, setListaPasientes] = useState([]);
+    const [listaTerapia, setListaTerapia] = useState([]);
+    const cookies = new Cookies();
+    const navigation = useNavigate();
+
+    const [day, setDay] = useState('')
+    const [frecuencia, setFrecuencia] = useState('')
+    const [repetir, setRepetir] = useState(null)
+    const [fechaInicio, setFechaInicio] = useState(null)
+    const [nom, setNom] = useState("")
+    const [terapeuta, setTerapeuta] = useState([])
+
+    const [idPatients, setIdPatients] = useState(0)
+    const [idTherapy, setIdTherapy] = useState(0)
+
+    const [priceEvaluacion, setPriceEvaluacion] = useState(0)
+    const [idterapeuta, setIdterapeuta] = useState(0)
+
+    let id = getDatosUsuario()
+    let rol = getUsuarioCompleto()
+
+    const date = {
+
+        Idterapeuta: id
+    }
+
+
+    useEffect(() => {
+        axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/Lista')
+            .then(responses => {
+
+                setDataPaciente(responses.data.lista)
+            });
+
+        axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/ListaTerapia')
+            .then(response => {
+                setData(response.data)
+            });
 
         axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/terapeuta')
 
@@ -94,7 +104,6 @@ function Evaluacion() {
 
     const terapias = (e) => {
 
-        console.log(e)
         if (e != null) {
             $('#FormModal').show();
             setIdTherapy(e)
@@ -108,43 +117,57 @@ function Evaluacion() {
         setPriceEvaluacion(e)
     }
 
-
-
     const dataEvaluacion = {
 
-        IdPatients: idPatients,
-        IdTherapy: idTherapy,
-        Price: priceEvaluacion,
+        IdPatients: parseInt(idPatients),
+        IdTherapy: parseInt(idTherapy),
+        Price: parseInt(priceEvaluacion),
+        IdTerapeuta: parseInt(idterapeuta),
+        visitas: true
+    };
+
+    const dataRecurrencia = {
         FechaInicio: fechaInicio,
         Repetir: repetir,
         Frecuencia: frecuencia,
         Dias: day,
         IdTerapeuta: idterapeuta,
-        Hola: nom
+        IdEvaluation: 0,
     };
-
 
 
 
     const EnviarEvaluacion = (e) => {
         e.preventDefault()
 
-        if (idPatients == null) {
-            return;
-        }
 
 
         const url = 'http://yankisggm-001-site1.ctempurl.com/api/traerpaciente/CrearEvaluacion';
+        const urlRecurrencia = 'http://yankisggm-001-site1.ctempurl.com/api/traerpaciente/CrearRecurrencia';
+
         axios.post(url, dataEvaluacion).then((resultEvaluacion) => {
-            console.log(resultEvaluacion)
 
-            swal({
-                title: "Correcto",
-                text: "Se ha guardado correctamente",
-                icon: "success",
-                button: "Aceptar",
 
-            });
+
+            if (resultEvaluacion.data > 0) {
+
+                dataRecurrencia.IdEvaluation = resultEvaluacion.data
+
+                axios.post(urlRecurrencia, dataRecurrencia)
+                    .then((resultEvaluacion) => {
+
+                        swal({
+                            title: "Correcto",
+                            text: "Se ha guardado correctamente",
+                            icon: "success",
+                            button: "Aceptar",
+
+                        });
+                    })
+            }
+
+
+
         })
 
     }
@@ -161,23 +184,19 @@ function Evaluacion() {
 
     function dia(e) {
         setDay(e)
-        console.log(day)
     };
 
 
     function Ffrecuencia(e) {
         setFrecuencia(e)
-        console.log(frecuencia)
     };
 
 
     function FRepetir(e) {
         setRepetir(e)
-        console.log(repetir)
     };
     function FFechaInicio(e) {
         setFechaInicio(e)
-        console.log(fechaInicio)
     };
 
 
@@ -265,7 +284,7 @@ function Evaluacion() {
 
                                 {
                                     data.map(item => [
-                                        <option >{item.nombreTerapia.label}</option>
+                                        <option value={item.nombreTerapia.idTherapy} >{item.nombreTerapia.label}</option>
                                     ])
                                 }
 

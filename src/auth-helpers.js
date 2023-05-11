@@ -55,15 +55,12 @@ export function getToken() {
 }
 
 
-
-
 export function DeleteToken() {
+
     cookies.remove('Token')
     cookies.remove('Nombre')
     cookies.remove('UsuarioId')
     cookies.remove('PrimeraLetra')
-    const navigation = useNavigate();
-    navigation("/login")
     return;
 }
 

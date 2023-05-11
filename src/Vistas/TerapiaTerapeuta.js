@@ -17,33 +17,39 @@ import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, 
 
 
 
+
 function TerapiaTerapeuta() {
-  
+
+    const FormularioTherapy = document.getElementById("FormularioTherapy");
     const [data, setData] = useState([]);
     const [terapeuta, setTerapeuta] = useState([])
     const [idTerapeuta, setIdTerapeuta] = useState([])
     const [idTerapias, setIdTerapias] = useState([]);
 
     useEffect(() => {
+        cargar()
+    }, []);
+
+
+    function cargar() {
 
         axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/terapeuta')
 
             .then(response => {
                 setTerapeuta(response.data.usuarios)
-                //  console.log(response.data.usuarios)
             })
 
         axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/ListaTerapia')
             .then(response => {
                 const florw = []
                 response.data.map(tera => {
-                 florw.push(tera.nombreTerapia)
-                    
-                 setData(florw)
-                 
+                    florw.push(tera.nombreTerapia)
+
+                    setData(florw)
+
                 })
             });
-    }, []);
+    }
 
 
     const datos = {
@@ -60,19 +66,22 @@ function TerapiaTerapeuta() {
         axios.post(url, datos).then((result) => {
 
             if (result) {
-                swal({
 
+                FormularioTherapy.reset()
+
+                swal({
                     title: "Correcto",
                     text: "Cambio guardado ",
                     icon: "success",
-
                 });
             }
+
         })
     }
 
     function handleTerapeuta(e) {
-        setIdTerapeuta(e.idUser)
+        console.log(e)
+        setIdTerapeuta(e)
     }
 
     function handle(selectedItems) {
@@ -95,30 +104,29 @@ function TerapiaTerapeuta() {
                         <h1>Asignación Terapeuta</h1>
                     </div>
                     <div className='sub-asignar'>
+                        <form id="FormularioTherapy" >
+                            <div className='row' id='row-1-asignar' >
+                                <div className='col'>
 
-                        <div className='row' id='row-1-asignar' >
-                            <div className='col'>
-                                { /*
-                                <select required className='asignarBarra' onChange={e => setNombreTerapeuta(e.target.value)} >
-                                    <option selected>Select</option>
-                                    {
-                                        terapeuta.map(item => [
-                                            <option value={item.idUser}>{item.names}</option>
-
-                                        ])
-                                    }
-                                </select>
-                                
-                                */}
+                                    <select required className='asignarBarra' onChange={e => handleTerapeuta(e.target.value)} >
+                                        <option selected>Select</option>
+                                        {
+                                            terapeuta.map(item => [
+                                                <option value={item.idUser}>{item.names} {item.apellido}</option>
+                                            ])
+                                        }
+                                    </select>
+                                    {/*
                                 <Select
                                     options={terapeuta}
                                     onChange={handleTerapeuta}
                                 />
+                                   */}
+                                </div>
                             </div>
-                        </div>
-                        <div className='row' id='id-react-select' >
-                            <div className='col'>
-                                {/*
+                            <div className='row' id='id-react-select' >
+                                <div className='col'>
+                                    {/*
                                 <select required className='asignarBarra' onChange={e => handle(e.target.value)} >
                                     <option selected>Select</option>
                                     {
@@ -129,21 +137,24 @@ function TerapiaTerapeuta() {
                                 </select>
   */}
 
-                                <Select
-                                    isMulti
-                                    options={data}
-                                    onChange={handle}
+                                    <Select
+                                        isMulti
+                                        options={data}
+                                        onChange={handle}
 
-                                />
+                                    />
+
+                                </div>
+
                             </div>
-                        </div>
-                        <button className='btn-buscar-citas' onClick={enviars}>Buscar</button>
+                        </form>
+                        <button className='btn-buscar-citas' onClick={enviars}>Guardar</button>
                     </div>
                 </div>
             </div>
 
 
-        </div>
+        </div >
     )
 }
 
