@@ -29,7 +29,6 @@ function Headers({ }) {
 
     return (
         <div>
-
             {rol == 1 ?
                 <header className='encabezado'>
                     <div>
@@ -124,13 +123,7 @@ function Headers({ }) {
                                 <li>
                                     <Link className='letras-menu' to="/terapia">Crear terapia</Link>
                                 </li>
-                                <li>
-                                    <Link className='letras-menu' to="/listasPacientes">Listado de Pacientes</Link>
-                                </li>
 
-                                <li>
-                                    <Link className='letras-menu' to="/listasTerapias">Listado de Terapias</Link>
-                                </li>
                                 <li>
                                     <Link className='letras-menu' to="/asistencias">Asistencia</Link>
                                 </li>
@@ -168,7 +161,6 @@ function Headers({ }) {
 
                 </header>
             }
-
         </div>
     )
 }

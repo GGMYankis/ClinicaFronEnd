@@ -181,10 +181,11 @@ const Admin = () => {
     return (
 
         <div>
+            
             <Headers />
 
             <div className='cont-admin'>
-                <form onSubmit={handleGuardar} id="FormularioAdmin" className='contenedor-cita'>
+                <form onSubmit={handleGuardar} id="FormularioAdmin" className='contenedor-admin'>
 
                     <div className='cont-titulo-form'>
                         <h1>Pacientes de nuevo ingreso </h1>

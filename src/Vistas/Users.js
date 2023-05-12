@@ -7,12 +7,13 @@ import swal from 'sweetalert';
 import { FaUser, FaUsers, FaTrash, FaEdit } from 'react-icons/fa';
 import { FaBars } from 'react-icons/fa'
 import { BrowserRouter, Routes, Route, Link, Redirect } from 'react-router-dom'
-import { DeleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser, getNombreUsuario } from '../auth-helpers'
+import { DeleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser, getNombreUsuario, getUsuarioCompleto } from '../auth-helpers'
 import { useNavigate } from 'react-router-dom';
 import logo from "../imagenes/IMG-20230221-WA0009.png"
 
 function Users() {
 
+    let rol = getUsuarioCompleto()
     useEffect(() => {
         cargar()
     }, []);
@@ -47,6 +48,9 @@ function Users() {
                     }
                     else if (a.idRol == 2) {
                         setTerapeuta(a.idRol = 'Terapeuta')
+                    }
+                    else if (a.idRol == 3) {
+                        setTerapeuta(a.idRol = 'Asistente')
                     }
                     setTerapeuta(response.data.lista)
                 })
@@ -103,7 +107,7 @@ function Users() {
     }
 
     const dataCrear = {
-       
+
         Names: nombre,
         Label: nombre,
         Apellido: apellido,
@@ -113,7 +117,6 @@ function Users() {
         Password: contraseñas,
         IdRol: parseInt(idRol)
     };
-
 
 
     function CrearUsuario(e) {
@@ -225,78 +228,140 @@ function Users() {
     return (
 
         <div>
-            <header className='encabezado'>
-                <div>
-                    <nav>
-                        <input type="checkbox" id="check" />
-                        <input type="checkbox" id="checkOtro" onClick={handleClickOtro} />
-                        <label htmlFor="check" className="checkbtn">
-                            <FaBars id='bar' />
-                        </label>
-                        <label htmlFor="checkOtro" className="checkbtnOtro">
-                            <FaBars id='bar' />
-                        </label>
 
-                        <ul>
-                            <li>
-                                <Link className='letras-menu' to="/admin">Paciente de ingreso</Link>
-                            </li>
-                            <li>
-                                <Link className='letras-menu' to="/evaluacion">Citas</Link>
-                            </li>
-                            <li>
-                                <Link className='letras-menu' to="/terapia">Crear terapia</Link>
-                            </li>
-                            <li>
-                                <Link className='letras-menu' to="/listasPacientes">Listado de Pacientes</Link>
-                            </li>
+            {rol == 1 ?
+                <header className='encabezado'>
+                    <div>
+                        <nav>
+                            <input type="checkbox" id="check" />
+                            <input type="checkbox" id="checkOtro" onClick={handleClickOtro} />
+                            <label htmlFor="check" className="checkbtn">
+                                <FaBars id='bar' />
+                            </label>
+                            <label htmlFor="checkOtro" className="checkbtnOtro">
+                                <FaBars id='bar' />
+                            </label>
 
-                            <li>
-                                <Link className='letras-menu' to="/listasTerapias">Listado de Terapias</Link>
-                            </li>
-                            <li>
-                                <Link className='letras-menu' to="/asistencias">Asistencia</Link>
-                            </li>
-                            <li>
-                                <Link className='letras-menu' to="/calendario">Calendario</Link>
-                            </li>
-                            <li>
-                                <Link className='letras-menu' to="/TerapiaTerapeuta">Asignación</Link>
-                            </li>
-                            <li>
-                                <Link className='letras-menu' to="/Users">Usuario</Link>
-                            </li>
-                            <li>
-                                <Link className='letras-menu' to="/gastos">Registro de gastos</Link>
-                            </li>
-                            <li>
-                                <Link className='letras-menu' to="/VerGanancias">Reporte</Link>
-                            </li>
+                            <ul>
+                                <li>
+                                    <Link className='letras-menu' to="/admin">Paciente de ingreso</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/evaluacion">Citas</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/terapia">Crear terapia</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/listasPacientes">Listado de Pacientes</Link>
+                                </li>
 
-                            <li>
-                                <a className='letras-menu' onClick={logout}>Cerra Sesión</a>
-                            </li>
+                                <li>
+                                    <Link className='letras-menu' to="/listasTerapias">Listado de Terapias</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/asistencias">Asistencia</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/calendario">Calendario</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/TerapiaTerapeuta">Asignación</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/Users">Usuario</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/gastos">Registro de gastos</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/VerGanancias">Reporte</Link>
+                                </li>
 
-                        </ul>
-                    </nav>
-                </div>
+                                <li>
+                                    <a className='letras-menu' onClick={logout}>Cerra Sesión</a>
+                                </li>
 
-                <div className='cont-logo-header'>
-                    <img className='img-admin-logo' src={logo} />
-                    <span className='ver'><span className='gg'>é</span>nfasis</span>
-                </div>
+                            </ul>
+                        </nav>
+                    </div>
 
-                <div className='contenedor-botones'>
-                    <div className='cont-btn-headers'>
-                        <div className='probarUs'>
-                            <Link className='Link' to="/perfilAdmin">{obtenerUser()}</Link>
+                    <div className='cont-logo-header'>
+                        <img className='img-admin-logo' src={logo} />
+                        <span className='ver'><span className='gg'>é</span>nfasis</span>
+                    </div>
+
+                    <div className='contenedor-botones'>
+                        <div className='cont-btn-headers'>
+                            <div className='probarUs'>
+                                <Link className='Link' to="/perfilAdmin">{obtenerUser()}</Link>
+                            </div>
+                        </div>
+                        <div className='cont-nombre-usuario'>
+                            <p className='nombreUsuario'>{getNombreUsuario()}</p>
                         </div>
                     </div>
-                    <div className='cont-nombre-usuario'>
-                        <p className='nombreUsuario'>{getNombreUsuario()}</p>
+                </header>
+                :
+                <header className='encabezado'>
+                    <div>
+                        <nav>
+                            <input type="checkbox" id="check" />
+                            <input type="checkbox" id="checkOtro" onClick={handleClickOtro} />
+                            <label htmlFor="check" className="checkbtn">
+                                <FaBars id='bar' />
+                            </label>
+                            <label htmlFor="checkOtro" className="checkbtnOtro">
+                                <FaBars id='bar' />
+                            </label>
+                            <ul>
+                                <li>
+                                    <Link className='letras-menu' to="/admin">Paciente de ingreso</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/evaluacion">Citas</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/terapia">Crear terapia</Link>
+                                </li>
+
+                                <li>
+                                    <Link className='letras-menu' to="/asistencias">Asistencia</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/calendario">Calendario</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/TerapiaTerapeuta">Asignación</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/Users">Usuario</Link>
+                                </li>
+                                <li>
+                                    <a className='letras-menu' onClick={logout}>Cerra Sesión</a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
-                </div>
-            </header>
+
+                    <div className='cont-logo-header'>
+                        <img className='img-admin-logo' src={logo} />
+                        <span className='ver'><span className='gg'>é</span>nfasis</span>
+                    </div>
+                    <div className='contenedor-botones'>
+                        <div className='cont-btn-headers'>
+                            <div className='probarUs'>
+
+                                <Link className='Link' to="/perfilAdmin">{obtenerUser()}</Link>
+                            </div>
+                        </div>
+                        <div className='cont-nombre-usuario'>
+                            <p className='nombreUsuario'>{getNombreUsuario()}</p>
+                        </div>
+                    </div>
+
+                </header>
+            }
 
             <div className='contCard' ref={myElement}>
                 <div className="card-box ">
@@ -350,9 +415,6 @@ function Users() {
                 </div>
             </div>
 
-
-
-
             {/* MODAL EDITAR USUARIO */}
             <div className='cont-modal-lista-usuario' ref={modalEditar}>
 
@@ -402,7 +464,7 @@ function Users() {
                                     <option defaultValue> seleccione un Rol</option>
                                     <option value="1">Administrador</option>
                                     <option value="2">Terapeuta</option>
-                                    <option value="3">Usuario</option>
+                                    <option value="3">Asistente</option>
                                 </select>
                             </div>
                         </div>
@@ -468,7 +530,7 @@ function Users() {
                                     <option defaultValue> seleccione un Rol</option>
                                     <option value="1">Administrador</option>
                                     <option value="2">Terapeuta</option>
-                                    <option value="3">Usuario</option>
+                                    <option value="3">Asistente</option>
                                 </select>
                             </div>
                         </div>
@@ -481,7 +543,6 @@ function Users() {
                     </div>
                 </form>
             </div>
-
 
             <div className="modal-usuario-eliminar" ref={modalEliminar}>
                 <div className="modal-dialog-usuario" role="document">

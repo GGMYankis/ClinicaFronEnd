@@ -13,11 +13,9 @@ import swal from 'sweetalert';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DataTable from 'react-data-table-component';
 import Headers from '../Headers'
-import { DeleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser, getNombreUsuario } from '../auth-helpers'
-
-
-
-
+import { DeleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser, getNombreUsuario, getUsuarioCompleto } from '../auth-helpers'
+import { set } from 'date-fns';
+import { Label } from 'reactstrap';
 
 
 function ListasPacientes() {
@@ -55,7 +53,11 @@ function ListasPacientes() {
     const [NumPadre, setNumPadre] = useState("");
     const [NumMadre, setNumMadre] = useState("");
     const FormularioTherapy = document.getElementById("txtCrearPaciente");
+    const [filtroNombre, setFiltroNombre] = useState('');
+    const [bsActivo, setBsActivo] = useState(null);
+    const [active, setActive] = useState(null);
 
+    let rol = getUsuarioCompleto()
     useEffect(() => {
         cargar()
     }, []);
@@ -66,9 +68,12 @@ function ListasPacientes() {
             .then(res => {
 
                 res.data.lista.map(item => {
+
+
                     if (item.activo == true) {
 
                         setlistaPaciente(item.activo = 'si')
+
                     }
                     if (item.activo == false) {
                         setlistaPaciente(item.activo = 'no')
@@ -328,8 +333,6 @@ function ListasPacientes() {
 
         })
 
-
-
         IdEditarPaciente.map(item => [
             setName(item.name),
             setSex(item.sex),
@@ -352,16 +355,6 @@ function ListasPacientes() {
 
         ])
     }
-
-
-
-
-
-
-    function refreshPage() {
-        window.location.reload();
-    }
-
 
 
     const handleEliminar = () => {
@@ -434,83 +427,159 @@ function ListasPacientes() {
         myElement.current.classList.toggle('mi-clase-css');
     };
 
+    const handleBuscarNombre = (event) => {
+        setFiltroNombre(event.target.value);
+    }
+    //  .filter(item => item.activo || item.activo == bsActivo)
 
+    const filtrarActivo = (event) => {
+
+        if (event == "2") {
+            setActive(2)
+        }
+        setBsActivo(event)
+
+
+    }
 
     return (
 
         <div>
 
-            <header className='encabezado'>
-                <div>
-                    <nav>
-                        <input type="checkbox" id="check" />
-                        <input type="checkbox" id="checkOtro" onClick={handleClickOtro} />
-                        <label htmlFor="check" className="checkbtn">
-                            <FaBars id='bar' />
-                        </label>
-                        <label htmlFor="checkOtro" className="checkbtnOtro">
-                            <FaBars id='bar' />
-                        </label>
+            {rol == 1 ?
+                <header className='encabezado'>
+                    <div>
+                        <nav>
+                            <input type="checkbox" id="check" />
+                            <input type="checkbox" id="checkOtro" onClick={handleClickOtro} />
+                            <label htmlFor="check" className="checkbtn">
+                                <FaBars id='bar' />
+                            </label>
+                            <label htmlFor="checkOtro" className="checkbtnOtro">
+                                <FaBars id='bar' />
+                            </label>
 
-                        <ul>
-                            <li>
-                                <Link className='letras-menu' to="/admin">Paciente de ingreso</Link>
-                            </li>
-                            <li>
-                                <Link className='letras-menu' to="/evaluacion">Citas</Link>
-                            </li>
-                            <li>
-                                <Link className='letras-menu' to="/terapia">Crear terapia</Link>
-                            </li>
-                            <li>
-                                <Link className='letras-menu' to="/listasPacientes">Listado de Pacientes</Link>
-                            </li>
+                            <ul>
+                                <li>
+                                    <Link className='letras-menu' to="/admin">Paciente de ingreso</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/evaluacion">Citas</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/terapia">Crear terapia</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/listasPacientes">Listado de Pacientes</Link>
+                                </li>
 
-                            <li>
-                                <Link className='letras-menu' to="/listasTerapias">Listado de Terapias</Link>
-                            </li>
-                            <li>
-                                <Link className='letras-menu' to="/asistencias">Asistencia</Link>
-                            </li>
-                            <li>
-                                <Link className='letras-menu' to="/calendario">Calendario</Link>
-                            </li>
-                            <li>
-                                <Link className='letras-menu' to="/TerapiaTerapeuta">Asignación</Link>
-                            </li>
-                            <li>
-                                <Link className='letras-menu' to="/Users">Usuario</Link>
-                            </li>
-                            <li>
-                                <Link className='letras-menu' to="/gastos">Registro de gastos</Link>
-                            </li>
-                            <li>
-                                <Link className='letras-menu' to="/VerGanancias">Reporte</Link>
-                            </li>
+                                <li>
+                                    <Link className='letras-menu' to="/listasTerapias">Listado de Terapias</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/asistencias">Asistencia</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/calendario">Calendario</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/TerapiaTerapeuta">Asignación</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/Users">Usuario</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/gastos">Registro de gastos</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/VerGanancias">Reporte</Link>
+                                </li>
 
-                            <li>
-                                <a className='letras-menu' onClick={logout}>Cerra Sesión</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+                                <li>
+                                    <a className='letras-menu' onClick={logout}>Cerra Sesión</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
 
-                <div className='cont-logo-header'>
-                    <img className='img-admin-logo' src={logo} />
-                    <span className='ver'><span className='gg'>é</span>nfasis</span>
-                </div>
+                    <div className='cont-logo-header'>
+                        <img className='img-admin-logo' src={logo} />
+                        <span className='ver'><span className='gg'>é</span>nfasis</span>
+                    </div>
 
-                <div className='contenedor-botones'>
-                    <div className='cont-btn-headers'>
-                        <div className='probarUs'>
-                            <Link className='Link' to="/perfilAdmin">{obtenerUser()}</Link>
+                    <div className='contenedor-botones'>
+                        <div className='cont-btn-headers'>
+                            <div className='probarUs'>
+                                <Link className='Link' to="/perfilAdmin">{obtenerUser()}</Link>
+                            </div>
+                        </div>
+                        <div className='cont-nombre-usuario'>
+                            <p className='nombreUsuario'>{getNombreUsuario()}</p>
                         </div>
                     </div>
-                    <div className='cont-nombre-usuario'>
-                        <p className='nombreUsuario'>{getNombreUsuario()}</p>
+                </header>
+                :
+                <header className='encabezado'>
+                    <div>
+                        <nav>
+                            <input type="checkbox" id="check" />
+                            <input type="checkbox" id="checkOtro" onClick={handleClickOtro} />
+                            <label htmlFor="check" className="checkbtn">
+                                <FaBars id='bar' />
+                            </label>
+                            <label htmlFor="checkOtro" className="checkbtnOtro">
+                                <FaBars id='bar' />
+                            </label>
+                            <ul>
+                                <li>
+                                    <Link className='letras-menu' to="/admin">Paciente de ingreso</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/evaluacion">Citas</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/terapia">Crear terapia</Link>
+                                </li>
+
+                                <li>
+                                    <Link className='letras-menu' to="/asistencias">Asistencia</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/calendario">Calendario</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/TerapiaTerapeuta">Asignación</Link>
+                                </li>
+                                <li>
+                                    <Link className='letras-menu' to="/Users">Usuario</Link>
+                                </li>
+                                <li>
+                                    <a className='letras-menu' onClick={logout}>Cerra Sesión</a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
-                </div>
-            </header>
+
+                    <div className='cont-logo-header'>
+                        <img className='img-admin-logo' src={logo} />
+                        <span className='ver'><span className='gg'>é</span>nfasis</span>
+                    </div>
+                    <div className='contenedor-botones'>
+                        <div className='cont-btn-headers'>
+                            <div className='probarUs'>
+
+                                <Link className='Link' to="/perfilAdmin">{obtenerUser()}</Link>
+                            </div>
+                        </div>
+                        <div className='cont-nombre-usuario'>
+                            <p className='nombreUsuario'>{getNombreUsuario()}</p>
+                        </div>
+                    </div>
+
+                </header>
+
+            }
+
 
             <div id='table-container' ref={myElement} className='table-container'>
                 <div className='sex-tables'>
@@ -520,12 +589,24 @@ function ListasPacientes() {
                         <h1>Listado de Pacientes</h1>
                     </div>
 
+                    <div className='cont-action'>
+                        <div className='cont-crear-paciente'  >
+                            <button className="btn-crear-Paciente-tabla" onClick={modalCraePaciente}>Crear Paciente</button>
+                        </div>
 
-                    <div className='cont-crear-paciente'  >
-                        <button className="btn-crear-Paciente-tabla" onClick={modalCraePaciente}>Crear Paciente</button>
+                        <div className='cont-crear-paciente'  >
+                            <label>Status</label>
+                            <select id='txtbuscar' onChange={e => filtrarActivo(e.target.value)}>
+                                <option value="2">Todos</option>
+                                <option value="si">Activo</option>
+                                <option value="no">Inactivos</option>
+                            </select>
+                            <label>Paciente</label>
+                            <input id='txtbuscar' placeholder='Nombre' onChange={handleBuscarNombre} value={filtroNombre} />
+                        </div>
                     </div>
 
-
+                    <hr></hr>
                     <div className='sub-2'>
                         <table className='table'>
 
@@ -545,31 +626,73 @@ function ListasPacientes() {
                             </thead>
 
                             <tbody>
-                                {
+                                {bsActivo ?
+                                    listaPaciente.filter(item => item.name.toLowerCase().includes(filtroNombre.toLowerCase()))
 
-                                    listaPaciente.map(item => [
-                                        <tr>
-                                            <td data-label="Nombre"  >{item.name}</td>
-                                            <td data-label="Sexo">{item.sex}</td>
-                                            <td data-label="Nombre De Los Padres">{item.parentsName}</td>
-                                            <td data-label="Teléfono de los padres o tutores">{item.parentOrGuardianPhoneNumber}</td>
-                                            <td data-label="Fecha de nacimiento">{item.dateOfBirth.substring('', 10)}</td>
-                                            <td data-label="edad">{item.age}</td>
-                                            <td data-label="activo">{item.activo}</td>
+                                        .filter(item => item.activo == bsActivo)
 
-                                            <td className='tr-btn'>
-                                                <button className='btn ' type='button' value={item.idPatients} onClick={e => modaleditar(e.target.value)}>Editar</button>
-                                                <button className='btn eliminar' type='button' value={item.idPatients} onClick={e => modalEliminar(e.target.value)}>Eliminar</button>
-                                            </td>
-                                        </tr>
-                                    ])
+                                        .map(item => (
+                                            <tr key={item.idPatients}>
+                                                <td data-label="Nombre"  >{item.name}</td>
+                                                <td data-label="Sexo">{item.sex}</td>
+                                                <td data-label="Nombre De Los Padres">{item.parentsName}</td>
+                                                <td data-label="Teléfono de los padres o tutores">{item.parentOrGuardianPhoneNumber}</td>
+                                                <td data-label="Fecha de nacimiento">{item.dateOfBirth.substring('', 10)}</td>
+                                                <td data-label="edad">{item.age}</td>
+                                                <td data-label="activo">{item.activo}</td>
 
+                                                <td className='tr-btn'>
+                                                    <button className='btn ' type='button' value={item.idPatients} onClick={e => modaleditar(e.target.value)}>Editar</button>
+                                                    <button className='btn eliminar' type='button' value={item.idPatients} onClick={e => modalEliminar(e.target.value)}>Eliminar</button>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    :
+                                    listaPaciente.filter(item => item.name.toLowerCase().includes(filtroNombre.toLowerCase()))
+                                        .map(item => (
+                                            <tr key={item.idPatients}>
+                                                <td data-label="Nombre"  >{item.name}</td>
+                                                <td data-label="Sexo">{item.sex}</td>
+                                                <td data-label="Nombre De Los Padres">{item.parentsName}</td>
+                                                <td data-label="Teléfono de los padres o tutores">{item.parentOrGuardianPhoneNumber}</td>
+                                                <td data-label="Fecha de nacimiento">{item.dateOfBirth.substring('', 10)}</td>
+                                                <td data-label="edad">{item.age}</td>
+                                                <td data-label="activo">{item.activo}</td>
+
+                                                <td className='tr-btn'>
+                                                    <button className='btn ' type='button' value={item.idPatients} onClick={e => modaleditar(e.target.value)}>Editar</button>
+                                                    <button className='btn eliminar' type='button' value={item.idPatients} onClick={e => modalEliminar(e.target.value)}>Eliminar</button>
+                                                </td>
+                                            </tr>
+                                        ))
+                                }
+                                {active ?
+
+                                    listaPaciente.filter(item => item.name.toLowerCase().includes(filtroNombre.toLowerCase()))
+                                        .map(item => (
+                                            <tr key={item.idPatients}>
+                                                <td data-label="Nombre"  >{item.name}</td>
+                                                <td data-label="Sexo">{item.sex}</td>
+                                                <td data-label="Nombre De Los Padres">{item.parentsName}</td>
+                                                <td data-label="Teléfono de los padres o tutores">{item.parentOrGuardianPhoneNumber}</td>
+                                                <td data-label="Fecha de nacimiento">{item.dateOfBirth.substring('', 10)}</td>
+                                                <td data-label="edad">{item.age}</td>
+                                                <td data-label="activo">{item.activo}</td>
+
+                                                <td className='tr-btn'>
+                                                    <button className='btn ' type='button' value={item.idPatients} onClick={e => modaleditar(e.target.value)}>Editar</button>
+                                                    <button className='btn eliminar' type='button' value={item.idPatients} onClick={e => modalEliminar(e.target.value)}>Eliminar</button>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    : ""
                                 }
 
                             </tbody>
                         </table>
                     </div>
                 </div>
+
 
             </div>
 
@@ -841,16 +964,10 @@ function ListasPacientes() {
                 </div>
             </div>
 
+
         </div >
     )
 }
 
 export default ListasPacientes
 
-/*
-
-  <td className='tr-btn'>
-                                                <button className='btn ' type='button' value={item.idPatients} onClick={e => modaleditar(e.target.value)}><FaEdit className='hgico'/></button>
-                                                <button className='btn eliminar' type='button' value={item.idPatients} onClick={e => modalEliminar(e.target.value)}><FaTrash/></button>
-                                            </td>
-*/

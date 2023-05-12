@@ -72,3 +72,43 @@ function AgeCalculator() {
 export default AgeCalculator;
 
 
+
+/*
+
+public class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+    public int CategoryId { get; set; }
+    public Category Category { get; set; }
+}
+
+public class Category
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+}
+
+
+inner join
+
+using (var db = new MyDbContext())
+{
+    var query = from p in db.Products
+                join c in db.Categories on p.CategoryId equals c.Id
+                select new
+                {
+                    ProductName = p.Name,
+                    CategoryName = c.Name
+                };
+
+    foreach (var result in query)
+    {
+        Console.WriteLine($"{result.ProductName} - {result.CategoryName}");
+    }
+}
+
+
+
+*/

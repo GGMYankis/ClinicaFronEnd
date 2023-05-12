@@ -124,10 +124,11 @@ ul li {
         display: none;
     }
 
-    .checkbtnOtro {  
+    .checkbtnOtro {
         display: block;
     }
 }
+
 @media (max-width:450px) {
     .mi-clase-css {
         margin-left: 220px;
@@ -286,17 +287,9 @@ body {
     min-height: 100vh;
 }
 
-.contenedor-cita {
-    width: 1200px;
-    margin: 10px;
-    background-color: white;
-    box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
-    border-radius: 10px;
-}
 
-.paddd {
-    padding: 20px;
-}
+
+
 
 @media(max-width:525px) {
     .paddd {
@@ -826,13 +819,48 @@ th {
 .cont-admin {
     width: 100%;
     min-height: 100vh;
-    margin-top: 55px;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: white;
     padding: 10px;
 }
+
+.contenedor-admin {
+    width: 80%;
+    margin: 10px;
+    background-color: white;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+    border-radius: 10px;
+}
+
+.paddd {
+    padding: 20px;
+}
+
+/*
+@media(max-width:1200px) {
+    .contenedor-admin {
+        height: 1240px;
+    }
+
+    .cont-admin {
+        margin-top: 55px;
+    }
+
+}
+
+*/
+
+.contenedor-cita {
+    width: 1200px;
+    margin: 10px;
+    background-color: white;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+    border-radius: 10px;
+}
+
+
 
 .crearpaciente {
     padding: 10px;

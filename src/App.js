@@ -12,10 +12,9 @@ import jwt_decode from 'jwt-decode';
 import Admin from './Vistas/Admin';
 import Gastos from './Vistas/Gastos';
 import Evaluacion from './Vistas/Evaluacion';
-
+import {Spinner} from 'reactstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import VerGanancias from './Vistas/VerGanancias';
-
-
 import AgeCalculator from './AgeCalculator';
 import PerfilAdmin from './Vistas/PerfilAdmin';
 import ListasTerapias from './Vistas/ListasTerapias';
@@ -31,7 +30,7 @@ import Calendario from './Vistas/Calendario';
 import { Protect } from './components/Protect';
 import Autenticacion from './components/Autenticacion';
 import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario,nombreUsuario } from './auth-helpers'
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 initAxiosInterceptors()

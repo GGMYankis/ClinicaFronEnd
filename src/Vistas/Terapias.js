@@ -9,8 +9,7 @@ import Cookies from 'universal-cookie';
 import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import Headers from '../Headers'
-
-
+import Loading from '../components/Loading';
 
 
 
@@ -23,7 +22,7 @@ function Terapias() {
     const [porcentaje, setPorcentaje] = useState(0)
     const [vali, setVali] = useState(0)
     const [value, setValue] = useState("");
-
+    const [loading, setLoading] = useState(false);
 
     const handleTerapia = (e) => {
         setLabel(e)
@@ -58,16 +57,15 @@ function Terapias() {
         Porcentaje: porcentaje
 
     }
+    function refreshPage() {
+        window.location.reload();
+    }
 
 
     const enviarTerapia = (e) => {
-
         e.preventDefault()
 
-        function refreshPage() {
-            window.location.reload();
-        }
-
+        setLoading(true)
 
         const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/CrearTerapia';
         axios.post(url, data).then((result) => {
@@ -87,6 +85,7 @@ function Terapias() {
 
             }
             if (result) {
+                setLoading(false)
                 probar()
             }
 
@@ -112,6 +111,11 @@ function Terapias() {
             <div className='cont-form-terapia' >
 
                 <form className='form-terapias' onSubmit={enviarTerapia} id="formterapia">
+
+                    {
+                        loading ? <Loading /> : ""
+                    }
+
                     <div className='cont-titu-Pagina-terapia'>
                         <h1>Terapia</h1>
                     </div>
@@ -121,12 +125,12 @@ function Terapias() {
 
                             <div className='cont-barra-tera'>
                                 <label>Terapia</label>
-                                <input  onChange={(e) => handleTerapia(e.target.value)} required />
+                                <input onChange={(e) => handleTerapia(e.target.value)} required />
                             </div>
 
                             <div className='cont-barra-tera'>
                                 <label>Precio</label>
-                                <input type="text"  onChange={handlePrecio} required />
+                                <input type="text" onChange={handlePrecio} required />
                             </div>
                             <div className='cont-barra-tera'>
                                 <label>Porcentaje</label>
@@ -134,7 +138,7 @@ function Terapias() {
                             </div>
                             <div className='cont-barra-tera'>
                                 <label>Descripcion</label>
-                                <textarea  onChange={(e) => handleDescripcion(e.target.value)} ></textarea>
+                                <textarea onChange={(e) => handleDescripcion(e.target.value)} ></textarea>
                             </div>
                             <button className='btn-terapia'>Guardar</button>
                         </div>
@@ -146,11 +150,6 @@ function Terapias() {
 
 
 
-            <div className="lds-roller">
-                <div></div><div></div><div></div><div></div>
-                <div></div><div></div><div></div><div></div>
-
-            </div>
         </div>
 
     )

@@ -6,11 +6,13 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Headers from '../Headers';
+import Loading from '../components/Loading';
 import { useRef } from 'react';
 import $ from 'jquery';
 
 import { DatePicker } from 'antd';
 import moment from 'moment'
+
 
 const { RangePicker } = DatePicker;
 
@@ -27,6 +29,7 @@ function VerGanancias() {
     const [sumarGastos, setSumarGastos] = useState(0);
     const [surmarAsistencia, setSurmarAsistencia] = useState(0);
     const [acolumaldo, setAcolumaldo] = useState(0);
+    const [loading, setLoading] = useState(false);
 
 
     const negaClas = useRef(null);
@@ -42,6 +45,7 @@ function VerGanancias() {
 
 
     function sumas(monto) {
+
         let acolumaldo = 0;
         for (let i = 0; i < monto.length; i++) {
             acolumaldo += monto[i]
@@ -51,7 +55,11 @@ function VerGanancias() {
 
 
 
-    const gana = sumarGastos - surmarAsistencia
+    const gana = sumarGastos - surmarAsistencia;
+
+    const consultorio = surmarAsistencia * 0.4;
+    const neto = consultorio - sumarGastos;
+    const totalTerapeuta = sumarGastos * 0.6;
 
 
     function ganancias() {
@@ -66,23 +74,20 @@ function VerGanancias() {
     }
 
     const data = {
+
         DateOfInvestment: startDate,
         EndDate: endDate
     }
-
 
     const datas = {
         FechaInicio: startDate,
         FechaFinal: endDate,
     }
 
-
-
     const enviars = (e) => {
 
-        e.preventDefault()
 
-
+        setLoading(true)
 
         const urls = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/FiltrarGastos'
         axios.post(urls, data).then((result) => {
@@ -98,24 +103,30 @@ function VerGanancias() {
             }
         })
 
+        try {
+            e.preventDefault()
+            const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/Probar'
+            axios.post(url, datas).then((result) => {
+
+                if (result.data) {
+                    setLoading(false)
+                }
+
+                setTera(result.data)
 
 
+                const montos = result.data.map(m => m.price)
 
-        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/GastosGanancia'
-        axios.post(url, datas).then((result) => {
+                const resultados = sumas(montos)
+                ganancias()
+            })
 
-            if (result.data.length) {
+        } catch (error) {
 
-            } else {
-
-            }
-
-            setTera(result.data.viewModal)
-            const montos = result.data.viewModal.map(m => m.nombreTerapia.price)
-            const resultados = sumas(montos)
-            ganancias()
-        })
+            console.log(error)
+        }
     }
+
 
     return (
 
@@ -123,7 +134,12 @@ function VerGanancias() {
             <Headers />
             <div className='contenedor-FiltrarGastos'>
 
+
                 <div className='contTableGastos'>
+
+                    {
+                        loading ? <Loading /> : ""
+                    }
                     <div className='cont-titu-gastos'>
                         <h1>Historial de gastos</h1>
                     </div>
@@ -192,9 +208,9 @@ function VerGanancias() {
                                     {
                                         tera.map(item => [
                                             <tr>
-                                                <td data-label="Descripcion">{item.nombreTerapia.label}</td>
-                                                <td data-label="Descripcion">{item.nombreTerapia.price}</td>
-                                                <td data-label="Descripcion">{item.fechaInicio.fechaInicio.substring('', 10)}</td>
+                                                <td data-label="Descripcion">{item.label}</td>
+                                                <td data-label="Descripcion">{item.price}</td>
+                                                <td data-label="Descripcion">{item.fechaInicio.substring('', 10)}</td>
                                             </tr>
                                         ])
                                     }
@@ -215,7 +231,10 @@ function VerGanancias() {
                                 {sumarGastos == false && surmarAsistencia == false ?
                                     <div className='mostrarMensaje'>
                                         <p className='sinbusqueda-gastos'>Sin busqueda...</p>
-                                    </div> : <h1 className='negaClas' ref={negaClas}>${gana.toFixed(2)}</h1>
+                                    </div> :
+                                    <div className='mostrarMensaje'>
+                                        <h1 className='resultadoGanancias' ref={negaClas}>${gana.toFixed(2)}</h1>
+                                    </div>
                                 }
                                 {mensaje ?
                                     <div className="alert alert-danger" role="alert">
@@ -224,6 +243,78 @@ function VerGanancias() {
                                     : ""
                                 }
                             </div>
+
+
+
+                            <div className='cont-titu-ganancia-tabla'>
+                                <p>Totales</p>
+                            </div>
+
+                            <div>
+                                {sumarGastos == false && surmarAsistencia == false ?
+                                    <div className='mostrarMensaje'>
+                                        <p className='sinbusqueda-gastos'>Sin busqueda...</p>
+                                    </div>
+                                    : <div className='mostrarMensaje'>
+                                        <h1 className='negaClas' ref={negaClas}>Total Consultorio = {consultorio}</h1>
+                                    </div>
+
+
+                                }
+                                {mensaje ?
+                                    <div className="alert alert-danger" role="alert">
+                                        No se encontraron registros
+                                    </div>
+                                    : ""
+                                }
+                            </div>
+
+                            <div className='cont-titu-ganancia-tabla'>
+                                <p>Total Neto</p>
+                            </div>
+                            <div>
+                                {sumarGastos == false && surmarAsistencia == false ?
+                                    <div className='mostrarMensaje'>
+                                        <p className='sinbusqueda-gastos'>Sin busqueda...</p>
+                                    </div> :
+
+                                    <div className='mostrarMensaje'>
+                                        <h1 className='negaClas' ref={negaClas}>Total Neto = {neto.toFixed(2)}</h1>
+                                    </div>
+
+                                }
+                                {mensaje ?
+                                    <div className="alert alert-danger" role="alert">
+                                        No se encontraron registros
+                                    </div>
+                                    : ""
+                                }
+                            </div>
+
+                            <div className='cont-titu-ganancia-tabla'>
+                                <p>Total Terapeutas</p>
+                            </div>
+                            <div>
+                                {sumarGastos == false && surmarAsistencia == false ?
+                                    <div className='mostrarMensaje'>
+                                        <p className='sinbusqueda-gastos'>Sin busqueda...</p>
+                                    </div> :
+                                    <div className='mostrarMensaje'>
+                                        <h1 className='negaClas' ref={negaClas}>Total Terapeutas = {totalTerapeuta.toFixed(2)}</h1>
+                                    </div>
+
+
+
+                                }
+                                {mensaje ?
+                                    <div className="alert alert-danger" role="alert">
+                                        No se encontraron registros
+                                    </div>
+                                    : ""
+                                }
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -232,5 +323,7 @@ function VerGanancias() {
     )
 }
 
+
 export default VerGanancias
 
+//consultorio
