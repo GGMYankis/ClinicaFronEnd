@@ -42,14 +42,13 @@ function Asistencias() {
             axios.post('http://yankisggm-001-site1.ctempurl.com/api/Clinica/BuscarPacientePorTerapeuta', date)
                 .then(responses => {
                     setDataPaciente(responses.data)
-
                 });
         } else {
 
             axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/Lista')
                 .then(responses => {
 
-                    setDataPaciente(responses.data.lista)
+                    setDataPaciente(responses.data)
                 });
         }
 
@@ -94,7 +93,7 @@ function Asistencias() {
             dataValor.IdTerapeuta = id
         }
 
-        const url = 'https://localhost:63958/api/Clinica/Asistencias';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/Asistencias';
         axios.post(url, dataValor).then((result) => {
             swal({
                 title: "Correcto",

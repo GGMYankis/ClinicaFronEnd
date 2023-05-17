@@ -68,7 +68,7 @@ function Terapias() {
 
         setLoading(true)
 
-        const url = 'https://localhost:63958/api/Clinica/CrearTerapia';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/CrearTerapia';
         axios.post(url, data).then((result) => {
 
 

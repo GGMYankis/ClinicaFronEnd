@@ -52,7 +52,6 @@ function Calendario() {
 
         axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/calendario')
             .then(res => {
-                console.log(res.data.lista)
 
                 setEvent(res.data.lista.map(item => ({
                     id: item.idAsistencias,
@@ -85,7 +84,6 @@ function Calendario() {
 
         e.preventDefault()
 
-        console.log(data)
 
         const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/AgregarEvento'
         axios.post(url, data).then((result) => {
@@ -176,7 +174,6 @@ function Calendario() {
 
     function eliminarFecha() {
 
-        console.log(datas)
 
         const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/Fecha';
         axios.post(url, datas)
@@ -368,18 +365,7 @@ function Calendario() {
 
 
                         height={"80vh"}
-                        eventDidMount={(info) => {
-                            return new bootstrap.Popover(info.el, {
-                                title: info.event.title,
-                                placement: "auto",
-                                trigger: "hover",
-                                customClass: "popoverStyle",
-                                content:
-                                    " <p>Please subcribe</p>",
-                                html: true
-
-                            })
-                        }}
+                      
 
                         dateClick={handleEventClick}
                         eventClick={handleEventClickFecha}

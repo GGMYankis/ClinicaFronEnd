@@ -22,6 +22,7 @@ function ListasTerapias() {
     const [descripcion, setDescripcion] = useState('  ')
     const [price, setPrice] = useState(0)
     const [porcentaje, setPorcentaje] = useState()
+    const [porcentajeCentro, setPorcentajeCentro] = useState(0)
     const [idTerapiaEliminar, setIdTerapiaEliminar] = useState()
     const [id, setId] = useState()
     const navigation = useNavigate();
@@ -49,15 +50,19 @@ function ListasTerapias() {
 
     const data2 = {
         Label: nmTerapias,
+        Value: nmTerapias,
         Description: descripcion,
         Price: price,
-        Porcentaje: porcentaje
+        Porcentaje: porcentaje,
+        PorcentajeCentro: porcentajeCentro
     }
 
     const FormularioTherapy = document.getElementById("FormularioTherapy");
     const enviarDatosCrear = (e) => {
 
         e.preventDefault()
+
+        console.log(data2)
         const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/CrearTerapia';
         axios.post(url, data2).then(res => {
 
@@ -100,7 +105,8 @@ function ListasTerapias() {
         Label: nmTerapias,
         Description: descripcion,
         Price: price,
-        Porcentaje: porcentaje
+        Porcentaje: porcentaje,
+        PorcentajeCentro: porcentajeCentro
     }
 
     const enviarDatos = (e) => {
@@ -378,9 +384,13 @@ function ListasTerapias() {
                             <input placeholder='Precio' id="precio" required onChange={e => setPrice(e.target.value)} />
                         </div>
                         <div className='con-input-terapia'>
-                            <label>Porcentaje</label>
+                            <label>Porcentaje del Terapeuta</label>
                             <input placeholder='Precio' id="precio" required onChange={e => setPorcentaje(e.target.value)} />
                         </div>
+                        <div className='con-input-terapia'>
+                                <label>Porcentaje del Centro</label>
+                                <input type="text" onChange={e => setPorcentajeCentro(e.target.value)} required />
+                            </div>
                         <button className='btn-editar-terapia' >Crear</button>
                         <button className='btn-eliminar-terapia' type='button' onClick={modalQuitarF}>Cancelar</button>
                     </div>

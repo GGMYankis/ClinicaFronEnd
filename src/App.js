@@ -61,13 +61,7 @@ function App() {
 
                         }).catch(error => {
 
-                            axios.interceptors.response.use(
-
-                                function (error) {
-                                    console.log(error)
-
-                                }
-                            )
+                          
 
                         });
                 }
