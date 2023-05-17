@@ -7,7 +7,7 @@ import axios from 'axios'
 import $ from 'jquery';
 import swal from 'sweetalert';
 import { FaUser, FaUsers } from 'react-icons/fa';
-
+import { Loading, LoaLogin } from '../components/Loading';
 
 function Gastos() {
 
@@ -15,10 +15,19 @@ function Gastos() {
     const [nombre, setNombre] = useState('')
     const [monto, setMonto] = useState('')
     const [fecha, setFecha] = useState('')
+    const [NumMadre, setNumMadre] = useState("");
+    const [loading, setLoading] = useState(false);
 
 
-    function refreshPage() {
-        window.location.reload();
+
+
+    const ValidarMonto = (value) => {
+
+        const regex = /^[0-9\b]+$/;
+        if (value.target.value === "" || regex.test(value.target.value)) {
+            setNumMadre(value.target.value);
+        }
+        setMonto(value.target.value);
     }
 
 
@@ -34,6 +43,8 @@ function Gastos() {
 
         e.preventDefault()
 
+        setLoading(true)
+
         const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/ContabilidadReportes';
         axios.post(url, dataCrear).then((result) => {
             const probar = async () => {
@@ -42,9 +53,9 @@ function Gastos() {
                     text: "Cambio guardado ",
                     icon: "success",
                 });
-                refreshPage()
             }
             if (result) {
+                setLoading(false)
                 probar()
             }
         })
@@ -57,6 +68,9 @@ function Gastos() {
             <Headers />
             <div className='cont-form-terapia' >
                 <form className='formReportesGastos' onSubmit={enviarReporte} id="formterapia">
+                    {
+                        loading ? <Loading /> : ""
+                    }
                     <div className='cont-titu-Pagina-terapia'>
                         <h1>Gastos</h1>
                     </div>
@@ -70,7 +84,7 @@ function Gastos() {
 
                             <div className='cont-barra-tera'>
                                 <label>Monto</label>
-                                <input onChange={(e) => setMonto(e.target.value)} required />
+                                <input value={NumMadre} onChange={ValidarMonto} required />
                             </div>
                             <div className='cont-barra-tera'>
                                 <label>Fecha</label>

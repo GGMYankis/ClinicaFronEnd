@@ -12,8 +12,7 @@ import { FaFontAwesomeIcon, FontAwesomeIcon } from '@fortawesome/react-fontaweso
 import { faBell, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import jwt_decode from 'jwt-decode';
 import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario, setUsuarioCompleto, setToken, nombreUsuario } from '../auth-helpers'
-import Loading from '../components/Loading';
-
+import {Loading ,LoaLogin} from '../components/Loading';
 function Login() {
 
     const login = document.getElementById("login")
@@ -56,6 +55,7 @@ function Login() {
             const url = 'http://yankisggm-001-site1.ctempurl.com/api/Autenticacion/Login';
             axios.post(url, data).then((result) => {
 
+                
 
                 if (result.data.user != null) {
                     setLoading(false)
@@ -82,9 +82,6 @@ function Login() {
         } catch (error) {
 
         }
-
-
-
     }
 
     return (
@@ -92,7 +89,7 @@ function Login() {
         <div className='contenedor_login3'>
             <form className='hhh' onSubmit={handleLogin} id="login">
                 {
-                    loading ? <Loading /> : ""
+                    loading ? <LoaLogin /> : ""
                 }
 
                 <img className='img3' src={logo} /><br></br>

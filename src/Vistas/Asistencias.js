@@ -17,6 +17,8 @@ function Asistencias() {
     const [terapeuta, setTerapeuta] = useState([])
     const [data, setData] = useState([]);
     const [dataPaciente, setDataPaciente] = useState([]);
+    const [justificaciones, setJustificaciones] = useState('');
+
 
 
     const Fobser = (e) => {
@@ -40,7 +42,7 @@ function Asistencias() {
             axios.post('http://yankisggm-001-site1.ctempurl.com/api/Clinica/BuscarPacientePorTerapeuta', date)
                 .then(responses => {
                     setDataPaciente(responses.data)
-                
+
                 });
         } else {
 
@@ -78,6 +80,7 @@ function Asistencias() {
         idTherapy: terapia,
         IdTerapeuta: idTerapeuta,
         FechaInicio: fecha,
+        TipoAsistencias: justificaciones,
         remarks: observaciones
     }
 
@@ -91,7 +94,7 @@ function Asistencias() {
             dataValor.IdTerapeuta = id
         }
 
-        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/Asistencias';
+        const url = 'https://localhost:63958/api/Clinica/Asistencias';
         axios.post(url, dataValor).then((result) => {
             swal({
                 title: "Correcto",
@@ -103,11 +106,8 @@ function Asistencias() {
             if (result) {
                 formAsistensscia.reset()
             }
-
         }).catch((error) => {
-
             console.log(error)
-
         })
     }
 
@@ -123,14 +123,23 @@ function Asistencias() {
                         <h1>Asistencias</h1>
                     </div>
 
-                    {rol == 2 ?
+                    <form onSubmit={enviar} className="form-asistencia" id='formAsistencia'>
+                        <div className='box-asistencia' onChange={e => setJustificaciones(e.target.value)}>
+                            <label className='label-asistencia'>
+                                Razón Asistencia</label>
+                            <select className='justificacinAsistencias'>
+                                <option value=''>Seleccione una asistencia</option>
+                                <option value="asistio">Asistio</option>
+                                <option value="justifico">No Asistencia injustificada</option>
+                                <option value="injustificada">No Asistencia Justificada</option>
+                            </select>
+                        </div>
+                        {rol == 2 ?
 
-                        <form onSubmit={enviar} className="form-asistencia" id='formAsistencia'>
-
-                            <label className='label-asistencia'>Lista de Pacientes</label>
-                            <div className='row'>
+                            <div className='box-asistencia'>
+                                <label className='label-asistencia'>Lista de Pacientes</label>
                                 <select onChange={e => setPaciente(e.target.value)} required className='select-asistencia' >
-                                    <option >Seleccione una Paciente</option>
+                                    <option value='' >Seleccione una Paciente</option>
                                     {
                                         dataPaciente.map(item => [
                                             //<option key={item.value} value={item.value}>{item.value}</option>
@@ -139,67 +148,43 @@ function Asistencias() {
                                     }
                                 </select>
                             </div>
-                            <div className='row'>
-                                <label className='label-asistencia'>Lista de Terapias</label>
-                                <select onChange={e => setTerapia(e.target.value)} required className='select-asistencia' >
-                                    <option >Seleccione una Terapia</option>
-                                    {
-                                        data.map(item => [
-                                            //<option key={item.value} value={item.value}>{item.value}</option>
-                                            <option value={item.nombreTerapia.idTherapy}>{item.nombreTerapia.label}</option>
-                                        ])
-                                    }
 
-                                </select>
-                            </div>
-                            <div className='row'>
-
-                                <label className='label-asistencia'>Fecha</label>
-                                <input type="datetime-local" required onChange={e => Fobser(e.target.value)} className='select-asistencia' />
-                            </div>
-                            <div className='row'>
-                                <label className='label-asistencia'>Observaciones</label>
-                                <textarea required onChange={e => setObservaciones(e.target.value)} className='select-asistencia' />
-                            </div>
-                            <div className='row'>
-                                <div className='col'>
-                                    <button type='submit' className='btn-asistencia' >Guardar</button>
-                                </div>
-                            </div>
-                        </form>
-                        :
-                        <form onSubmit={enviar} className="form-asistencia" id='formAsistencia'>
-
-                            <label className='label-asistencia'>Lista de Pacientes</label>
-                            <div className='row'>
+                            :
+                            <div className='box-asistencia'>
+                                <label className='label-asistencia'>Lista de Pacientes</label>
                                 <select onChange={e => setPaciente(e.target.value)} required className='select-asistencia' >
-                                    <option >Seleccione una Paciente</option>
+                                    <option value='' >Seleccione una Paciente</option>
                                     {
                                         dataPaciente.map(item => [
-                                            //<option key={item.value} value={item.value}>{item.value}</option>
                                             <option value={item.idPatients}>{item.name}</option>
                                         ])
                                     }
                                 </select>
                             </div>
-                            <div className='row'>
-                                <label className='label-asistencia'>Lista de Terapias</label>
-                                <select onChange={e => setTerapia(e.target.value)} required className='select-asistencia' >
-                                    <option >Seleccione una Terapia</option>
-                                    {
-                                        data.map(item => [
-                                            //<option key={item.value} value={item.value}>{item.value}</option>
-                                            <option value={item.nombreTerapia.idTherapy}>{item.nombreTerapia.label}</option>
-                                        ])
-                                    }
 
-                                </select>
-                            </div>
+                        }
 
-                            <div className='row'>
+
+                        <div className='box-asistencia'>
+                            <label className='label-asistencia'>Lista de Terapias</label>
+                            <select onChange={e => setTerapia(e.target.value)} required className='select-asistencia' >
+                                <option value=''>Seleccione una Terapia</option>
+                                {
+                                    data.map(item => [
+                                        //<option key={item.value} value={item.value}>{item.value}</option>
+                                        <option value={item.nombreTerapia.idTherapy}>{item.nombreTerapia.label}</option>
+                                    ])
+                                }
+
+                            </select>
+                        </div>
+
+                        {rol == 1 ?
+
+                            <div className='box-asistencia'>
                                 <label className='label-asistencia'>Lista de Terapeuta</label>
                                 <select onChange={e => setIdTerapeuta(e.target.value)} required className='select-asistencia' >
-                                    <option >Seleccione un Terapeuta</option>
+                                    <option value='' >Seleccione un Terapeuta</option>
                                     {
                                         terapeuta.map(item => [
                                             //<option key={item.value} value={item.value}>{item.value}</option>
@@ -209,32 +194,34 @@ function Asistencias() {
 
                                 </select>
                             </div>
-                            <div className='row'>
+                            :
+                            ""
+                        }
+                        <div className='box-asistencia'>
 
-                                <label className='label-asistencia'>Fecha</label>
-                                <input type="datetime-local" required onChange={e => Fobser(e.target.value)} className='select-asistencia' />
+                            <label className='label-asistencia'>Fecha</label>
+                            <input type="datetime-local" required onChange={e => Fobser(e.target.value)} className='select-asistencia' />
+                        </div>
+                        <div className='box-asistencia'>
+                            <label className='label-asistencia'>Observaciones</label>
+                            <textarea required onChange={e => setObservaciones(e.target.value)} className='select-asistencia' />
+                        </div>
+                        <div className='box-asistencia'>
+                            <div className='col'>
+                                <button type='submit' className='btn-asistencia' >Guardar</button>
                             </div>
-                            <div className='row'>
-                                <label className='label-asistencia'>Observaciones</label>
-                                <textarea required onChange={e => setObservaciones(e.target.value)} className='select-asistencia' />
-                            </div>
-                            <div className='row'>
-                                <div className='col'>
-                                    <button type='submit' className='btn-asistencia' >Guardar</button>
-                                </div>
 
-                            </div>
+                        </div>
 
-                        </form>
-
-                    }
+                    </form>
 
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 
 export default Asistencias
 
-
+/* 
+{rol == 2 ? */

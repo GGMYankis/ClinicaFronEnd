@@ -6,7 +6,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Headers from '../Headers';
-import Loading from '../components/Loading';
+import { Loading, LoaLogin } from '../components/Loading';
 import { useRef } from 'react';
 import $ from 'jquery';
 
@@ -24,14 +24,10 @@ function VerGanancias() {
     const [endDate, setEndDate] = useState(null);
     const [mensaje, setMensaje] = useState(false);
     const [mostrarVacio, setMostrarVacio] = useState(true);
-
-
     const [sumarGastos, setSumarGastos] = useState(0);
     const [surmarAsistencia, setSurmarAsistencia] = useState(0);
     const [acolumaldo, setAcolumaldo] = useState(0);
     const [loading, setLoading] = useState(false);
-
-
     const negaClas = useRef(null);
 
     function suma(monto) {
@@ -42,7 +38,7 @@ function VerGanancias() {
         setSumarGastos(acolumaldo)
     }
 
-
+    const myElement = useRef();
 
     function sumas(monto) {
 
@@ -69,7 +65,7 @@ function VerGanancias() {
         if (acolumaldo == 0) {
         } else if (acolumaldo > 0) {
         } else {
-            negaClas.current.classList.add('activoNega')
+            // negaClas.current.classList.add('activoNega')
         }
     }
 
@@ -85,8 +81,6 @@ function VerGanancias() {
     }
 
     const enviars = (e) => {
-
-
         setLoading(true)
 
         const urls = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/FiltrarGastos'
@@ -95,7 +89,6 @@ function VerGanancias() {
             if (result.data.mensaje) {
                 setMensaje(true)
             } else {
-                setMensaje(false)
                 setMostrarVacio(false)
                 setCitas(result.data)
                 const monto = result.data.map(m => m.amount)
@@ -131,11 +124,11 @@ function VerGanancias() {
     return (
 
         <div>
-            <Headers />
-            <div className='contenedor-FiltrarGastos'>
+            <Headers myElement={myElement}  />
+            <div className='contenedor-FiltrarGastos' >
 
 
-                <div className='contTableGastos'>
+                <form className='contTableGastos' onSubmit={enviars} ref={myElement}>
 
                     {
                         loading ? <Loading /> : ""
@@ -148,14 +141,14 @@ function VerGanancias() {
                         <div className='row' id='cont-input-gastos'>
                             <div className='col'>
                                 <label>Fecha Inicio</label>
-                                <input type='date' className='inputgastos' onChange={e => setStartDate(e.target.value)} />
+                                <input type='date' className='inputgastos' onChange={e => setStartDate(e.target.value)} required />
                             </div>
                             <div className='col'>
                                 <label>Fecha Fin</label>
-                                <input type='date' className='inputgastos' onChange={e => setEndDate(e.target.value)} />
+                                <input type='date' className='inputgastos' onChange={e => setEndDate(e.target.value)} required />
                             </div>
                             <div className='col'>
-                                <button className='btn-gastos' onClick={enviars}>Buscar</button>
+                                <button className='btn-gastos' type='submit'>Buscar</button>
                             </div>
                         </div>
                         <hr></hr>
@@ -184,7 +177,9 @@ function VerGanancias() {
                                             </tr>
                                         ])
                                     }
+
                                 </tbody>
+                              
                             </table>
                             {mostrarVacio ?
                                 <div className='mostrarMensaje'>
@@ -236,12 +231,7 @@ function VerGanancias() {
                                         <h1 className='resultadoGanancias' ref={negaClas}>${gana.toFixed(2)}</h1>
                                     </div>
                                 }
-                                {mensaje ?
-                                    <div className="alert alert-danger" role="alert">
-                                        No se encontraron registros
-                                    </div>
-                                    : ""
-                                }
+
                             </div>
 
 
@@ -261,12 +251,7 @@ function VerGanancias() {
 
 
                                 }
-                                {mensaje ?
-                                    <div className="alert alert-danger" role="alert">
-                                        No se encontraron registros
-                                    </div>
-                                    : ""
-                                }
+
                             </div>
 
                             <div className='cont-titu-ganancia-tabla'>
@@ -283,12 +268,7 @@ function VerGanancias() {
                                     </div>
 
                                 }
-                                {mensaje ?
-                                    <div className="alert alert-danger" role="alert">
-                                        No se encontraron registros
-                                    </div>
-                                    : ""
-                                }
+
                             </div>
 
                             <div className='cont-titu-ganancia-tabla'>
@@ -306,18 +286,13 @@ function VerGanancias() {
 
 
                                 }
-                                {mensaje ?
-                                    <div className="alert alert-danger" role="alert">
-                                        No se encontraron registros
-                                    </div>
-                                    : ""
-                                }
+
                             </div>
 
 
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     )
@@ -326,4 +301,9 @@ function VerGanancias() {
 
 export default VerGanancias
 
-//consultorio
+/* {mensaje ?
+    <div className="alert alert-danger" role="alert">
+        No se encontraron registros
+    </div>
+    : ""
+} */

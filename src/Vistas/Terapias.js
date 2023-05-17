@@ -9,8 +9,7 @@ import Cookies from 'universal-cookie';
 import { useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import Headers from '../Headers'
-import Loading from '../components/Loading';
-
+import { Loading, LoaLogin } from '../components/Loading';
 
 
 function Terapias() {
@@ -20,6 +19,9 @@ function Terapias() {
     const [description, setDescription] = useState('')
     const [price, setPrice] = useState(0)
     const [porcentaje, setPorcentaje] = useState(0)
+    const [porcentajeCentro, setPorcentajeCentro] = useState(0)
+
+
     const [vali, setVali] = useState(0)
     const [value, setValue] = useState("");
     const [loading, setLoading] = useState(false);
@@ -34,11 +36,9 @@ function Terapias() {
         console.log(e)
     }
 
-
     const handlePrecio = (event) => {
 
         const regex = /^[0-9\b]+$/;
-
 
         if (event.target.value === "" || regex.test(event.target.value)) {
             setValue(event.target.value);
@@ -54,7 +54,8 @@ function Terapias() {
         Value: label,
         Description: description,
         Price: price,
-        Porcentaje: porcentaje
+        Porcentaje: porcentaje,
+        PorcentajeCentro: porcentajeCentro
 
     }
     function refreshPage() {
@@ -67,7 +68,7 @@ function Terapias() {
 
         setLoading(true)
 
-        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/CrearTerapia';
+        const url = 'https://localhost:63958/api/Clinica/CrearTerapia';
         axios.post(url, data).then((result) => {
 
 
@@ -95,18 +96,10 @@ function Terapias() {
         })
     }
 
-
-
-
     return (
 
         <div>
-
-
             <Headers />
-
-
-
 
             <div className='cont-form-terapia' >
 
@@ -133,11 +126,15 @@ function Terapias() {
                                 <input type="text" onChange={handlePrecio} required />
                             </div>
                             <div className='cont-barra-tera'>
-                                <label>Porcentaje</label>
+                                <label>Porcentaje del Terapeuta</label>
                                 <input type="text" onChange={e => setPorcentaje(e.target.value)} required />
                             </div>
                             <div className='cont-barra-tera'>
-                                <label>Descripcion</label>
+                                <label>Porcentaje del Centro</label>
+                                <input type="text" onChange={e => setPorcentajeCentro(e.target.value)} required />
+                            </div>
+                            <div className='cont-barra-tera'>
+                                <label>Descripción</label>
                                 <textarea onChange={(e) => handleDescripcion(e.target.value)} ></textarea>
                             </div>
                             <button className='btn-terapia'>Guardar</button>
@@ -146,9 +143,6 @@ function Terapias() {
 
                 </form>
             </div>
-
-
-
 
         </div>
 

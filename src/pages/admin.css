@@ -21,9 +21,7 @@
     border: 1px solid white;
 }
 
-
-
-.encabezado ul {
+.encabezado .cont-menu {
     position: fixed;
     width: 220px;
     height: 100vh;
@@ -35,23 +33,32 @@
     overflow: auto;
 }
 
-.encabezado ul::-webkit-scrollbar {
+.encabezado .cont-menu::-webkit-scrollbar {
     background-color: #0b2f57;
     width: 8px;
 }
 
-.encabezado ul::-webkit-scrollbar-thumb {
+.encabezado .cont-menu::-webkit-scrollbar-thumb {
     background-color: orange;
     border-radius: 5px;
     width: 0px;
 }
 
-ul li {
+.cont-menu {
+    transition: all .5s ease;
+}
+
+.cont-menu ul li {
     display: block;
-    padding-top: 13px;
     line-height: 30px;
     color: red;
     text-align: left;
+    padding-left: 10px;
+}
+
+.letras-menu:hover {
+    transition: all .1s;
+    color: white;
 }
 
 .letras-menu {
@@ -59,6 +66,7 @@ ul li {
     color: white;
     padding-right: 10px;
     transition: all .2s;
+    font-size: 15px;
 
 }
 
@@ -76,18 +84,13 @@ ul li {
     display: flex;
 }
 
-
-
 #ddd {
     margin-top: 100px;
 }
 
-.letras-menu:hover {
-    transition: all .1s;
-    color: orange;
-}
 
-#check:checked~ul {
+
+#check:checked~.cont-menu {
     left: 0;
     transition: all .5s;
 }
@@ -116,24 +119,22 @@ ul li {
     border-radius: 5px;
     display: none;
     margin-bottom: 15px;
+}
 
+
+.mi-clase-css {
+    margin-left: 220px;
 }
 
 @media (max-width:1150px) {
-    .checkbtn {
-        display: none;
-    }
+
 
     .checkbtnOtro {
         display: block;
     }
 }
 
-@media (max-width:450px) {
-    .mi-clase-css {
-        margin-left: 220px;
-    }
-}
+
 
 .perfil {
     padding: 10px;
@@ -324,7 +325,7 @@ body {
 
 .form-select {
     width: 100%;
-    background-color: rgba(196, 190, 190, 0.322);
+    background-color: white;
 }
 
 .mostra {
@@ -706,7 +707,6 @@ th {
     border: 1px solid #0b2f57;
     margin-top: 20px;
     transition: all .2s;
-
 }
 
 .btn-editar-terapia:hover {
@@ -824,6 +824,7 @@ th {
     align-items: center;
     background-color: white;
     padding: 10px;
+    margin-top: 55px;
 }
 
 .contenedor-admin {

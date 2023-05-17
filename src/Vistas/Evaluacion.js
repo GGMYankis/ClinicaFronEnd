@@ -14,46 +14,30 @@ import $ from 'jquery';
 import { findDOMNode } from 'react-dom'
 import { FaUser } from 'react-icons/fa'
 import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario, getUsuarioCompleto } from '../auth-helpers'
+import { Loading, LoaLogin } from '../components/Loading';
 
 
-/*
-
-        if (rol == 2) {
-            axios.post('http://yankisggm-001-site1.ctempurl.com/api/Clinica/GetEvaluacionByTerapeuta', date)
-                .then(response => {
-
-                    setData(response.data)
-                });
-        } else {
-            axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/ListaTerapia')
-                .then(response => {
-                    setData(response.data)
-                });
-        }
-
-*/
 
 
 function Evaluacion() {
+
     const [data, setData] = useState([]);
     const [dataPaciente, setDataPaciente] = useState([]);
     const [listapacientes, setListaPasientes] = useState([]);
     const [listaTerapia, setListaTerapia] = useState([]);
     const cookies = new Cookies();
     const navigation = useNavigate();
-
     const [day, setDay] = useState('')
     const [frecuencia, setFrecuencia] = useState('')
     const [repetir, setRepetir] = useState(null)
     const [fechaInicio, setFechaInicio] = useState(null)
     const [nom, setNom] = useState("")
     const [terapeuta, setTerapeuta] = useState([])
-
     const [idPatients, setIdPatients] = useState(0)
     const [idTherapy, setIdTherapy] = useState(0)
-
     const [priceEvaluacion, setPriceEvaluacion] = useState(0)
     const [idterapeuta, setIdterapeuta] = useState(0)
+    const [loading, setLoading] = useState(false);
 
     let id = getDatosUsuario()
     let rol = getUsuarioCompleto()
@@ -65,16 +49,38 @@ function Evaluacion() {
 
 
     useEffect(() => {
-        axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/Lista')
-            .then(responses => {
 
-                setDataPaciente(responses.data.lista)
-            });
+        if (rol == 2) {
 
-        axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/ListaTerapia')
-            .then(response => {
-                setData(response.data)
-            });
+            axios.post('http://yankisggm-001-site1.ctempurl.com/api/Clinica/BuscarPacientePorTerapeuta', date)
+                .then(responses => {
+
+                    setDataPaciente(responses.data)
+                    console.log(responses.data)
+                });
+        } else {
+            axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/Lista')
+                .then(responses => {
+
+                    setDataPaciente(responses.data.lista)
+                });
+        }
+
+
+
+
+        if (rol == 2) {
+            axios.post('http://yankisggm-001-site1.ctempurl.com/api/Clinica/GetEvaluacionByTerapeuta', date)
+                .then(response => {
+                    setData(response.data)
+
+                });
+        } else {
+            axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/ListaTerapia')
+                .then(response => {
+                    setData(response.data)
+                });
+        }
 
         axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/terapeuta')
 
@@ -86,20 +92,13 @@ function Evaluacion() {
     }, []);
 
 
-
-
     const pasientes = (e) => {
         setIdPatients(e)
     }
 
-
-
     const Fterapeuta = (e) => {
         setIdterapeuta(e)
     }
-
-
-
 
 
     const terapias = (e) => {
@@ -107,7 +106,6 @@ function Evaluacion() {
         if (e != null) {
             $('#FormModal').show();
             setIdTherapy(e)
-
         }
     }
 
@@ -138,16 +136,13 @@ function Evaluacion() {
 
 
     const EnviarEvaluacion = (e) => {
-        e.preventDefault()
-
-
+        e.preventDefault();
+        setLoading(true)
 
         const url = 'http://yankisggm-001-site1.ctempurl.com/api/traerpaciente/CrearEvaluacion';
         const urlRecurrencia = 'http://yankisggm-001-site1.ctempurl.com/api/traerpaciente/CrearRecurrencia';
 
         axios.post(url, dataEvaluacion).then((resultEvaluacion) => {
-
-
 
             if (resultEvaluacion.data > 0) {
 
@@ -155,7 +150,7 @@ function Evaluacion() {
 
                 axios.post(urlRecurrencia, dataRecurrencia)
                     .then((resultEvaluacion) => {
-
+                        setLoading(false)
                         swal({
                             title: "Correcto",
                             text: "Se ha guardado correctamente",
@@ -216,7 +211,7 @@ function Evaluacion() {
                     <div className="modal-content">
 
                         <div className="modal-header bg-dark text-white">
-                            <h1 className="modal-title fs-5" id="staticBackdropLabel">Usuario</h1>
+                            <h1 className="modal-title fs-5" id="staticBackdropLabel">Terapia</h1>
                         </div>
 
                         <div className="modal-body ">
@@ -251,7 +246,9 @@ function Evaluacion() {
 
             <div className='contenedor-evaluacion'>
                 <form className='form-select-evaluacion' onSubmit={EnviarEvaluacion}>
-
+                    {
+                        loading ? <Loading /> : ""
+                    }
                     <div className='cont-titu-select'>
                         <h1>Citas</h1>
                         <i className="bi bi-person-circle"></i>
@@ -260,34 +257,50 @@ function Evaluacion() {
                     <div className='sub-cont-evaluacion'>
 
 
-                        <div className='cont-select-evaluacion1'>
-                            <p className='titu-barra'>   Lista de Pacientes </p>
-                            <select className='form-select' required onChange={e => pasientes(e.target.value)}  >
-                                <option >Seleccione una paciente</option>
-                                {
-                                    dataPaciente.map(item => [
-                                        <option key={item.IdPatients} value={item.idPatients}>{item.name}</option>
+                        {rol == 2 ?
+                            <div className='cont-select-evaluacion1'>
+                                <p className='titu-barra'>   Lista de Pacientes </p>
+                                <select className='form-select' required onChange={e => pasientes(e.target.value)}  >
+                                    <option value='' >Seleccione una paciente</option>
+                                    {
+                                        dataPaciente.map(item => [
+                                            <option key={item.nombrePaciente.IdPatients} value={item.nombrePaciente.idPatients}>{item.nombrePaciente.name}</option>
 
-                                    ])
+                                        ])
+                                    }
 
-                                }
+                                </select>
+                            </div>
+                            :
 
-                            </select>
-                        </div>
+                            <div className='cont-select-evaluacion1'>
+                                <p className='titu-barra'>   Lista de Pacientes </p>
+                                <select className='form-select' required onChange={e => pasientes(e.target.value)}  >
+                                    <option value='' >Seleccione una paciente</option>
+                                    {
+                                        dataPaciente.map(item => [
+                                            <option key={item.IdPatients} value={item.idPatients}>{item.name}</option>
+
+                                        ])
+                                    }
+
+                                </select>
+                            </div>
+                        }
+
+
 
 
                         <div className='cont-select-evaluacion1'>
                             <p className='titu-barra'> Lista de Terapias </p>
 
                             <select className='form-select' onChange={e => terapias(e.target.value)} required >
-                                <option >Seleccione una terapia</option>
-
+                                <option value='' >Seleccione una terapia</option>
                                 {
                                     data.map(item => [
                                         <option value={item.nombreTerapia.idTherapy} >{item.nombreTerapia.label}</option>
                                     ])
                                 }
-
                             </select>
                         </div>
 
@@ -295,7 +308,7 @@ function Evaluacion() {
                         <div className='cont-select-evaluacion1'>
                             <p className='titu-barra'> Terapeuta </p>
                             <select className='form-select' onChange={e => Fterapeuta(e.target.value)} required >
-                                <option >Seleccione un Terapeuta</option>
+                                <option value=''>Seleccione un Terapeuta</option>
                                 {
                                     terapeuta.map(item => [
                                         <option value={item.idUser}>{item.names}</option>
@@ -358,7 +371,7 @@ function Evaluacion() {
                             </div>
 
                         </div>
-                        <button className='btn-evaluacion'>Guadar</button>
+                        <button className='btn-evaluacion' type='submit'>Guadar</button>
                     </div>
                 </form>
             </div>

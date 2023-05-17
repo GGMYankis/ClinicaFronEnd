@@ -50,6 +50,8 @@ const Admin = () => {
         console.log(parents_name)
     }
 
+    
+
     const handlemothers_number = (value) => {
 
         const regex = /^[0-9\b]+$/;
@@ -59,6 +61,9 @@ const Admin = () => {
 
         setNumberMothers(value.target.value);
     }
+
+
+
 
     const handleparent_or_guardian_phone_numberChange = (value) => {
 
@@ -232,7 +237,7 @@ const Admin = () => {
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Edad</label>
-                                <input type="text" className="form-control" id="validationServer02" value={calculateAge()} />
+                                <input type="text" className="form-control" id="validationServer02" defaultValue={calculateAge()} />
 
                             </div>
 

@@ -183,6 +183,8 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
+  margin-top: 55px;
+  background-color: white;
 }
 
 .form-terapias {
@@ -191,7 +193,6 @@
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
   border-radius: 10px;
   margin: 10px;
-  position: relative;
 }
 
 
@@ -323,6 +324,7 @@
   text-align: center;
   border-radius: 10px;
   margin: 20px;
+  position: relative;
 }
 
 .sub-cont-evaluacion {
@@ -335,6 +337,11 @@
   color: white;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
+  text-align: center;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -619,35 +626,43 @@
   height: 100px;
 }
 
-
-
 /* Asistencia */
-
 
 .cont-padre-asistencia {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
-  margin-top: 80px;
+  min-height: 100vh;
+  margin-top: 55px;
+  background-color: white;
 }
 
 .cont-titu-asistencias {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: #0b2f57;
   color: white;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   padding: 10px;
-  text-align: center;
+  height: 40px;
+}
+
+.justificacinAsistencias {
+  float: right;
+  width: 100%;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 0;
 }
 
 .cont-titu-asistencias h1 {
   font-size: 20px;
   font-weight: bold;
-
+  margin-bottom: 0px;
 }
-
 
 @media(max-width:550px) {
   .contanedor-asistencias {
@@ -660,16 +675,20 @@
   border-radius: 10px;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
   margin: 10px;
-
 }
 
 .form-asistencia {
-  padding: 30px;
+  padding: 20px;
+}
+
+.box-asistencia {
+  margin-bottom: 15px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
 }
 
 /* background-color: rgba(196, 190, 190, 0.322); */
-
-
 
 .select-asistencia {
   border-radius: 10px;
@@ -1532,7 +1551,7 @@
 }
 
 .cont-menu ul {
-  padding: 20px 0px 20px 0px;
+  padding: 15px 0px 20px 0px;
   list-style: none;
   overflow-y: auto;
 }
@@ -1542,7 +1561,6 @@
   display: block;
   font-size: 25px;
   text-decoration: none;
-  padding: 10px 15px;
 }
 
 .cont-menu ul li:hover {
@@ -1619,6 +1637,7 @@
   background-color: white;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
   border-radius: 10px;
+  position: relative;
 }
 
 #myTable {
@@ -1646,4 +1665,89 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.cont-formPagoTerapeuat {
+  width: 100%;
+  height: 100vh;
+  background-color: white;
+  margin-top: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  position: relative;
+}
+
+.formPagoTerapeuat {
+  width: 80%;
+  height: 250px;
+  background-color: white;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+  position: relative;
+}
+
+.table-formPagoTerapeuat {
+  width: 100%;
+}
+
+.table-formPagoTerapeuat thead tr th {
+  border: none;
+}
+
+.cont-form-abono {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 55px;
+}
+
+
+.formAbonoTerapias {
+  width: 50%;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+  border-radius: 10px;
+  background-color: white;
+  position: relative;
+}
+
+.cont-box-abono {
+  margin-bottom: 15px;
+}
+
+.cont-sub-box-abono {
+  padding: 20px;
+}
+
+.btn-abono {
+  padding: 10px;
+  background-color: #0b2f57;
+  border: 3px solid #0b2f57;
+  border-radius: 5px;
+  color: white;
+  margin-left: 5px;
+  display: block;
+  margin: auto;
+  width: 200px;
+}
+
+
+.btn-abono:hover {
+  background-color: #0b2e57c4;
+}
+
+
+
+
+.cont-titu-select h1 {
+
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 25px;
+  margin-bottom: 0px;
+
 }
