@@ -31,17 +31,17 @@ import Asistencias from './Vistas/Asistencias';
 import Calendario from './Vistas/Calendario';
 import { Protect } from './components/Protect';
 import Autenticacion from './components/Autenticacion';
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario, nombreUsuario } from './auth-helpers'
+import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, idUser, getDatosUsuario, nombreUsuario } from './auth-helpers'
 import { Loading, LoaLogin, LoaAll } from './components/Loading';
 
 initAxiosInterceptors()
 
 function App() {
 
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        
+
         setTimeout(() => {
             setIsLoading(false);
         }, 1000);
@@ -54,14 +54,15 @@ function App() {
                 if (token) {
                     axios.post('http://yankisggm-001-site1.ctempurl.com/api/Autenticacion/getUserByToken')
                         .then(res => {
-                            setUsuario(res.data.idUser)
-                            const user = res.data.names.substring('', 1)
+
+                            idUser(res.data.user.idUser)
+                            const user = res.data.user.names.substring('', 1)
                             setUsuarioM(user)
-                            nombreUsuario(res.data.names)
+                            nombreUsuario(res.data.user.names)
 
                         }).catch(error => {
 
-                          
+
 
                         });
                 }
@@ -75,21 +76,6 @@ function App() {
 
         cargarUsuario()
     }, []);
-
-
-
-
-    function decodeToken(tokens) {
-
-        try {
-            const decoded = jwt_decode(tokens);
-            return decoded;
-
-        } catch (err) {
-            return null;
-        }
-    }
-
 
 
     /*

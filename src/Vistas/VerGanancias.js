@@ -29,7 +29,8 @@ function VerGanancias() {
     const [acolumaldo, setAcolumaldo] = useState(0);
     const [loading, setLoading] = useState(false);
     const negaClas = useRef(null);
-
+    const resportes = useRef();
+    
     function suma(monto) {
         let acolumaldo = 0;
         for (let i = 0; i < monto.length; i++) {
@@ -38,7 +39,7 @@ function VerGanancias() {
         setSumarGastos(acolumaldo)
     }
 
-    const myElement = useRef();
+    
 
     function sumas(monto) {
 
@@ -81,7 +82,8 @@ function VerGanancias() {
     }
 
     const enviars = (e) => {
-        setLoading(true)
+
+        resportes.current.classList.add('contenedors');
 
         const urls = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/FiltrarGastos'
         axios.post(urls, data).then((result) => {
@@ -102,7 +104,7 @@ function VerGanancias() {
             axios.post(url, datas).then((result) => {
 
                 if (result.data) {
-                    setLoading(false)
+                    resportes.current.classList.remove('contenedors');
                 }
 
                 setTera(result.data)
@@ -124,11 +126,10 @@ function VerGanancias() {
     return (
 
         <div>
-            <Headers myElement={myElement}  />
+            <Headers myElement={resportes} />
+
             <div className='contenedor-FiltrarGastos' >
-
-
-                <form className='contTableGastos' onSubmit={enviars} ref={myElement}>
+                <form className='contTableGastos' onSubmit={enviars} ref={resportes}>
 
                     {
                         loading ? <Loading /> : ""
@@ -179,7 +180,7 @@ function VerGanancias() {
                                     }
 
                                 </tbody>
-                              
+
                             </table>
                             {mostrarVacio ?
                                 <div className='mostrarMensaje'>

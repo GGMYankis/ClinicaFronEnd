@@ -67,7 +67,7 @@ function ListasPacientes() {
         axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/Lista')
             .then(res => {
 
-                res.data.lista.map(item => {
+                res.data.map(item => {
 
 
                     if (item.activo == true) {
@@ -79,7 +79,7 @@ function ListasPacientes() {
                         setlistaPaciente(item.activo = 'no')
 
                     }
-                    setlistaPaciente(res.data.lista)
+                    setlistaPaciente(res.data)
 
                 })
 

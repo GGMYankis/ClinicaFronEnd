@@ -6,20 +6,20 @@ import Cookies from "universal-cookie"
 
 export const Protect = ({ children }) => {
 
-   const cookies = new Cookies();
+  const cookies = new Cookies();
 
-   const token = cookies.get('Token')
-
-
-   if (!token) {
-
-     // return <Navigate to="/login" />
-     
-   }
+  const token = cookies.get('Token')
 
 
+  if (!token) {
 
-   return children ? children : <Outlet />
+    return <Navigate to="/login" />
+
+  }
+
+
+
+  return children ? children : <Outlet />
 
 }
 

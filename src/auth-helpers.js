@@ -24,13 +24,15 @@ export function nombreUsuario(name) {
     return cookies.set('Nombre', name, { path: '/' });
 }
 
-export function setUsuario(user) {
-    return cookies.set('UsuarioId', user, { path: '/' });
+export function idUser(idUser) {
+    
+
+    return cookies.set('idUser', idUser, { path: '/' });
 }
 
 export function getDatosUsuario() {
 
-    return cookies.get('UsuarioId');
+    return cookies.get('idUser');
 }
 
 export function getNombreUsuario() {
@@ -61,6 +63,7 @@ export function DeleteToken() {
     cookies.remove('Nombre')
     cookies.remove('UsuarioId')
     cookies.remove('PrimeraLetra')
+    cookies.remove('idUser')
     return;
 }
 

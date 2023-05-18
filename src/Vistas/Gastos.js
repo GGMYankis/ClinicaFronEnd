@@ -17,10 +17,8 @@ function Gastos() {
     const [fecha, setFecha] = useState('')
     const [NumMadre, setNumMadre] = useState("");
     const [loading, setLoading] = useState(false);
-
-
-
-
+    const resportes = useRef();
+    
     const ValidarMonto = (value) => {
 
         const regex = /^[0-9\b]+$/;
@@ -43,7 +41,7 @@ function Gastos() {
 
         e.preventDefault()
 
-        setLoading(true)
+        resportes.current.classList.add('contenedors');
 
         const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/ContabilidadReportes';
         axios.post(url, dataCrear).then((result) => {
@@ -55,7 +53,7 @@ function Gastos() {
                 });
             }
             if (result) {
-                setLoading(false)
+                resportes.current.classList.remove('contenedors')
                 probar()
             }
         })
@@ -66,8 +64,8 @@ function Gastos() {
 
         <div>
             <Headers />
-            <div className='cont-form-terapia' >
-                <form className='formReportesGastos' onSubmit={enviarReporte} id="formterapia">
+            <div className='cont-form-gastos' >
+                <form className='formReportesGastos' onSubmit={enviarReporte} id="formterapia" ref={resportes}>
                     {
                         loading ? <Loading /> : ""
                     }

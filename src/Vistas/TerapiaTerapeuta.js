@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { BrowserRouter, Routes, Route, Link, Redirect } from 'react-router-dom'
 import logo from "../imagenes/IMG-20230221-WA0009.png"
 import doctor from "../imagenes/undraw_medicine_b1ol.png"
@@ -25,6 +25,7 @@ function TerapiaTerapeuta() {
     const [terapeuta, setTerapeuta] = useState([])
     const [idTerapeuta, setIdTerapeuta] = useState([])
     const [idTerapias, setIdTerapias] = useState([]);
+    const resportes = useRef();
 
     useEffect(() => {
         cargar()
@@ -61,6 +62,7 @@ function TerapiaTerapeuta() {
 
     const enviars = (e) => {
         e.preventDefault()
+        resportes.current.classList.add('contenedors');
 
         const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/Post'
         axios.post(url, datos).then((result) => {
@@ -68,7 +70,7 @@ function TerapiaTerapeuta() {
             if (result) {
 
                 FormularioTherapy.reset()
-
+                resportes.current.classList.remove('contenedors');
                 swal({
                     title: "Correcto",
                     text: "Cambio guardado ",
@@ -99,20 +101,20 @@ function TerapiaTerapeuta() {
             <Headers />
             <div className='cont-asignar'>
 
-                <div className='form-asignar'>
+                <div className='form-asignar' ref={resportes}>
                     <div className='cont-titu-asignacionTerapeuta'>
                         <h1>Asignación Terapeuta</h1>
                     </div>
                     <div className='sub-asignar'>
-                        <form id="FormularioTherapy" >
+                        <form id="FormularioTherapy" onSubmit={enviars}>
                             <div className='row' id='row-1-asignar' >
                                 <div className='col'>
 
                                     <select required className='asignarBarra' onChange={e => handleTerapeuta(e.target.value)} >
-                                        <option selected>Select</option>
+                                        <option value=''>Select</option>
                                         {
                                             terapeuta.map(item => [
-                                                <option value={item.idUser}>{item.names} {item.apellido}</option>
+                                                <option key={item.idUser}  value={item.idUser}>{item.names} {item.apellido}</option>
                                             ])
                                         }
                                     </select>
@@ -141,14 +143,13 @@ function TerapiaTerapeuta() {
                                         isMulti
                                         options={data}
                                         onChange={handle}
-
+                                        required
                                     />
-
                                 </div>
-
                             </div>
+                            <button className='btn-buscar-citas' type='submit'>Guardar</button>
                         </form>
-                        <button className='btn-buscar-citas' onClick={enviars}>Guardar</button>
+
                     </div>
                 </div>
             </div>

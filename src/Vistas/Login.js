@@ -1,5 +1,5 @@
 
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import axios from 'axios';
 //import { Navigate, Outlet } from "react-router-dom";
 import { BrowserRouter, Routes, Route, Link, Redirect, Form, useNavigate } from 'react-router-dom';
@@ -11,8 +11,9 @@ import swal from 'sweetalert';
 import { FaFontAwesomeIcon, FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell, faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 import jwt_decode from 'jwt-decode';
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario, setUsuarioCompleto, setToken, nombreUsuario } from '../auth-helpers'
-import {Loading ,LoaLogin} from '../components/Loading';
+import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, idUser, getDatosUsuario, setUsuarioCompleto, setToken, nombreUsuario } from '../auth-helpers'
+import { Loading, LoaLogin } from '../components/Loading';
+
 function Login() {
 
     const login = document.getElementById("login")
@@ -24,7 +25,7 @@ function Login() {
     const navigation = useNavigate();
 
 
-
+    const resportes = useRef();
     const handleLogin = async (e) => {
 
         try {
@@ -50,12 +51,12 @@ function Login() {
                 Password: Password
             };
 
-            setLoading(true)
+            resportes.current.classList.add('contenedorsL');
 
             const url = 'http://yankisggm-001-site1.ctempurl.com/api/Autenticacion/Login';
             axios.post(url, data).then((result) => {
 
-                
+
 
                 if (result.data.user != null) {
                     setLoading(false)
@@ -63,11 +64,13 @@ function Login() {
                     navigation("/admin")
                     const user = result.data.user.names.substring('', 1)
                     setUsuarioM(user)
-                    setUsuario(result.data.user.idUser)
+                    idUser(result.data.user.idUser)
                     nombreUsuario(result.data.user.names)
                     setUsuarioCompleto(result.data.user.idRol)
                     login.reset()
+
                 } else {
+                    resportes.current.classList.remove('contenedorsL');
                     setLoading(false)
                     setMensajeError(result.data.message)
                     return;
@@ -87,7 +90,7 @@ function Login() {
     return (
 
         <div className='contenedor_login3'>
-            <form className='hhh' onSubmit={handleLogin} id="login">
+            <form className='hhh' onSubmit={handleLogin} id="login" ref={resportes}>
                 {
                     loading ? <LoaLogin /> : ""
                 }
@@ -98,7 +101,7 @@ function Login() {
 
                 <div className='cont-email-login' >
                     <FontAwesomeIcon icon={faEnvelope} className='email' />
-                    <input type="text" placeholder='Email' onChange={(e) => setEmail(e.target.value)} autoComplete='off' />
+                    <input type="text" placeholder='Email'id='emaillogin'  onChange={(e) => setEmail(e.target.value)} autoComplete='off' />
                 </div>
 
                 <div className='cont-email-login' >
@@ -124,3 +127,6 @@ function Login() {
 export default Login;
 
 
+/* input:focus {
+    outline-color: red;
+  } */

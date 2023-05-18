@@ -131,13 +131,7 @@ function Calendario() {
 
 
 
-    const myElement = useRef(null);
-
-    const handleClick = () => {
-        myElement.current.classList.toggle('calendario');
-    };
-
-
+    const calendario = useRef(null);
 
     function handleEventClick(info) {
 
@@ -236,117 +230,15 @@ function Calendario() {
         })
     }
 
-    const handleClickOtro = () => {
-        myElement.current.classList.toggle('mi-clase-css');
-    };
+
 
     return (
 
         <div>
+            <Headers calendario={calendario} />
 
-
-
-            <header className='encabezado'>
-                <div>
-                    <nav>
-                        <input type="checkbox" id="check" />
-                        <label htmlFor="check" className="checkbtn">
-                            <FaBars id='bar' />
-                        </label>
-                    
-                        <div className='cont-menu'>
-                            <ul>
-                                <li>
-                                    <Link className='letras-menu' to="/admin">Paciente de ingreso</Link>
-                                </li>
-                                <li>
-                                    <Link className='letras-menu' to="/evaluacion">Citas</Link>
-                                </li>
-                                <li>
-                                    <Link className='letras-menu' to="/terapia">Crear terapia</Link>
-                                </li>
-
-                                {rol == 1 ?
-
-                                    <span>
-                                        <li>
-                                            <Link className='letras-menu' to="/listasPacientes">Listado de Pacientes</Link>
-                                        </li>
-
-                                        <li>
-                                            <Link className='letras-menu' to="/listasTerapias">Listado de Terapias</Link>
-                                        </li>
-                                    </span>
-                                    :
-                                    ""
-                                }
-
-                                <li>
-                                    <Link className='letras-menu' to="/asistencias">Asistencia</Link>
-                                </li>
-                                <li>
-                                    <Link className='letras-menu' to="/calendario">Calendario</Link>
-                                </li>
-                                <li>
-                                    <Link className='letras-menu' to="/TerapiaTerapeuta">Asignación</Link>
-                                </li>
-                                <li>
-                                    <Link className='letras-menu' to="/Users">Usuario</Link>
-                                </li>
-
-                                {rol == 1 ?
-
-
-                                    <span>
-                                        <li>
-                                            <Link className='letras-menu' to="/gastos">Registro de gastos</Link>
-                                        </li>
-                                        <li>
-                                            <Link className='letras-menu' to="/VerGanancias">Reporte</Link>
-                                        </li>
-                                        <li>
-                                            <Link className='letras-menu' to="/AbonoTerapias">AbonoTerapias</Link>
-                                        </li>
-                                        <li>
-                                            <Link className='letras-menu' to="/PagoTerapeutas">PagoTerapeutas</Link>
-                                        </li>
-                                    </span>
-                                    :
-                                    ""
-                                }
-
-                                <li>
-                                    <a className='letras-menu' onClick={logout}>Cerra Sesión</a>
-                                </li>
-
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-
-                <div className='cont-logo-header'>
-                    <img className='img-admin-logo' src={logo} />
-                    <span className='ver'><span className='gg'>é</span>nfasis</span>
-                </div>
-
-                <div className='contenedor-botones'>
-                    <div className='cont-btn-headers'>
-                        <div className='probarUs'>
-                            <Link className='Link' to="/perfilAdmin">{obtenerUser()}</Link>
-                        </div>
-                    </div>
-                    <div className='cont-nombre-usuario'>
-                        <p className='nombreUsuario'>{getNombreUsuario()}</p>
-                    </div>
-                </div>
-            </header>
-
-
-
-
-
-            <div className='cont-padre' ref={myElement}>
-                <div id='calendario'>
+            <div className='cont-padre' >
+                <div className='calendario' ref={calendario} >
                     <FullCalendar
                         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
                         editable={true}
@@ -358,21 +250,13 @@ function Calendario() {
                             center: "title",
                             end: "dayGridMonth,timeGridWeek,timeGridDay",
                         }}
-
-
                         eventDrop={handleEventDrop}
-
-
-
                         height={"80vh"}
-                      
-
                         dateClick={handleEventClick}
                         eventClick={handleEventClickFecha}
                     />
                 </div>
             </div>
-
 
             <div className="modal" tabIndex="-1" id='eliminarPaciente' >
 
@@ -423,7 +307,6 @@ function Calendario() {
                     </div>
                 </div>
             </div>
-
             <div className="modal" tabIndex="-1" id='eliminarEvento' >
 
                 <div className="modal-dialog" role="document">
@@ -447,9 +330,6 @@ function Calendario() {
                     </div>
                 </div>
             </div>
-
-
-
         </div>
     )
 }

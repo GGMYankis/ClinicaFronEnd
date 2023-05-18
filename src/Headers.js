@@ -9,7 +9,7 @@ import { useState, useEffect, useRef } from 'react';
 import { setUsuarioM, obtenerUser, getNombreUsuario, DeleteToken, getUsuarioCompleto } from './auth-helpers'
 
 
-function Headers({ myElement}) {
+function Headers(props) {
 
     const navigation = useNavigate();
     obtenerUser()
@@ -22,7 +22,13 @@ function Headers({ myElement}) {
     let rol = getUsuarioCompleto()
 
     const handleClickOtro = () => {
-        myElement.current.classList.toggle('mi-clase-css');
+
+        if (props.hasOwnProperty("calendario")) {
+            props.calendario.current.classList.toggle('mi-clase-css');
+        }
+        else if (props.hasOwnProperty("myElement")) {
+            props.myElement.current.classList.toggle('mi-clase-css');
+        }
     };
 
     return (
@@ -32,11 +38,11 @@ function Headers({ myElement}) {
                 <div>
                     <nav>
                         <input type="checkbox" id="check" />
-                       
+
                         <label htmlFor="check" className="checkbtn" onClick={handleClickOtro}>
                             <FaBars id='bar' />
                         </label>
-                       
+
                         <div className='cont-menu' >
                             <ul>
                                 <li>

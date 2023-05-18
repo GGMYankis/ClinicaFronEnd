@@ -45,15 +45,17 @@
 }
 
 .cont-menu {
-    transition: all .5s ease;
+    transition: all .5s;
+
 }
 
 .cont-menu ul li {
     display: block;
     line-height: 30px;
     color: red;
-    text-align: left;
     padding-left: 10px;
+    display: flex;
+    justify-content: center;
 }
 
 .letras-menu:hover {
@@ -67,7 +69,8 @@
     padding-right: 10px;
     transition: all .2s;
     font-size: 15px;
-
+    text-align: left;
+    width: 100%;
 }
 
 .cont-nombre-usuario {
@@ -92,6 +95,7 @@
 
 #check:checked~.cont-menu {
     left: 0;
+    width: 220px;
     transition: all .5s;
 }
 
@@ -99,27 +103,6 @@
     display: none;
 }
 
-#checkOtro {
-    display: none;
-}
-
-#checkOtro:checked~ul {
-    left: 0;
-    transition: all .5s;
-}
-
-.checkbtnOtro {
-    font-size: 30px;
-    color: white;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 5px;
-    display: none;
-    margin-bottom: 15px;
-}
 
 
 .mi-clase-css {
@@ -133,8 +116,6 @@
         display: block;
     }
 }
-
-
 
 .perfil {
     padding: 10px;
@@ -159,7 +140,7 @@
 .cont-titulo-form {
     background-color: #0b2f57;
     text-align: center;
-    padding: 3px;
+    padding: 10px;
     width: 100%;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
@@ -170,6 +151,7 @@
 
     font-size: 25px;
     color: white;
+    margin-bottom: 0px;
 
 }
 
@@ -696,7 +678,8 @@ th {
 }
 
 .cont-titu-terapia h1 {
-    font-size: 20px;
+    font-size: 25px;
+    margin-bottom: 0px;
 }
 
 .btn-editar-terapia {
@@ -821,18 +804,17 @@ th {
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
     background-color: white;
-    padding: 10px;
     margin-top: 55px;
 }
 
 .contenedor-admin {
     width: 80%;
-    margin: 10px;
+    height: 80%;
     background-color: white;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
     border-radius: 10px;
+    margin: 40px 10px 10px 10px;
 }
 
 .paddd {

@@ -10,7 +10,6 @@
     transition: all .5s
 }
 
-
 .sex-tables {
     border-radius: 10px;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
@@ -25,6 +24,14 @@
     color: #FFFFFF;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.cont-titu-tables h1 {
+    margin-bottom: 0px;
 }
 
 .cont-action {
@@ -37,7 +44,7 @@
 
 .cont-titu-tables h1 {
     font-size: 25px;
-    padding: 15px;
+    margin-bottom: 0px;
 }
 
 .table {
@@ -284,6 +291,6 @@
     align-items: center;
 }
 
-.loadin{
+.loadin {
     background-color: #0b2f57;
 }

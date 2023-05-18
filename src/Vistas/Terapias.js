@@ -11,7 +11,7 @@ import swal from 'sweetalert';
 import Headers from '../Headers'
 import { Loading, LoaLogin } from '../components/Loading';
 
-
+//
 function Terapias() {
 
 
@@ -20,11 +20,11 @@ function Terapias() {
     const [price, setPrice] = useState(0)
     const [porcentaje, setPorcentaje] = useState(0)
     const [porcentajeCentro, setPorcentajeCentro] = useState(0)
-
-
     const [vali, setVali] = useState(0)
     const [value, setValue] = useState("");
     const [loading, setLoading] = useState(false);
+
+    const resportes = useRef();
 
     const handleTerapia = (e) => {
         setLabel(e)
@@ -56,40 +56,35 @@ function Terapias() {
         Price: price,
         Porcentaje: porcentaje,
         PorcentajeCentro: porcentajeCentro
-
     }
+    
     function refreshPage() {
         window.location.reload();
     }
 
-
     const enviarTerapia = (e) => {
         e.preventDefault()
 
-        setLoading(true)
+        resportes.current.classList.add('contenedors');
 
         const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/CrearTerapia';
         axios.post(url, data).then((result) => {
 
-
             const probar = async () => {
 
                 const ale = await swal({
-
                     title: "Correcto",
                     text: "Cambio guardado ",
                     icon: "success",
-
                 });
 
                 refreshPage()
 
             }
             if (result) {
-                setLoading(false)
+                resportes.current.classList.remove('contenedors');
                 probar()
             }
-
 
         }).catch((error) => {
             console.log(error)
@@ -103,7 +98,7 @@ function Terapias() {
 
             <div className='cont-form-terapia' >
 
-                <form className='form-terapias' onSubmit={enviarTerapia} id="formterapia">
+                <form className='form-terapias' onSubmit={enviarTerapia} id="formterapia" ref={resportes}>
 
                     {
                         loading ? <Loading /> : ""

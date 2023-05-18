@@ -1,11 +1,11 @@
 
 import { error } from 'jquery'
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
 import Headers from '../Headers'
 import swal from 'sweetalert';
 import '../responsive.css'
-import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario, getUsuarioCompleto } from '../auth-helpers'
+import { getDatosUsuario, getUsuarioCompleto } from '../auth-helpers'
 
 function Asistencias() {
 
@@ -18,8 +18,7 @@ function Asistencias() {
     const [data, setData] = useState([]);
     const [dataPaciente, setDataPaciente] = useState([]);
     const [justificaciones, setJustificaciones] = useState('');
-
-
+    const resportes = useRef();
 
     const Fobser = (e) => {
         setFecha(e)
@@ -35,8 +34,6 @@ function Asistencias() {
 
     useEffect(() => {
 
-
-
         if (rol == 2) {
 
             axios.post('http://yankisggm-001-site1.ctempurl.com/api/Clinica/BuscarPacientePorTerapeuta', date)
@@ -51,7 +48,6 @@ function Asistencias() {
                     setDataPaciente(responses.data)
                 });
         }
-
 
         if (rol == 2) {
             axios.post('http://yankisggm-001-site1.ctempurl.com/api/Clinica/GetEvaluacionByTerapeuta', date)
@@ -89,12 +85,14 @@ function Asistencias() {
     const enviar = (e) => {
         e.preventDefault()
 
+        resportes.current.classList.add('contenedors');
         if (rol == 2) {
             dataValor.IdTerapeuta = id
         }
 
         const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/Asistencias';
         axios.post(url, dataValor).then((result) => {
+            resportes.current.classList.remove('contenedors');
             swal({
                 title: "Correcto",
                 text: "Cambio guardado ",
@@ -117,7 +115,7 @@ function Asistencias() {
             <Headers />
 
             <div className='cont-padre-asistencia' >
-                <div className='contanedor-asistencias'>
+                <div className='contanedor-asistencias' ref={resportes}>
                     <div className='cont-titu-asistencias'>
                         <h1>Asistencias</h1>
                     </div>

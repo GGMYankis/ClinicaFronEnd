@@ -75,7 +75,6 @@ function Contabilidad() {
     }
 
 
-
     return (
 
         <div>

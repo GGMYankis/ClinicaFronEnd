@@ -78,6 +78,7 @@
   position: relative;
 }
 
+
 .email {
   color: orange;
   font-size: 20px;
@@ -86,6 +87,14 @@
   padding-right: 10px;
   padding-top: 8px;
 }
+
+.iconosMenu {
+  margin-right: 20px;
+  color: white;
+}
+
+
+
 
 .contenedor_login3 .hhh {
   width: 300px;
@@ -108,21 +117,22 @@
 
 
 .img3 {
-
   border-radius: 50%;
   width: 100px;
-
 }
 
-
+#emaillogin:focus{
+  outline-color: white;
+}
 
 .contenedor_login3 .hhh input {
-
   padding: 5px;
   width: 100%;
   margin-top: 10px;
   display: block;
   border-radius: 20px;
+  border: none;
+  background-color: white;
 }
 
 .contenedor_login3 .btn {
@@ -181,7 +191,6 @@
 .cont-form-terapia {
   display: flex;
   justify-content: center;
-  align-items: center;
   height: 100vh;
   margin-top: 55px;
   background-color: white;
@@ -190,9 +199,10 @@
 .form-terapias {
   background-color: white;
   width: 50%;
+  height: 520px;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
   border-radius: 10px;
-  margin: 10px;
+  margin: 40px 10px 10px 10px;
 }
 
 
@@ -246,6 +256,7 @@
 .cont-titu-Pagina-terapia h1 {
   color: white;
   font-size: 25px;
+  margin-bottom: 0px;
 }
 
 
@@ -311,7 +322,6 @@
 .contenedor-evaluacion {
   display: flex;
   justify-content: center;
-  align-items: center;
   height: 100%;
   margin-top: 55px;
   background-color: white;
@@ -321,10 +331,9 @@
   width: 50%;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
   background-color: white;
-  text-align: center;
   border-radius: 10px;
-  margin: 20px;
   position: relative;
+  margin: 40px 10px 10px 10px;
 }
 
 .sub-cont-evaluacion {
@@ -631,11 +640,18 @@
 .cont-padre-asistencia {
   display: flex;
   justify-content: center;
-  align-items: center;
   width: 100%;
   min-height: 100vh;
   margin-top: 55px;
   background-color: white;
+}
+
+.contanedor-asistencias {
+  width: 50%;
+  border-radius: 10px;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+  background-color: white;
+  margin: 40px 10px 10px 10px;
 }
 
 .cont-titu-asistencias {
@@ -670,12 +686,7 @@
   }
 }
 
-.contanedor-asistencias {
-  width: 650px;
-  border-radius: 10px;
-  box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
-  margin: 10px;
-}
+
 
 .form-asistencia {
   padding: 20px;
@@ -718,12 +729,7 @@
   background-color: #0b2e57c4;
 }
 
-
-
 /* CALENDARIO */
-.calendario {
-  margin-left: 150px;
-}
 
 
 #tableContabilidad {
@@ -732,18 +738,19 @@
 
 .cont-padre {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 30px;
   transition: all .5s;
+  background-color: white;
+  margin-top: 55px;
 }
 
-#calendario {
-  margin-top: 100px;
+.calendario {
+  margin: 40px 10px 10px 10px;
   width: 80%;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+  background-color: white;
 }
 
 
@@ -1016,16 +1023,16 @@
   background-color: #0b2f57;
   color: white;
   display: flex;
-  justify-content: left;
+  justify-content: center;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   height: 40px;
   align-items: center;
 }
 
-.contTituUsuario p {
-  margin-top: 15px;
-  padding-left: 10px;
+.contTituUsuario h1 {
+  font-size: 25px;
+  margin-bottom: 0px;
 
 }
 
@@ -1280,7 +1287,6 @@
   margin-top: 15px;
 }
 
-
 .sub-boxAbono {
   padding: 30px;
 }
@@ -1292,33 +1298,35 @@
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   text-align: center;
-
 }
 
 .cont-titu-abono h1 {
   font-size: 25px;
-
 }
-
 
 
 .cont-asignar {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  background-color: white;
+  margin-top: 55px;
 }
 
 .form-asignar {
-  width: 500px;
-  margin: 10px;
+  width: 40%;
+  margin: 40px 10px 10px 10px;
   border-radius: 10px;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
+  background-color: white;
+  height: 40%;
+
+
 }
 
 .sub-asignar {
-  padding: 20px;
+  padding: 40px;
 }
 
 .asignarBarra {
@@ -1347,6 +1355,7 @@
 
   color: white;
   font-size: 25px;
+  margin-bottom: 0px;
 }
 
 #id-react-select {
@@ -1377,16 +1386,15 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  background-color: white;
 }
 
 .contTableGastos {
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
   border-radius: 8px;
   background-color: white;
-  margin: 10px;
+  margin: 40px 10px 10px 10px;
   width: 80%;
-  position: relative;
 }
 
 .cont-box-body-gastos {
@@ -1397,21 +1405,21 @@
   padding-right: 10px;
 }
 
-.cont-titu-gastos h1 {
-  font-size: 20px;
-  padding-top: 20px;
-  padding-left: 10px;
-  font-weight: 400;
-}
-
 .cont-titu-gastos {
   display: flex;
+  justify-content: center;
   align-items: center;
   width: 100%;
-  height: 35px;
-  background-color: rgba(0, 0, 0, 0.03);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-  padding-bottom: 15px;
+  height: 40px;
+  background-color: #0b2f57;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+}
+.cont-titu-gastos h1 {
+  font-size: 25px;
+  color: white;
+  margin-bottom: 0px;
 }
 
 #cont-input-gastos {
@@ -1632,12 +1640,23 @@
   color: rgb(255, 187, 0);
 }
 
+.cont-form-gastos {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  margin-top: 55px;
+}
+
 .formReportesGastos {
   width: 50%;
+  height: 450px;
   background-color: white;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
   border-radius: 10px;
   position: relative;
+  margin: 40px 10px 10px 10px;
 }
 
 #myTable {
@@ -1674,14 +1693,13 @@
   margin-top: 55px;
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 10px;
   position: relative;
 }
 
 .formPagoTerapeuat {
   width: 80%;
   height: 250px;
+  margin: 40px 10px 10px 10px;
   background-color: white;
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
   position: relative;
@@ -1700,8 +1718,8 @@
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
   margin-top: 55px;
+  background-color: white;
 }
 
 
@@ -1711,6 +1729,8 @@
   border-radius: 10px;
   background-color: white;
   position: relative;
+  margin: 40px 10px 10px 10px;
+  height: 340px;
 }
 
 .cont-box-abono {
@@ -1750,4 +1770,25 @@
   font-size: 25px;
   margin-bottom: 0px;
 
+}
+
+.contenedorsL {
+  opacity: 0.7;
+}
+
+.contenedors {
+  opacity: 0.5;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, .5);
+}
+
+.contenedors p,
+.contenedor img {
+  opacity: 1;
+  /* Opacidad de los elementos hijos */
+}
+
+.contenedors h1,
+.contenedor img {
+  opacity: 1;
+  /* Opacidad de los elementos hijos */
 }

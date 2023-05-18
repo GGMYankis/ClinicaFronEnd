@@ -10,6 +10,7 @@ function PagoTerapeutas() {
     const [endDate, setEndDate] = useState(null);
     const [dataPaciente, setDataPaciente] = useState([]);
     const [loading, setLoading] = useState(false);
+    const resportes = useRef();
 
     const data = {
         FechaInicio: startDate,
@@ -19,12 +20,12 @@ function PagoTerapeutas() {
     const enviars = (e) => {
         e.preventDefault();
 
-        setLoading(true)
+        resportes.current.classList.add('contenedors');
 
         const urls = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/ListaEvaluacion'
         axios.post(urls, data).then((result) => {
 
-            setLoading(false)
+            resportes.current.classList.remove('contenedors');
             setDataPaciente(result.data)
         })
     }
@@ -38,7 +39,7 @@ function PagoTerapeutas() {
 
 
             <div className='cont-formPagoTerapeuat'>
-                <form className='formPagoTerapeuat' onSubmit={enviars}>
+                <form className='formPagoTerapeuat' onSubmit={enviars} ref={resportes}>
                     {
                         loading ? <Loading /> : ""
                     }
@@ -61,8 +62,6 @@ function PagoTerapeutas() {
                             </div>
                         </div>
                         <hr></hr>
-
-
 
                         <table className='table-formPagoTerapeuat'>
                             <thead>
@@ -92,44 +91,6 @@ function PagoTerapeutas() {
                 <Headers />
             </div>
 
-            {/*             <div className='row' id='cont-input-gastos'>
-                <div className='col'>
-                    <label>Fecha Inicio</label>
-                    <input type='date' className='inputgastos' onChange={e => setStartDate(e.target.value)} />
-                </div>
-                <div className='col'>
-                    <label>Fecha Fin</label>
-                    <input type='date' className='inputgastos' onChange={e => setEndDate(e.target.value)} />
-                </div>
-                <div className='col'>
-                    <button className='btn-gastos' onClick={enviars} >Buscar</button>
-                </div>
-            </div>
-
-
-            <table>
-                <thead>
-                    <tr>
-                        <th>Terapeuta</th>
-                        <th>Terapia</th>
-                        <th>Fecha</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    {
-                        dataPaciente.map(x => [
-                            <tr>
-                                <td>{x.terapeuta}</td>
-                                <td>{x.terapia}</td>
-                                <td>{x.fechaInicio.substring('', 10)}</td>
-                            </tr>
-                        ])
-                    }
-
-                </tbody>
-
-            </table> */}
         </div>
     )
 }

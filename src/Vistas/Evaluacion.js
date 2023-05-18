@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useRef } from 'react'
 import { BrowserRouter, Routes, Route, Link, Redirect } from 'react-router-dom'
 import logo from "../imagenes/IMG-20230221-WA0009.png"
 import doctor from "../imagenes/undraw_medicine_b1ol.png"
@@ -15,9 +15,6 @@ import { findDOMNode } from 'react-dom'
 import { FaUser } from 'react-icons/fa'
 import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, setUsuario, getDatosUsuario, getUsuarioCompleto } from '../auth-helpers'
 import { Loading, LoaLogin } from '../components/Loading';
-
-
-
 
 function Evaluacion() {
 
@@ -41,12 +38,13 @@ function Evaluacion() {
 
     let id = getDatosUsuario()
     let rol = getUsuarioCompleto()
+    const resportes = useRef();
+  
 
     const date = {
 
         Idterapeuta: id
     }
-
 
     useEffect(() => {
 
@@ -56,18 +54,14 @@ function Evaluacion() {
                 .then(responses => {
 
                     setDataPaciente(responses.data)
-                    console.log(responses.data)
                 });
         } else {
             axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/Lista')
                 .then(responses => {
 
-                    setDataPaciente(responses.data.lista)
+                    setDataPaciente(responses.data)
                 });
         }
-
-
-
 
         if (rol == 2) {
             axios.post('http://yankisggm-001-site1.ctempurl.com/api/Clinica/GetEvaluacionByTerapeuta', date)
@@ -137,7 +131,8 @@ function Evaluacion() {
 
     const EnviarEvaluacion = (e) => {
         e.preventDefault();
-        setLoading(true)
+
+        resportes.current.classList.add('contenedors');
 
         const url = 'http://yankisggm-001-site1.ctempurl.com/api/traerpaciente/CrearEvaluacion';
         const urlRecurrencia = 'http://yankisggm-001-site1.ctempurl.com/api/traerpaciente/CrearRecurrencia';
@@ -150,7 +145,7 @@ function Evaluacion() {
 
                 axios.post(urlRecurrencia, dataRecurrencia)
                     .then((resultEvaluacion) => {
-                        setLoading(false)
+                        resportes.current.classList.remove('contenedors');
                         swal({
                             title: "Correcto",
                             text: "Se ha guardado correctamente",
@@ -205,8 +200,6 @@ function Evaluacion() {
 
             <div id="FormModal" className='modal' data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel">
 
-
-
                 <div className="modal-dialog">
                     <div className="modal-content">
 
@@ -245,7 +238,7 @@ function Evaluacion() {
             <Headers />
 
             <div className='contenedor-evaluacion'>
-                <form className='form-select-evaluacion' onSubmit={EnviarEvaluacion}>
+                <form className='form-select-evaluacion' onSubmit={EnviarEvaluacion} ref={resportes}>
                     {
                         loading ? <Loading /> : ""
                     }

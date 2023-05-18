@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Loading, LoaLogin } from '../components/Loading';
 import swal from 'sweetalert';
 import axios from 'axios';
@@ -19,12 +19,13 @@ function AbonoTerapias() {
     const [dataPaciente, setDataPaciente] = useState([]);
     const [loading, setLoading] = useState(false);
     const [terapeuta, setTerapeuta] = useState([])
+    const resportes = useRef();
 
     useEffect(() => {
         axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/Lista')
             .then(responses => {
 
-                setDataPaciente(responses.data.lista)
+                setDataPaciente(responses.data)
             });
 
         axios.get('http://yankisggm-001-site1.ctempurl.com/api/Clinica/ListaTerapia')
@@ -68,15 +69,15 @@ function AbonoTerapias() {
     const CrearAbonoTerapias = (e) => {
 
         e.preventDefault()
-        setLoading(true)
-
+        //  setLoading(true)
+        resportes.current.classList.add('contenedors');
 
         const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/AbonoTerapias';
         axios.post(url, dataEnviar).then((result) => {
 
 
             const probar = async () => {
-
+                resportes.current.classList.remove('contenedors');
                 const ale = await swal({
 
                     title: "Correcto",
@@ -86,7 +87,7 @@ function AbonoTerapias() {
                 });
             }
             if (result) {
-                setLoading(false)
+                /*     setLoading(false) */
                 probar()
             }
 
@@ -101,14 +102,14 @@ function AbonoTerapias() {
         <div>
             <Headers />
             <div className='cont-form-abono'>
-                <form onSubmit={CrearAbonoTerapias} className='formAbonoTerapias'>
+                <form onSubmit={CrearAbonoTerapias} className='formAbonoTerapias' ref={resportes}>
                     {
                         loading ? <Loading /> : ""
                     }
                     <div className='cont-titu-select'>
                         <h1>Abonos</h1>
                     </div>
-                   
+
                     <div className='cont-sub-box-abono'>
 
                         <div className='cont-box-abono'>
