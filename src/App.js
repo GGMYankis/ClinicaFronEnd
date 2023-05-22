@@ -33,12 +33,15 @@ import { Protect } from './components/Protect';
 import Autenticacion from './components/Autenticacion';
 import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, idUser, getDatosUsuario, nombreUsuario } from './auth-helpers'
 import { Loading, LoaLogin, LoaAll } from './components/Loading';
+import Headers from './Headers'
 
 initAxiosInterceptors()
 
 function App() {
 
     const [isLoading, setIsLoading] = useState(false);
+    const [usuarioLogin, setUsuarioLogin] = useState([]);
+    const [tokenHook, setTokenHook] = useState('');
 
     useEffect(() => {
 
@@ -47,6 +50,8 @@ function App() {
         }, 1000);
 
         let token = getToken()
+        setTokenHook(token)
+
 
         async function cargarUsuario() {
 
@@ -54,6 +59,8 @@ function App() {
                 if (token) {
                     axios.post('http://yankisggm-001-site1.ctempurl.com/api/Autenticacion/getUserByToken')
                         .then(res => {
+
+                            setUsuarioLogin(res.data.user)
 
                             idUser(res.data.user.idUser)
                             const user = res.data.user.names.substring('', 1)
@@ -66,6 +73,8 @@ function App() {
 
                         });
                 }
+
+
 
 
 
@@ -97,22 +106,33 @@ function App() {
 
         <div className="App">
 
+            {/* {getToken ?
+                <Headers />
+                :
+                ""
+            } */}
+
+
+
+
+
             {isLoading ?
                 <LoaAll />
                 :
                 <HashRouter>
                     <Routes >
+                   
                         <Route element={<Autenticacion />}>
                             <Route index element={<Login />} />
                         </Route>
-                        <Route path='/login' element={<Login />} />
+                        <Route path='/login' element={<Login setUsuarioLogin={setUsuarioLogin} />} />
                         <Route element={<Protect />}>
                             <Route exact path="/evaluacion" element={<Evaluacion />} />
                             <Route exact path="/perfilAdmin" element={<PerfilAdmin />} />
-                            <Route exact path="/listasTerapias" element={<ListasTerapias />} />
-                            <Route exact path="/listasPacientes" element={<ListasPacientes />} />
+                            <Route exact path="/listasTerapias" element={<ListasTerapias usuarioLogin={usuarioLogin} />} />
+                            <Route exact path="/listasPacientes" element={<ListasPacientes usuarioLogin={usuarioLogin} />} />
                             <Route exact path='/terapia' element={<Terapias />} />
-                            <Route exact path="/admin" element={<Admin />} />
+                            <Route exact path="/admin" element={<Admin usuarioLogin={usuarioLogin} />} />
                             <Route exact path="/asistencias" element={<Asistencias />} />
                             <Route exact path="/calendario" element={<Calendario />} />
                             <Route exact path="/contabilidad" element={<Contabilidad />} />
@@ -125,7 +145,6 @@ function App() {
                             <Route exact path="/AbonoTerapias" element={<AbonoTerapias />} />
                             <Route exact path="/PagoTerapeutas" element={<PagoTerapeutas />} />
 
-
                         </Route>
                     </Routes>
                 </HashRouter>
@@ -137,7 +156,11 @@ function App() {
                 <p>Contactanos en SaraClinica@gmail.com</p>
             </div>
             */}
+
+
+
         </div>
+
 
     );
 }

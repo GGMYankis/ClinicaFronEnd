@@ -157,7 +157,8 @@ const Admin = () => {
         Recommendations: recommendations,
         FamilyMembersConcerns: family_members_concerns,
         SpecificMedicalCondition: specific_medical_condition,
-        Other: other
+        Other: other,
+        Activo:true
     })
 
     const FormularioAdmin = document.getElementById("FormularioAdmin");

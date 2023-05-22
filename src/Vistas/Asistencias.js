@@ -126,9 +126,9 @@ function Asistencias() {
                                 Razón Asistencia</label>
                             <select className='justificacinAsistencias'>
                                 <option value=''>Seleccione una asistencia</option>
-                                <option value="asistio">Asistio</option>
-                                <option value="justifico">No Asistencia injustificada</option>
-                                <option value="injustificada">No Asistencia Justificada</option>
+                                <option value="asistio">Asistencia</option>
+                                <option value="justifico">Falta</option>
+                                <option value="injustificada">Justificada</option>
                             </select>
                         </div>
                         {rol == 2 ?
@@ -136,7 +136,7 @@ function Asistencias() {
                             <div className='box-asistencia'>
                                 <label className='label-asistencia'>Lista de Pacientes</label>
                                 <select onChange={e => setPaciente(e.target.value)} required className='select-asistencia' >
-                                    <option value='' >Seleccione una Paciente</option>
+                                    <option value='' >Seleccione un Paciente</option>
                                     {
                                         dataPaciente.map(item => [
                                             //<option key={item.value} value={item.value}>{item.value}</option>
@@ -150,7 +150,7 @@ function Asistencias() {
                             <div className='box-asistencia'>
                                 <label className='label-asistencia'>Lista de Pacientes</label>
                                 <select onChange={e => setPaciente(e.target.value)} required className='select-asistencia' >
-                                    <option value='' >Seleccione una Paciente</option>
+                                    <option value='' >Seleccione un Paciente</option>
                                     {
                                         dataPaciente.map(item => [
                                             <option value={item.idPatients}>{item.name}</option>
@@ -185,7 +185,7 @@ function Asistencias() {
                                     {
                                         terapeuta.map(item => [
                                             //<option key={item.value} value={item.value}>{item.value}</option>
-                                            <option value={item.idUser}>{item.names}</option>
+                                            <option value={item.idUser}>{item.names} {item.apellido}</option>
                                         ])
                                     }
 

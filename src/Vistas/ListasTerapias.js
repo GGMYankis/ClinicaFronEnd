@@ -15,7 +15,7 @@ import { DeleteToken, getToken, initAxiosInterceptors, setUsuarioM, obtenerUser,
 import '../Tabla.css';
 import { useCookies } from 'react-cookie';
 
-function ListasTerapias() {
+function ListasTerapias({usuarioLogin}) {
     obtenerUser()
     const [terapias, setTerapias] = useState([])
     const [nmTerapias, setNmTerapias] = useState('  ')

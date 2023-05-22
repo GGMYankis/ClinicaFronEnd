@@ -114,14 +114,12 @@
   }
 }
 
-
-
 .img3 {
   border-radius: 50%;
   width: 100px;
 }
 
-#emaillogin:focus{
+#emaillogin:focus {
   outline-color: white;
 }
 
@@ -254,6 +252,8 @@
 }
 
 .cont-titu-Pagina-terapia h1 {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
   color: white;
   font-size: 25px;
   margin-bottom: 0px;
@@ -332,7 +332,6 @@
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, .1);
   background-color: white;
   border-radius: 10px;
-  position: relative;
   margin: 40px 10px 10px 10px;
 }
 
@@ -343,7 +342,6 @@
 .cont-titu-select {
   width: 100%;
   background-color: #0b2f57;
-  color: white;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
   text-align: center;
@@ -675,8 +673,10 @@
 }
 
 .cont-titu-asistencias h1 {
-  font-size: 20px;
+  font-size: 25px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-weight: bold;
+  color: white;
   margin-bottom: 0px;
 }
 
@@ -1031,6 +1031,9 @@
 }
 
 .contTituUsuario h1 {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
+  color: white;
   font-size: 25px;
   margin-bottom: 0px;
 
@@ -1353,7 +1356,10 @@
 
 .cont-titu-asignacionTerapeuta h1 {
 
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
   color: white;
+
   font-size: 25px;
   margin-bottom: 0px;
 }
@@ -1416,9 +1422,13 @@
   border-top-right-radius: 10px;
 
 }
+
 .cont-titu-gastos h1 {
   font-size: 25px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
   color: white;
+
   margin-bottom: 0px;
 }
 
@@ -1758,11 +1768,7 @@
   background-color: #0b2e57c4;
 }
 
-
-
-
 .cont-titu-select h1 {
-
   color: white;
   font-weight: bold;
   text-align: center;
@@ -1791,4 +1797,13 @@
 .contenedor img {
   opacity: 1;
   /* Opacidad de los elementos hijos */
+}
+
+.iamgenSelecionada{
+  width: 400px;
+  height: 400px;
+}
+.iamgenSelecionada img{
+  width: 100%;
+
 }

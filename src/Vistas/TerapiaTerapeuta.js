@@ -111,7 +111,7 @@ function TerapiaTerapeuta() {
                                 <div className='col'>
 
                                     <select required className='asignarBarra' onChange={e => handleTerapeuta(e.target.value)} >
-                                        <option value=''>Select</option>
+                                        <option value=''>Seleccione un Terapeuta</option>
                                         {
                                             terapeuta.map(item => [
                                                 <option key={item.idUser}  value={item.idUser}>{item.names} {item.apellido}</option>
@@ -144,6 +144,7 @@ function TerapiaTerapeuta() {
                                         options={data}
                                         onChange={handle}
                                         required
+                                        placeholder = "Seleccione una Terapia"
                                     />
                                 </div>
                             </div>

@@ -138,7 +138,7 @@ function AbonoTerapias() {
                                 <option value="">Seleccione un Terapeuta</option>
                                 {
                                     terapeuta.map(item => [
-                                        <option value={item.idUser}>{item.names}</option>
+                                        <option value={item.idUser}>{item.names} {item.apellido}</option>
                                     ])
                                 }
                             </select>

@@ -325,7 +325,7 @@ function Users() {
 
                     <div className="card-body">
                         <div className='contTituUsuario'>
-                            <h1>Lista de Usuario</h1>
+                            <h1>Lista de Usuarios</h1>
                         </div>
 
                         <div className='subBoxTableUsuario'>

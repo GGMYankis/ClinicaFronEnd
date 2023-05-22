@@ -8,7 +8,7 @@ import React from 'react'
 import { BrowserRouter, Routes, Route, Link, Redirect } from 'react-router-dom'
 import logo from "../imagenes/IMG-20230221-WA0009.png"
 import { useNavigate } from 'react-router-dom';
-import { setUsuarioM, obtenerUser, getDatosUsuario,setUsuario, DeleteToken } from '../auth-helpers'
+import { setUsuarioM, obtenerUser, getDatosUsuario, setUsuario, DeleteToken } from '../auth-helpers'
 import $ from 'jquery';
 import { findDOMNode } from 'react-dom'
 import Headers from '../Headers'
@@ -20,6 +20,7 @@ function PerfilAdmin() {
     const [usuarioPerfil, setusuarioPerfil] = useState('');
     const [correoPerfil, setcorreoPerfil] = useState('');
     const [contraseña, setContraseña] = useState('');
+    const [tipoRol, setTipoRol] = useState('');
     const [confirmar, setConfirmar] = useState('');
     const [mensajeError, setMensajeError] = useState(false);
     const [mensajeInfo, setMensajeInfo] = useState(false);
@@ -29,7 +30,7 @@ function PerfilAdmin() {
     const nave = useNavigate()
     const id = getDatosUsuario()
 
-   
+
 
     const formRef = useRef(null);
 
@@ -47,6 +48,13 @@ function PerfilAdmin() {
 
         const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/TraerUsuario';
         axios.post(url, data).then((result) => {
+
+            if (result.data.users.idRol == 1) {
+                setTipoRol("Admin")
+            }else{
+                setTipoRol("Terapeuta")
+            }
+          
 
             setusuarioPerfil(result.data.users.names)
             setcorreoPerfil(result.data.users.email)
@@ -116,7 +124,7 @@ function PerfilAdmin() {
     }
 
     const user = {
-        IdUser:id
+        IdUser: id
     }
 
 
@@ -126,10 +134,10 @@ function PerfilAdmin() {
         const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/EliminarUsuario';
         axios.post(url, user).then((result) => {
 
-             if(result){
+            if (result) {
                 DeleteToken()
                 nave("/login")
-             }
+            }
 
         });
     }
@@ -166,7 +174,7 @@ function PerfilAdmin() {
                                 <label>Email</label><br></br>
                                 <input className='barra-perfil' type='text' value={correoPerfil} onChange={e => setcorreoPerfil(e.target.value)} />
                             </div>
-                            
+
 
 
 
@@ -179,6 +187,11 @@ function PerfilAdmin() {
                                     <div class="alert alert-danger" role="alert">
                                         {mensajeInfo}
                                     </div> : ""}
+                            </div>
+                            
+                            <div className='con-barra'>
+                                <label>Rol: {tipoRol}</label>
+                               
                             </div>
 
                             <button className='btn-perfil'>Guardar Cambios</button>
@@ -217,7 +230,7 @@ function PerfilAdmin() {
                 <div className='sub-elemento'>
                     <h1 className='titulosPerfil'>Eliminar Cuenta</h1>
                     <hr></hr>
-                    <form  ref={formRef}>
+                    <form ref={formRef}>
                         <div className='con-barra'>
                             <p>Puedes eliminar tu cuenta, pero esta acción es irreversible.</p>
                         </div>

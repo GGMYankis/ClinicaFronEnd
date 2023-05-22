@@ -14,7 +14,7 @@ import jwt_decode from 'jwt-decode';
 import { deleteToken, getToken, initAxiosInterceptors, setUsuarioM, idUser, getDatosUsuario, setUsuarioCompleto, setToken, nombreUsuario } from '../auth-helpers'
 import { Loading, LoaLogin } from '../components/Loading';
 
-function Login() {
+function Login({ setUsuarioLogin }) {
 
     const login = document.getElementById("login")
     const [email, setEmail] = useState('');
@@ -55,8 +55,6 @@ function Login() {
 
             const url = 'http://yankisggm-001-site1.ctempurl.com/api/Autenticacion/Login';
             axios.post(url, data).then((result) => {
-
-
 
                 if (result.data.user != null) {
                     setLoading(false)
@@ -101,7 +99,7 @@ function Login() {
 
                 <div className='cont-email-login' >
                     <FontAwesomeIcon icon={faEnvelope} className='email' />
-                    <input type="text" placeholder='Email'id='emaillogin'  onChange={(e) => setEmail(e.target.value)} autoComplete='off' />
+                    <input type="text" placeholder='Email' id='emaillogin' onChange={(e) => setEmail(e.target.value)} autoComplete='off' />
                 </div>
 
                 <div className='cont-email-login' >

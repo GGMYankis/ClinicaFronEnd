@@ -18,7 +18,7 @@ import { set } from 'date-fns';
 import { Label } from 'reactstrap';
 
 
-function ListasPacientes() {
+function ListasPacientes({usuarioLogin}) {
 
     const [ac, setAc] = useState([])
 
@@ -217,13 +217,14 @@ function ListasPacientes() {
         FamilyMembersConcerns: family_members_concerns,
         SpecificMedicalCondition: specific_medical_condition,
         Other: other,
+        Activo:true
     })
 
     const handleGuardar = (e) => {
 
         e.preventDefault()
 
-        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/GuardarPaciente';
+        const url = 'https://localhost:63958/api/Clinica/GuardarPaciente';
         axios.post(url, data).then((result) => {
 
             const probar = async () => {

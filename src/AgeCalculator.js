@@ -65,6 +65,15 @@ function AgeCalculator() {
   }, []);
 
 
+  // ...
+
+  const [selectedImage, setSelectedImage] = useState(null);
+
+  const handleImageChange = (event) => {
+    const image = event.target.files[0];
+    setSelectedImage(image);
+  };
+
 
   // 
   //<img src={iphone} className='img1' />
@@ -74,76 +83,19 @@ function AgeCalculator() {
     <div >
 
 
+      <input type="file" onChange={handleImageChange} />
 
 
-      <header className='headers'>
 
-        <nav className='menu'>
+      <div className='iamgenSelecionada'>
+        {selectedImage && (
+          <img src={URL.createObjectURL(selectedImage)} alt="Selected" />
+        )}
+      </div>
 
-          <FaBars className='icoBarra' id='icoBarra' onClick={evento} />
-          <p className='txtNombre'>Cyber Plaza</p>
 
-          <div className='cont-menu' id='icono-menu' ref={menu}>
-            <div className='cont-titu-menu'>
-              <p>Hola Yankis</p>
-              <p onClick={quitar} className='quitar'>X</p>
-            </div>
-            <ul>
-              <li>Home</li>
-              <li>Home</li>
-              <li>Home</li>
-              <li>Home</li>
-              <li>Home</li> 
-              <li>Home</li>
-              <li>Home</li>
-              <li>Home</li>
-              <li>Home</li>
-              <li>juan</li>
-              <li>juan</li>
-              <li>juan</li>
-              <li>juan</li>
-              <li>pedro</li>
-              <li>juan</li>
-              <li>juan</li>
-              <li>juan</li>
-              <li>juan</li>
-              <li>pedro</li> 
-              <li>juan</li>
-              <li>juan</li>
-              <li>juan</li>
-              <li>juan</li>
-              <li>yankis</li>
-            </ul>
-      
-          </div>
 
-          <input className='busqueda' placeholder='Buscar un producto' />
-
-          <span className='span2'>
-            <a>Inicia sesion</a>
-            <a className='cont-card'>
-              <FaShoppingCart className='txtcard' />
-              <span class="badge bg-dark text-white ms-1 rounded-pill" id="cantidadcarrito">0</span>
-            </a>
-          </span>
-
-        </nav>
-
-        <nav className='nav-menu' >
-          <ul className='menu-horizontal'>
-            <li><a>Categoria</a>
-              <ul className='menu-vertical'>
-                <li>Tecnologia</li>
-                <li>Deportes</li>
-                <li>Dormitorio</li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-
-      </header>
-
-  {/*
+      {/*
       <div className='cont-padre-detalle'>
       
         <div className='cont-img-detalle'>
@@ -176,10 +128,10 @@ function AgeCalculator() {
             </div>
 
           </div>
-        </div>
+        </div>npm
  </div>
   */}
-   
+
 
       {/*
 

@@ -9,7 +9,7 @@ import { useState, useEffect, useRef } from 'react';
 import { setUsuarioM, obtenerUser, getNombreUsuario, DeleteToken, getUsuarioCompleto } from './auth-helpers'
 
 
-function Headers(props) {
+function Headers({calendario,myElement}) {
 
     const navigation = useNavigate();
     obtenerUser()
@@ -23,11 +23,11 @@ function Headers(props) {
 
     const handleClickOtro = () => {
 
-        if (props.hasOwnProperty("calendario")) {
-            props.calendario.current.classList.toggle('mi-clase-css');
+        if (calendario) {
+           calendario.current.classList.toggle('mi-clase-css');
         }
-        else if (props.hasOwnProperty("myElement")) {
-            props.myElement.current.classList.toggle('mi-clase-css');
+        else if (myElement) {
+            myElement.current.classList.toggle('mi-clase-css');
         }
     };
 

@@ -233,8 +233,7 @@ function Evaluacion() {
                     </div>
                 </div>
             </div>
-
-
+     
             <Headers />
 
             <div className='contenedor-evaluacion'>
@@ -304,7 +303,7 @@ function Evaluacion() {
                                 <option value=''>Seleccione un Terapeuta</option>
                                 {
                                     terapeuta.map(item => [
-                                        <option value={item.idUser}>{item.names}</option>
+                                        <option value={item.idUser}>{item.names} {item.apellido} </option>
 
                                     ])
                                 }
