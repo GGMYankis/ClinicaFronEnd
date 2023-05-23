@@ -17,13 +17,12 @@ import { Spinner } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import VerGanancias from './Vistas/VerGanancias';
 import PagoTerapeutas from './Vistas/PagoTerapeutas';
-import AgeCalculator from './AgeCalculator';
 import PerfilAdmin from './Vistas/PerfilAdmin';
 import ListasTerapias from './Vistas/ListasTerapias';
 import Login from './Vistas/Login';
 import Terapias from './Vistas/Terapias';
 import Users from './Vistas/Users';
-import Abono from './Vistas/Abono';
+import Abono from './Vistas/Abono';  
 import TerapiaTerapeuta from './Vistas/TerapiaTerapeuta';
 import Contabilidad from './Vistas/Contabilidad';
 import ListasPacientes from './Vistas/ListasPacientes';
@@ -109,7 +108,6 @@ function App() {
                             <Route exact path="/asistencias" element={<Asistencias />} />
                             <Route exact path="/calendario" element={<Calendario />} />
                             <Route exact path="/contabilidad" element={<Contabilidad />} />
-                            <Route exact path="/AgeCalculator" element={<AgeCalculator />} />
                             <Route exact path="/Users" element={<Users />} />
                             <Route exact path="/abono" element={<Abono />} />
                             <Route exact path="/TerapiaTerapeuta" element={<TerapiaTerapeuta />} />
