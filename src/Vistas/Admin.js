@@ -37,17 +37,14 @@ const Admin = () => {
     const handleNameChange = (value) => {
 
         setName(value);
-        console.log(name)
     }
 
     const handleSexChange = (value) => {
         setSex(value);
-        console.log(sex)
     }
 
     const handleParents_NameChange = (value) => {
         setParents_Name(value);
-        console.log(parents_name)
     }
 
     
@@ -83,15 +80,13 @@ const Admin = () => {
 
 
     function calculateAge() {
-
         const currentDate = new Date();
         const birthDate = new Date(inputValue);
         const differenceMs = currentDate - birthDate;
-        let differenceYears = parseFloat((differenceMs / (1000 * 60 * 60 * 24 * 365)).toFixed(2));
-
+        const differenceYears = parseFloat((differenceMs / (1000 * 60 * 60 * 24 * 365)).toFixed(2));
         return differenceYears.toString();
-
     }
+  
 
 
     const handleducational_institutionChange = (value) => {
@@ -238,7 +233,7 @@ const Admin = () => {
 
                             <div className="col">
                                 <label htmlFor="validationServer02" className='labelPaciente'>Edad</label>
-                                <input type="text" className="form-control" id="validationServer02" defaultValue={calculateAge()} />
+                                <input type="text" className="form-control" id="validationServer02" value={calculateAge()} />
 
                             </div>
 

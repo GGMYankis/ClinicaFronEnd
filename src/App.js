@@ -69,14 +69,8 @@ function App() {
 
                         }).catch(error => {
 
-
-
                         });
                 }
-
-
-
-
 
             } catch (error) {
                 console.log(error)
@@ -87,33 +81,12 @@ function App() {
     }, []);
 
 
-    /*
-           const dispatch = useDispatch();
-    
-           useEffect(() => {
-       
-               fetch("https://jsonplaceholder.typicode.com/users/1")
-                   .then((response) => response.json())
-                   .then((data) => dispatch(addUser(data)))
-           }, [])
-       
-       
-           */
 
 
     return (
 
 
         <div className="App">
-
-            {/* {getToken ?
-                <Headers />
-                :
-                ""
-            } */}
-
-
-
 
 
             {isLoading ?
@@ -144,20 +117,11 @@ function App() {
                             <Route exact path="/verGanancias" element={<VerGanancias />} />
                             <Route exact path="/AbonoTerapias" element={<AbonoTerapias />} />
                             <Route exact path="/PagoTerapeutas" element={<PagoTerapeutas />} />
-
+                        
                         </Route>
                     </Routes>
                 </HashRouter>
             }
-
-
-            {/*
-            <div className='cont-footer-web'>
-                <p>Contactanos en SaraClinica@gmail.com</p>
-            </div>
-            */}
-
-
 
         </div>
 
@@ -169,7 +133,3 @@ function App() {
 export default App;
 
 
-/* setTimeout(() => {
-    setIsLoading(false);
-}, 2000);
- */

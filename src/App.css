@@ -1799,11 +1799,20 @@
   /* Opacidad de los elementos hijos */
 }
 
-.iamgenSelecionada{
+.iamgenSelecionada {
   width: 400px;
   height: 400px;
 }
-.iamgenSelecionada img{
+
+.iamgenSelecionada img {
   width: 100%;
 
+}
+
+.con-table-probamdo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

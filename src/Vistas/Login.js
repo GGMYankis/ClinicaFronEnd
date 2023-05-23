@@ -52,14 +52,19 @@ function Login({ setUsuarioLogin }) {
             };
 
             resportes.current.classList.add('contenedorsL');
+            setTimeout(() => {
+                resportes.current.classList.remove('contenedorsL');
+            }, 4000);
+
+
 
             const url = 'http://yankisggm-001-site1.ctempurl.com/api/Autenticacion/Login';
             axios.post(url, data).then((result) => {
 
                 if (result.data.user != null) {
-                    setLoading(false)
+                   
                     setToken(result.data.tokencreado)
-                    navigation("/admin")
+                     navigation("/admin")
                     const user = result.data.user.names.substring('', 1)
                     setUsuarioM(user)
                     idUser(result.data.user.idUser)

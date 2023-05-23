@@ -224,7 +224,7 @@ function ListasPacientes({usuarioLogin}) {
 
         e.preventDefault()
 
-        const url = 'https://localhost:63958/api/Clinica/GuardarPaciente';
+        const url = 'http://yankisggm-001-site1.ctempurl.com/api/Clinica/GuardarPaciente';
         axios.post(url, data).then((result) => {
 
             const probar = async () => {
